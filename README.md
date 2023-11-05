@@ -12,7 +12,8 @@ create the equates template for each type of subject. You have several examples 
 import, and create an EQU file with your equates and a CSV file for future use.
 
 This becomes useful when you have to build a system with many types of forms or other objects and have some way of identifying 
-these items and use case statements to take coding actions on these different items.
+these items and use case statements to take coding actions on these different items. Think of a state machine,
+every state executes some code, every state has to be identified, and each identity is defined by an EQUATE value,
 
 Not making any sense yet. Look at some of the examples on the [Wiki](https://github.com/RobertArtigas/RYBEQUATES/wiki) documentation.
 
