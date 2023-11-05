@@ -1,5 +1,5 @@
 ## Development
-IF you want me to continue improving this EQUATES code generator, THEN e-mail me that you are using **RYBEQUATES**. 
+IF you want me to continue improving these templates EQUATES code generators, THEN e-mail me that you are using **RYBEQUATES**. 
   It might be useful to include your use case scenario for **RYBEQUATES** and a description of how it helps the 
   Return On Investment (ROI) of the business you are involved in working. 
   After all is said and done, information technology is there to support the business goals. 
