@@ -15,8 +15,8 @@ This becomes useful when you have to build a system with many types of forms or 
 these items and use case statements to take coding actions on these different items. Think of a state machine,
 every state executes some code, every state has to be identified, and each identity is defined by an EQUATE value.
 
-The [RYB Templates](https://github.com/RobertArtigas/RYB/wiki/Equate-Tables) contain a very simple example. This Template Set
-contain a bit more sofisticated examples including ...
+The [RYB Templates](https://github.com/RobertArtigas/RYB/wiki/Equate-Tables) contain a very simple example. The techniques have been improved
+since the original release in those templates. This Template Set contain a bit more sofisticated examples including ...
 
 Not making any sense yet. Look at some of the examples on the [Wiki](https://github.com/RobertArtigas/RYBEQUATES/wiki) documentation.
 
