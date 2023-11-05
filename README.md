@@ -11,6 +11,10 @@ The EQUATES code generation is based on the Clarion template language. You will 
 create the equates template for each type of subject. You have several examples of how to build,
 import, and create an EQU file with your equates and a CSV file for future use.
 
+This becomes useful when you have to build a system with many types of forms or other objects and have some way of identifying 
+these items and use case statements to take coding actions on these different items
+
+
 ##
 ###
 
