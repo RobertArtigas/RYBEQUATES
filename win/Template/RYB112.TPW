@@ -1,0 +1,931 @@
+#!TEMPLATE(zzzEquateRYB112,'Equate RYB112 Definitions'),FAMILY('ABC')
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #GROUP(%PreambleRAYS)                                                               #! Basic copyright message
+#! #BOXED('RAYS: Application Templates'),PROP(PROP:FontStyle,700)
+#!   #DISPLAY(''),AT(,,,1)
+#!   #DISPLAY('Copyright © 1999-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+#!   #DISPLAY('All Rights Reserved World Wide.')
+#!   #DISPLAY('Commercial License and non-disclosure agreement required for use.')
+#!   #DISPLAY('E-mail: roberto.artigas.dev@gmail.com')
+#!   #DISPLAY('Skype: Clarion Live Chat | CW-Talk')
+#! #ENDBOXED
+#!
+#GROUP(%RYB112Copyright)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB112Copyright01))
+    #DECLARE(%RYB112Copyright01)
+  #ENDIF
+  #SET(%RYB112Copyright01, 'Generate Global EQUATES for ABC.')
+  #SET(%RYB112Copyright01, %RYB112Copyright01 & '<13,10>Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler.')
+  #SET(%RYB112Copyright01, %RYB112Copyright01 & '<13,10>All copyrights reserved world wide.')
+  #SET(%RYB112Copyright01, %RYB112Copyright01 & '<13,10>E-MAIL: roberto.artigas.dev@gmail.com')
+#ENDPREPARE
+#!BOXED('Version 1.0 [ 2018.09.11 ]'),AT(,,278),PROP(PROP:FontStyle,700)
+#BOXED('Version 1.0 [ 2018.12.31 ]'),AT(,,454),PROP(PROP:FontStyle,700)
+  #DISPLAY(''),AT(,,,1)
+  #!DISPLAY(%RYB112Copyright01),AT(,,260,34)
+  #DISPLAY(%RYB112Copyright01),AT(,,436,34)
+#ENDBOXED
+#!
+#GROUP(%RYB112License)
+#TAB('BUSINESS'),PROP(PROP:FontStyle,700)
+  #INSERT(%RYB112Copyright) 
+  #INSERT(%MITLicenseRYB)
+  #!INSERT(%ClarionFamily)              #! RA.2023.09.04: Not for utilities [DO NOT USE]
+#ENDTAB
+#!
+#GROUP(%RYB112Explain)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB112Explain01))
+    #DECLARE(%RYB112Explain01)
+  #ENDIF
+  #SET(%RYB112Explain01, '')
+  #SET(%RYB112Explain01, %RYB112Explain01 & 'This template is used to generate table equates to use as global equates.')
+  #SET(%RYB112Explain01, %RYB112Explain01 & '<13,10><13,10>')
+  #SET(%RYB112Explain01, %RYB112Explain01 & 'This template has been tested with the ABC template chain.')
+  #SET(%RYB112Explain01, %RYB112Explain01 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB112Explain02))
+    #DECLARE(%RYB112Explain02)
+  #ENDIF
+  #!
+  #SET(%RYB112Explain02, '')
+  #SET(%RYB112Explain02, %RYB112Explain02 & 'NOTE: Make sure the COMPLETE DIRECTORY PATH exists on your machine.')
+#ENDPREPARE
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!EXTENSION(RYB112_Equates_Tables,'RA.2021.03.14: Equates for Tables'),DESCRIPTION('RAYS | Equate for Tables (EQU).'),APPLICATION
+#!UTILITY(RYB112_Equates,'RA.2021.03.14: RYB112: Global Equates')
+#EXTENSION(RYB112_Equates,'RA.2021.03.14: RYB112: BUSINESS Equates'),DESCRIPTION('RYB | RYB112: BUSINESS Global Equates (EQU,CSV,TXT).'),APPLICATION
+#!-----------------------------------------------------------------------------
+#INSERT(%PreambleRYB)
+#!-----------------------------------------------------------------------------
+#! RA.2021.03.14.SUN      Roberto Artigas Jr
+#!  *   Created for the ABC templates
+#!-----------------------------------------------------------------------------
+#PREPARE
+  #DECLARE(%BegDate)
+  #DECLARE(%BegTime)
+  #SET(%BegDate, TODAY())                     #! Begin date
+  #SET(%BegTime, CLOCK())                     #! Begin time
+  #!
+  #!INSERT(%PrepareTheIncludes)
+#ENDPREPARE
+#!
+#DISPLAY('')
+#!SHEET,AT(,,288),HSCROLL
+#SHEET,AT(,,464),HSCROLL
+#INSERT(%RYB112License)
+#INSERT(%RYB112Explain)
+#TAB(UPPER(%Application) & '.' & UPPER(%ProgramExtension))
+  #BOXED('Hidden'),AT(,,456),HIDE
+    #!PROMPT('NextLine: ',@S120),%NextLine,AT(102,,346)
+    #PROMPT('BegDate: '     ,@S120) ,%BegDate         ,AT(102,,346)
+    #PROMPT('BegTime: '     ,@S120) ,%BegTime         ,AT(102,,346)
+    #PROMPT('CSVRecord: '   ,@S120) ,%RYB112Record    ,AT(102,,346)
+    #PROMPT('FieldText: '   ,@S120) ,%RYB112FText     ,AT(102,,346)
+    #PROMPT('CSVFields: '   ,@N4)   ,%RYB112Fields    ,AT(102,,40)
+    #PROMPT('FieldLoop: '   ,@N4)   ,%RYB112FLoop     ,AT(102,,40)
+    #PROMPT('Start: '       ,@N4)   ,%Start           ,AT(102,,40)
+    #PROMPT('Next: '        ,@N4)   ,%Next            ,AT(102,,40)
+    #PROMPT('Begin: '       ,@N4)   ,%N1Beg           ,AT(102,,40)
+    #PROMPT('End: '         ,@N4)   ,%N2End           ,AT(102,,40)
+    #PROMPT('LineShow: '    ,@S120) ,%LineShow        ,AT(102,,346)
+    #PROMPT('LineWork: '    ,@S120) ,%LineWork        ,AT(102,,346)
+    #PROMPT('LineCmnt: '    ,@S120) ,%LineCmnt        ,AT(102,,346)
+    #PROMPT('LineNext: '    ,@S120) ,%LineNext        ,AT(102,,346)
+    #PROMPT('LineText: '    ,@S120) ,%LineText        ,AT(102,,346)
+    #PROMPT('CountEquate: ' ,@N8)   ,%CountEquate     ,AT(102,,40)
+    #PROMPT('zNames: '      ,@N8)   ,%zNames112       ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zGroup: '      ,@N8)   ,%zGroup112       ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zItems: '      ,@N8)   ,%zItems112       ,AT(102,,40)    , DEFAULT(32)
+    #PROMPT('zCmnts: '      ,@N8)   ,%zCmnts112       ,AT(102,,40)    , DEFAULT(50)
+  #ENDBOXED
+  #!
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create EQUATES from existing entries?'        , CHECK), %RYB112OptExpEQU, DEFAULT(1)  , AT(10)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB112Comment  , REQ   , DEFAULT(140), AT(220,,40)
+  #ENDBOXED
+  #!
+  #BOXED('Global Includes'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB112Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED(''),AT(,,446)
+      #PROMPT('Directory: '   ,@S120)   , %RYB112Directory           , REQ   , DEFAULT('.\Generators\Temp\') , AT(100,,344)
+      #PROMPT('Name: '        ,@S120)   , %RYB112TableName           , REQ   , DEFAULT('RYB112_EQUATES.EQU') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB112IncludeLocation , %RYB112Directory & %RYB112TableName)
+      #ENDPREPARE
+      #PROMPT('Location: ',@S120),%RYB112IncludeLocation,REQ,DEFAULT(%RYB112IncludeLocation),PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Equate: '      ,@S120)   , %RYB112TableID             , REQ   , DEFAULT('RYB112_EQUATE_')     , AT(100,,344)
+      #PROMPT('Description: ' ,@S120)   , %RYB112TableDescr          , REQ   , DEFAULT('RYB112_DESCR_')      , AT(100,,344)
+      #PROMPT('Value: '       ,@S120)   , %RYB112TablePrefix         , REQ   , DEFAULT('RYB112_VALUE_')      , AT(100,,344)
+      #PROMPT('Value Size: '  ,@N8  )   , %RYB112DataSize            , REQ   , DEFAULT(16)                   , AT(100,,40)
+    #ENDBOXED
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB112Explain01),AT(,,436,34)
+  #ENDBOXED
+#ENDTAB
+#!
+#TAB('Documents')
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB112OptExpCSV, DEFAULT(1)  , AT(10)
+    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB112OptExpTXT, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Documents'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB112Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED('Export'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('CSV Directory: '     ,@S120)   , %RYB112CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
+      #PROMPT('CSV Name: '          ,@S120)   , %RYB112CsvName       , REQ   , DEFAULT('RYB112_EQUATES.CSV')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB112CsvLocation     , %RYB112CsvDirectory & %RYB112CsvName)
+      #ENDPREPARE
+      #PROMPT('CSV Location: '  ,@S120),%RYB112CsvLocation    ,REQ,DEFAULT(%RYB112CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #BOXED('Import'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('TXT Directory: '     ,@S120)   , %RYB112TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('TXT Name: '          ,@S120)   , %RYB112TxtName       , REQ   , DEFAULT('RYB112_ENTRIES.TXT')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB112TxtLocation     , %RYB112TxtDirectory & %RYB112TxtName)
+      #ENDPREPARE
+      #PROMPT('TXT Location: '  ,@S120),%RYB112TxtLocation    ,REQ,DEFAULT(%RYB112CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+  #ENDBOXED
+#ENDTAB
+#!
+#PREPARE
+  #CALL(%RYB112DefaultTheIncludes)
+#ENDPREPARE
+#!+++
+#TAB('Equates')
+  #!BOXED(''),AT(,,280)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(''),AT(,,,1)
+    #BUTTON('File name'),MULTI(%RYB112Includes, '(' & FORMAT(%RYB112Number,@N03) & ') ' & %RYB112Code & ' :: ' & %RYB112Value & ' :: ' & %RYB112Descr & ' ::'),INLINE,AT(,,,150)
+    #INSERT(%PreambleRYB)
+      #!BOXED('Table Item'),AT(,,288)
+      #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+        #DISPLAY(''),AT(,,,1)
+        #PROMPT('Field Equate: '        ,@N8)     , %RYB112Number                     , AT(100,,362)
+        #PROMPT('Field Code:  '         ,@S120)   , %RYB112Code     , REQ             , AT(100,,362)
+        #PROMPT('Field Value: '         ,@S120)   , %RYB112Value                      , AT(100,,362)
+        #PROMPT('Field Description: '   ,@S120)   , %RYB112Descr                      , AT(100,,362)
+       #ENDBOXED
+    #ENDBUTTON
+  #ENDBOXED
+#ENDTAB
+#!
+#INSERT(%RYB010TabDocumentation)
+#INSERT(%RYB010TabVersions)
+#!INSERT(%TabClarionVersion)
+#ENDSHEET
+#!
+#ATSTART
+#!COMMENT(90)
+#COMMENT(%RYB112Comment)
+#!
+#IF(%RYB112OptExpEQU)
+  #SET(%RYB112IncludeLocation , %RYB112Directory    & %RYB112TableName)
+  #CREATE(%RYB112IncludeLocation)
+  #INSERT(%RYB112BuildTheIncludes)
+  #CLOSE (%RYB112IncludeLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB112IncludeLocation & '"')
+#ENDIF
+#!
+#IF(%RYB112OptExpCSV)
+  #SET(%RYB112CsvLocation     , %RYB112CsvDirectory & %RYB112CsvName)
+  #CREATE(%RYB112CsvLocation)
+  #INSERT(%RYB112BuildTheCSV)
+  #CLOSE (%RYB112CsvLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB112CsvLocation & '"')
+#ENDIF
+#!
+#IF(%RYB112OptExpTXT)
+  #SET(%RYB112TxtLocation     , %RYB112TxtDirectory & %RYB112TxtName)
+  #CREATE(%RYB112TxtLocation)
+  #INSERT(%RYB112LoadCsvEntries)
+  #CLOSE (%RYB112TxtLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB112TxtLocation & '"')
+#ENDIF
+#!
+#ENDAT
+#COMMENT(60)
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB112BuildTheCSV)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & 'SEQUENCE'     & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'CODE'         & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'VALUE'        & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'DESCRIPTION'  & '"')
+%LineNext
+#SET(%CountEquate, 0)
+#FOR (%RYB112Includes)
+    #SET(%CountEquate, %CountEquate + 1)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & FORMAT(%CountEquate,@N03)  & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB112Code)          & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB112Value)         & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB112Descr)         & '"')
+%LineNext
+#ENDFOR
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB112BuildTheIncludes)
+!ABCIncludeFile
+  OMIT('_EndOfInclude_', _RYB112_)
+_RYB112_ EQUATE(1)
+!BOF
+!
+! File:         %RYB112IncludeLocation
+! Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+! Purpose:      Define global table includes for applications
+#SET(%LineText, '! Author:       Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+!               All Rights Reserved World Wide.
+!               MIT License.
+!
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+! The EQUATES ---might--- have cross uses in other areas in the architecture.
+! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+!Region EQUATE
+  #SET(%LineShow, ITEMS(%RYB112Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB112Includes)
+#!
+#! !!! %%RYB112Includes=%RYB112Includes, %%RYB112Number=%RYB112Number, %%RYB112Code=%RYB112Code, %%RYB112Value=%RYB112Value
+#! !!! %%RYB112Descr=%RYB112Descr
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB112TableID & %RYB112Code)
+#SET(%LineNext, 'EQUATE(' & FORMAT(%CountEquate,@N03) & ')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB112Descr)
+%[%zNames112]LineWork %[%zItems112-%zNames112]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion EQUATE
+!Region VALUE
+!                                         1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB112Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB112TablePrefix & %RYB112Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB112Value) & ''')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB112Descr)
+%[%zNames112]LineWork %[%zItems112-%zNames112]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!                                         1234567890123456
+!EndRegion VALUE
+!Region DESCRIPTION
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB112Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB112TableDescr & %RYB112Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB112Descr) & ''')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB112Descr)
+%[%zNames112]LineWork %[%zItems112-%zNames112]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion DESCRIPTION
+!
+!EOF
+!  _EndOfInclude_
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB112LoadCsvEntries)
+#!
+#!ERROR(%RYB112TxtLocation)
+#!FREE(%RYB112Includes)
+#!
+#OPEN(%RYB112CsvLocation),READ
+#SET(%CountEquate, 0)
+#LOOP
+  #READ(%RYB112Record)
+  #IF(%RYB112Record = %EOF)
+    #BREAK
+  #ELSE
+    #SET(%CountEquate, %CountEquate + 1)
+    #IF(%CountEquate = 1)
+      #CALL(%RYB112Header)
+#!%RYB112Fields
+#!%RYB112Record
+    #ELSE
+      #SET(%RYB112Record, CLIP(%RYB112Record) & ',')
+      #CALL(%RYB112Detail)
+#!%RYB112Record
+    #ENDIF
+  #END
+#END
+#SET(%LineNext, '#RETURN')
+%LineNext
+#CLOSE(%RYB112CsvLocation)
+#!---------------------------------------------------------------------
+#GROUP(%RYB112Header)
+#SET(%RYB112Fields, 0)
+#SET(%Start,1)
+#LOOP
+  #SET(%Next,INSTRING(',',%RYB112Record,1,%Start))
+  #SET(%RYB112Fields,%RYB112Fields+1)
+  #IF (%Next=0)
+    #BREAK
+  #ENDIF
+  #SET(%Start,%Next+1)
+#ENDLOOP
+#SET(%LineNext, '#GROUP(%RYB112IncludesDefault)')
+%LineNext
+#SET(%LineNext, '#FREE(%RYB112Includes)')
+%LineNext
+#SET(%LineNext, '#!')
+%LineNext
+#RETURN
+#!---------------------------------------------------------------------
+#GROUP(%RYB112Detail)
+#SET(%RYB112FText, '')
+#SET(%RYB112FLoop, 1)
+#SET(%Start,1)
+#LOOP
+  #SET(%N1Beg,INSTRING('"',%RYB112Record,1,%Start))
+  #IF (%N1Beg=0)
+    #RETURN
+  #ENDIF
+  #SET(%N2End,INSTRING('"',%RYB112Record,1,%N1Beg+1))
+  #SET(%RYB112FText,SUB(%RYB112Record,%N1Beg+1,%N2End-%N1Beg-1))
+#!%N1Beg :: %N2End :: %RYB112FText
+  #CASE(%RYB112FLoop)
+  #OF(1)
+    #SET(%LineNext, '#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)')
+%LineNext
+    #SET(%LineNext, '#SET(%RYB112Number     , %RYB112Includes)')
+%LineNext
+    #ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+    #SET(%RYB112Number     , %RYB112Includes)    
+  #OF(2)
+    #SET(%LineNext, '#SET(%RYB112Code       , <39>' & %RYB112FText & '<39>)')
+%LineNext
+    #SET(%RYB112Code       , %RYB112FText)
+  #OF(3)
+    #SET(%LineNext, '#SET(%RYB112Value      , <39>' & %RYB112FText & '<39>)')
+%LineNext
+    #SET(%RYB112Value      , %RYB112FText)
+  #OF(4)
+    #SET(%LineNext, '#SET(%RYB112Descr      , <39>' & %RYB112FText & '<39>)')
+%LineNext
+    #SET(%RYB112Descr      , %RYB112FText)
+    #!
+    #SET(%LineNext, '#!')
+%LineNext
+  #ENDCASE
+  #SET(%Start,%N2End+2)
+  #SET(%RYB112FLoop,%RYB112FLoop+1)
+#!%RYB112FText
+#ENDLOOP
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB112DefaultTheIncludes)
+#FREE(%RYB112Includes)
+#!
+#SET(%LineShow, ITEMS(%RYB112Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! #FREE: Is this correct?
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'FIRST')
+#SET(%RYB112Value      , ALL('-',%RYB112DataSize))
+#SET(%RYB112Descr      , 'First Entry')
+#!
+#!
+#!
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'STARSYSTEM')
+#SET(%RYB112Value      , 'STARSYSTEM')
+#SET(%RYB112Descr      , 'Starzation (Sales) (Origin Star System)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'PLANETARYBODIES')
+#SET(%RYB112Value      , 'PLANETARYBODIES')
+#SET(%RYB112Descr      , 'Planetization (Sales) (Earth, Moon, Mars, Asteroids)')
+#!SET(%RYB112Descr      , 'Internationalization (Sales)')                                     #! RA.2021.03.27: Above will happen
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CONTINENT')
+#SET(%RYB112Value      , 'CONTINENT')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CONTINENTAREA')
+#SET(%RYB112Value      , 'CONTINENTAREA')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'COUNTRY')
+#SET(%RYB112Value      , 'COUNTRY')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'STATES')
+#SET(%RYB112Value      , 'STATES')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'COUNTY')
+#SET(%RYB112Value      , 'COUNTY')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CITY')
+#SET(%RYB112Value      , 'CITY')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'LANGUAGE')
+#SET(%RYB112Value      , 'LANGUAGE')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CURRENCY')
+#SET(%RYB112Value      , 'CURRENCY')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CALENDAR')
+#SET(%RYB112Value      , 'CALENDAR')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'TIMEZONE')
+#SET(%RYB112Value      , 'TIMEZONE')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'MEASURE')
+#SET(%RYB112Value      , 'MEASURE')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CULTURE')
+#SET(%RYB112Value      , 'CULTURE')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'POLITICAL')
+#SET(%RYB112Value      , 'POLITICAL')
+#SET(%RYB112Descr      , 'Internationalization (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'LOCATION')
+#SET(%RYB112Value      , 'LOCATION')
+#SET(%RYB112Descr      , 'Internationalization (Sales) (Latitude,Longitude,Altitude)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'IDENTITY')
+#SET(%RYB112Value      , 'IDENTITY')
+#SET(%RYB112Descr      , 'Country Formats (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'NAME')
+#SET(%RYB112Value      , 'NAME')
+#SET(%RYB112Descr      , 'Country Formats (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'ADDRESS')
+#SET(%RYB112Value      , 'ADDRESS')
+#SET(%RYB112Descr      , 'Country Formats (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'POSTALCODE')
+#SET(%RYB112Value      , 'POSTALCODE')
+#SET(%RYB112Descr      , 'Country Formats (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'PARTY')
+#SET(%RYB112Value      , 'PARTY')
+#SET(%RYB112Descr      , 'Country Formats (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'AGENT')
+#SET(%RYB112Value      , 'AGENT')
+#SET(%RYB112Descr      , 'Sales Person, Employee, Manager, Owner, Robot, etc (Sales, Manufacturing, Overhead)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'COMMUNICATION')
+#SET(%RYB112Value      , 'COMMUNICATION')
+#SET(%RYB112Descr      , 'Communication (Everything)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'ENTITY')
+#SET(%RYB112Value      , 'ENTITY')
+#SET(%RYB112Descr      , 'EMS: Entity Management System (Enterprise Management System) (Assets,Liabilities)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'GOVERNMENT')
+#SET(%RYB112Value      , 'GOVERNMENT')
+#SET(%RYB112Descr      , 'GMS: Government Management System (Taxes, Everything)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'CLIENT')
+#SET(%RYB112Value      , 'CLIENT')
+#SET(%RYB112Descr      , 'CMS: Client Management System (Income)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'VENDOR')
+#SET(%RYB112Value      , 'VENDOR')
+#SET(%RYB112Descr      , 'VMS: Vendor Management System (Expenses)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SHIPPER')
+#SET(%RYB112Value      , 'SHIPPER')
+#SET(%RYB112Descr      , 'SMS: Shipper Management System (Income/Expenses)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'FBS')
+#SET(%RYB112Value      , 'FBS')
+#SET(%RYB112Descr      , 'Financial Balance Sheet (Assets - Liabilities = Equity | Health)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'FPL')
+#SET(%RYB112Value      , 'FPL')
+#SET(%RYB112Descr      , 'Financial Profit & Loss (Income - Expenses = Net Profit | Cash Flow)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'KPI')
+#SET(%RYB112Value      , 'KPI')
+#SET(%RYB112Descr      , 'Key Performance Indicators (Health Checkup | Cash Flow Checkup)')
+#!-----
+#! Employee: Learning/Growth, Employee Satisfaction (work/life balance)
+#! Leading: Employee Training => Employee Productivity => Employee Retention
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'KPIEMPLOYEES')
+#SET(%RYB112Value      , 'KPIEMPLOYEES')
+#SET(%RYB112Descr      , 'Key Performance Indicators (Employee Satisfaction | Health)')
+#! Customer: Sales price, returned items. Returning customers, new customers.
+#! Leading: Customer Satisfaction => Customer Retention => Financial Returns
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'KPICUSTOMERS')
+#SET(%RYB112Value      , 'KPICUSTOMERS')
+#SET(%RYB112Descr      , 'Key Performance Indicators (Customer Satisfaction | Health)')
+#! Innovation (R&D, Products), Operations (Sales, Delivery)[Six Sigma], Service-after-sale (Billing, Support)
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'KPIPROCESSES')
+#SET(%RYB112Value      , 'KPIPROCESSES')
+#SET(%RYB112Descr      , 'Key Performance Indicators (Internal Processes | Health)')
+#! Profit margin, average collection period, current ratio, debt ratio
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'KPIFINANCIAL')
+#SET(%RYB112Value      , 'KPIFINANCIAL')
+#SET(%RYB112Descr      , 'Key Performance Indicators (Financial Processes | Health | Cash Flow)')
+#!-----
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'MACHINE')
+#SET(%RYB112Value      , 'MACHINE')
+#SET(%RYB112Descr      , 'Machine (Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'TOOL')
+#SET(%RYB112Value      , 'TOOL')
+#SET(%RYB112Descr      , 'Tool (Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'GAGE')
+#SET(%RYB112Value      , 'GAGE')
+#SET(%RYB112Descr      , 'Gage (Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'TRUCK')
+#SET(%RYB112Value      , 'TRUCK')
+#SET(%RYB112Descr      , 'Truck (Fulfillment)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SERVICE')
+#SET(%RYB112Value      , 'SERVICE')
+#SET(%RYB112Descr      , 'Service Items (Sales, Material, Time, Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'INVENTORY')
+#SET(%RYB112Value      , 'INVENTORY')
+#SET(%RYB112Descr      , 'Inventory Items (Sales, Material, Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SUPPLY')
+#SET(%RYB112Value      , 'SUPPLY')
+#SET(%RYB112Descr      , 'Consumable Items (Sales, Manufacturing, Overhead)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'WAREHOUSE')
+#SET(%RYB112Value      , 'WAREHOUSE')
+#SET(%RYB112Descr      , 'Storage of Items (Sales, Material, Manufacturing, Overhead)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'MARKETING')
+#SET(%RYB112Value      , 'MARKETING')
+#SET(%RYB112Descr      , 'Client and Customer Engagement (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'PRICING')
+#SET(%RYB112Value      , 'PRICING')
+#SET(%RYB112Descr      , 'Historical Goods, Services, and Inventory Pricing (Sales)')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'DOCUMENT')
+#SET(%RYB112Value      , 'DOCUMENT')
+#SET(%RYB112Descr      , 'Contracts (Sales), Certificates (Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'IMAGE')
+#SET(%RYB112Value      , 'IMAGE')
+#SET(%RYB112Descr      , 'Contracts (Sales), Certificates (Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SCHEMATIC')
+#SET(%RYB112Value      , 'SCHEMATIC')
+#SET(%RYB112Descr      , 'Diagram, Drawing, Plan, Blueprint (Sales, Manufacturing)')
+#!
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFI')
+#SET(%RYB112Value      , 'RFI')
+#SET(%RYB112Descr      , 'Request For Information (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFIHEADER')
+#SET(%RYB112Value      , 'RFIHEADER')
+#SET(%RYB112Descr      , 'Request For Information')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFIDETAIL')
+#SET(%RYB112Value      , 'RFIDETIAL')
+#SET(%RYB112Descr      , 'Request For Information')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFP')
+#SET(%RYB112Value      , 'RFP')
+#SET(%RYB112Descr      , 'Request For Proposal (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFPHEADER')
+#SET(%RYB112Value      , 'RFPHEADER')
+#SET(%RYB112Descr      , 'Request For Proposal')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFPDETAIL')
+#SET(%RYB112Value      , 'RFPDETAIL')
+#SET(%RYB112Descr      , 'Request For Proposal')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFQ')
+#SET(%RYB112Value      , 'RFQ')
+#SET(%RYB112Descr      , 'Request For Quote (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFQHEADER')
+#SET(%RYB112Value      , 'RFQHEADER')
+#SET(%RYB112Descr      , 'Request For Quote')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFQDETAIL')
+#SET(%RYB112Value      , 'RFQDETAIL')
+#SET(%RYB112Descr      , 'Request For Quote')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFO')
+#SET(%RYB112Value      , 'RFO')
+#SET(%RYB112Descr      , 'Request For Order (Sales)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFOHEADER')
+#SET(%RYB112Value      , 'RFOHEADER')
+#SET(%RYB112Descr      , 'Request For Order')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFODETAIL')
+#SET(%RYB112Value      , 'RFODETAIL')
+#SET(%RYB112Descr      , 'Request For Order')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFW')
+#SET(%RYB112Value      , 'RFW')
+#SET(%RYB112Descr      , 'Request For Work (Service, Product)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFWHEADER')
+#SET(%RYB112Value      , 'RFWHEADER')
+#SET(%RYB112Descr      , 'Request For Work')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFWDETAIL')
+#SET(%RYB112Value      , 'RFWDETAIL')
+#SET(%RYB112Descr      , 'Request For Work')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFB')
+#SET(%RYB112Value      , 'RFB')
+#SET(%RYB112Descr      , 'Request For Bill (Financial Processes)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFBHEADER')
+#SET(%RYB112Value      , 'RFBHEADER')
+#SET(%RYB112Descr      , 'Request For Bill')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFBDETAIL')
+#SET(%RYB112Value      , 'RFBDETAIL')
+#SET(%RYB112Descr      , 'Request For Bill')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFA')
+#SET(%RYB112Value      , 'RFA')
+#SET(%RYB112Descr      , 'Request For Payment (Financial Processes)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFAHEADER')
+#SET(%RYB112Value      , 'RFAHEADER')
+#SET(%RYB112Descr      , 'Request For Payment')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFADETAIL')
+#SET(%RYB112Value      , 'RFADETAIL')
+#SET(%RYB112Descr      , 'Request For Payment')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFC')
+#SET(%RYB112Value      , 'RFC')
+#SET(%RYB112Descr      , 'Request For Collection (Financial Processes)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFCHEADER')
+#SET(%RYB112Value      , 'RFCHEADER')
+#SET(%RYB112Descr      , 'Request For Collection')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RFCDETAIL')
+#SET(%RYB112Value      , 'RFCDETAIL')
+#SET(%RYB112Descr      , 'Request For Collection')
+#!
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BOM')
+#SET(%RYB112Value      , 'BOM')
+#SET(%RYB112Descr      , 'Bill Of Materials (Manufacturing, Service)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BOMHEADER')
+#SET(%RYB112Value      , 'BOMHEADER')
+#SET(%RYB112Descr      , 'Bill Of Materials')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BOMDETAIL')
+#SET(%RYB112Value      , 'BOMDETAIL')
+#SET(%RYB112Descr      , 'Bill Of Materials')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BOO')
+#SET(%RYB112Value      , 'BOO')
+#SET(%RYB112Descr      , 'Bill Of Operations (Manufacturing, Service)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BOOHEADER')
+#SET(%RYB112Value      , 'BOOHEADER')
+#SET(%RYB112Descr      , 'Bill Of Operations')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BOODETAIL')
+#SET(%RYB112Value      , 'BOODETAIL')
+#SET(%RYB112Descr      , 'Bill Of Operations')
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'QUALITY')
+#SET(%RYB112Value      , 'QUALITY')
+#SET(%RYB112Descr      , 'Quality Control (Material, Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'PICKING')
+#SET(%RYB112Value      , 'PICKING')
+#SET(%RYB112Descr      , 'Picking (Fulfillment)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'PACKING')
+#SET(%RYB112Value      , 'PACKING')
+#SET(%RYB112Descr      , 'Packing (Fulfillment)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SHIPPING')
+#SET(%RYB112Value      , 'SHIPPING')
+#SET(%RYB112Descr      , 'Shipping (Fulfillment)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'RETURN')
+#SET(%RYB112Value      , 'RETURN')
+#SET(%RYB112Descr      , 'Return (Fulfillment)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SELL')
+#SET(%RYB112Value      , 'SELL')
+#SET(%RYB112Descr      , 'VENDOR (Owner) + AGENT (Seller, Manufacturing, Overhead)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'BUY')
+#SET(%RYB112Value      , 'BUY')
+#SET(%RYB112Descr      , 'CLIENT (Prospect) + AGENT (Buyer)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'MAKE')
+#SET(%RYB112Value      , 'MAKE')
+#SET(%RYB112Descr      , '(BOM + BOO) + AGENT (Manufacturing)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'USE')
+#SET(%RYB112Value      , 'USE')
+#SET(%RYB112Descr      , 'INVENTORY + AGENT (Manufacturing, Overhead)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SYSTEM')
+#SET(%RYB112Value      , 'SYSTEM')
+#SET(%RYB112Descr      , 'Automation (Scale, Speed)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'DEFAULT')
+#SET(%RYB112Value      , 'DEFAULT')
+#SET(%RYB112Descr      , 'Automation (Scale, Speed)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'OPTION')
+#SET(%RYB112Value      , 'OPTION')
+#SET(%RYB112Descr      , 'Automation (Scale, Speed)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'USER')
+#SET(%RYB112Value      , 'USER')
+#SET(%RYB112Descr      , 'Automation (Scale, Speed)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'SEARCH')
+#SET(%RYB112Value      , 'SEARCH')
+#SET(%RYB112Descr      , 'Automation (Scale, Speed)')
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'NOTE')
+#SET(%RYB112Value      , 'NOTE')
+#SET(%RYB112Descr      , 'Automation (Scale, Speed)')
+#!
+#!
+#!
+#!
+#ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
+#SET(%RYB112Number     , ITEMS(%RYB112Includes))
+#SET(%RYB112Code       , 'LAST')
+#SET(%RYB112Value      , ALL('~',%RYB112DataSize))
+#SET(%RYB112Descr      , 'Last Entry')
+#!
+#!
+#SET(%LineShow, ITEMS(%RYB112Includes) & ' AFTER ADD')
+#! !!! %%LineShow=%LineShow
+#! !!! ADD: Is this correct?
+#RETURN
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------

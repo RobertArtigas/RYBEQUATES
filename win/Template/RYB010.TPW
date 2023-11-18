@@ -1,0 +1,134 @@
+#!TEMPLATE(zzzEquateRYB010,'Equate RYB010 Definitions'),FAMILY('ABC')
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!
+#GROUP(%RYB010Docs)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB010Docs00))
+    #DECLARE(%RYB010Docs00)
+  #ENDIF
+  #SET(%RYB010Docs00, '')
+  #SET(%RYB010Docs00, %RYB010Docs00 & '.GitIgnore')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs01))
+    #DECLARE(%RYB010Docs01)
+  #ENDIF
+  #SET(%RYB010Docs01, '')
+  #SET(%RYB010Docs01, %RYB010Docs01 & '<9>[Tt][eE][mM][pP]<13><10>')
+  #SET(%RYB010Docs01, %RYB010Docs01 & 'Add the entry above to your <39>.GitIgnore<39> file. This will prevent the <39>Temp<39>') 
+  #SET(%RYB010Docs01, %RYB010Docs01 & ' named directories from being included in your source control.')
+  #SET(%RYB010Docs01, %RYB010Docs01 & ' The <39>Temp<39> directories are where you generate the pre-production equate files')
+  #SET(%RYB010Docs01, %RYB010Docs01 & ' so you can validate them against the production equate files for correctness.')
+  #SET(%RYB010Docs01, %RYB010Docs01 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs02))
+    #DECLARE(%RYB010Docs02)
+  #ENDIF
+  #SET(%RYB010Docs02, '')
+  #SET(%RYB010Docs02, %RYB010Docs02 & 'Source Directories')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs03))
+    #DECLARE(%RYB010Docs03)
+  #ENDIF
+  #SET(%RYB010Docs03, '')
+  #SET(%RYB010Docs03, %RYB010Docs03 & '<9>.\Temp<13><10>')
+  #SET(%RYB010Docs03, %RYB010Docs03 & '<9>.\Classes\Temp<13><10>')
+  #SET(%RYB010Docs03, %RYB010Docs03 & '<9>.\DataSources\Temp<13><10>')
+  #SET(%RYB010Docs03, %RYB010Docs03 & '<9>.\Generators\Temp<13><10>')
+  #SET(%RYB010Docs03, %RYB010Docs03 & '<9>.\Includes\Temp<13><10>')
+  #SET(%RYB010Docs03, %RYB010Docs03 & 'Create these directories in your source code tree for source code generation.')
+  #SET(%RYB010Docs03, %RYB010Docs03 & ' You can make them a product level or global level directory.')
+  #SET(%RYB010Docs03, %RYB010Docs03 & ' They can be either a relative or a fixed path.')
+  #SET(%RYB010Docs03, %RYB010Docs03 & ' Normal setup, you would put these below the application directory.')
+  #SET(%RYB010Docs03, %RYB010Docs03 & ' However, for larger systems, some individuals have one path for everything')
+  #SET(%RYB010Docs03, %RYB010Docs03 & ' that is generated.')
+  #SET(%RYB010Docs03, %RYB010Docs03 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs04))
+    #DECLARE(%RYB010Docs04)
+  #ENDIF
+  #SET(%RYB010Docs04, '')
+  #SET(%RYB010Docs04, %RYB010Docs04 & 'Redirection File')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs05))
+    #DECLARE(%RYB010Docs05)
+  #ENDIF
+  #SET(%RYB010Docs05, '')
+  #!SET(%RYB010Docs05, %RYB010Docs05 & '<9>*.* = .\Classes; .\DataSources; .\Generators; .\Includes')
+  #SET(%RYB010Docs05, %RYB010Docs05 & '<9>*.* = .\Classes; .\Generators; .\Includes')
+  #SET(%RYB010Docs05, %RYB010Docs05 & '<13><10>')
+  #SET(%RYB010Docs05, %RYB010Docs05 & 'Add the above line to your <39><ClarionRelease>.RED<39> file.')
+  #SET(%RYB010Docs05, %RYB010Docs05 & ' This will allow the compiler to pick up the generated sources that have')
+  #SET(%RYB010Docs05, %RYB010Docs05 & ' been moved into production.')
+  #SET(%RYB010Docs05, %RYB010Docs05 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs06))
+    #DECLARE(%RYB010Docs06)
+  #ENDIF
+  #SET(%RYB010Docs06, '')
+  #SET(%RYB010Docs06, %RYB010Docs06 & 'Directions')
+  #!
+  #IF(NOT VAREXISTS(%RYB010Docs07))
+    #DECLARE(%RYB010Docs07)
+  #ENDIF
+  #SET(%RYB010Docs07, '')
+  #SET(%RYB010Docs07, %RYB010Docs07 & 'Follow the instructions above.')
+  #SET(%RYB010Docs07, %RYB010Docs07 & ' Your redirection file will pick up your production sources.')
+  #!SET(%RYB010Docs07, %RYB010Docs07 & ' Once you are satisfied with the generated source in the <39>Temp<39> file,')
+  #!SET(%RYB010Docs07, %RYB010Docs07 & ' you can move the source file to the parent directory.')
+  #SET(%RYB010Docs07, %RYB010Docs07 & ' Generate any new developer source to the <39>Temp<39>.')
+  #SET(%RYB010Docs07, %RYB010Docs07 & ' You can then do a source compare between the newly generated file and the production')
+  #SET(%RYB010Docs07, %RYB010Docs07 & ' file with the same name in the parent directory.')
+  #SET(%RYB010Docs07, %RYB010Docs07 & ' Once you have verified that the newly generated file is good, then you can')
+  #SET(%RYB010Docs07, %RYB010Docs07 & ' move that developer source to the parent directory replacing the production source.')
+  #SET(%RYB010Docs07, %RYB010Docs07 & '')
+  #SET(%RYB010Docs07, %RYB010Docs07 & '')
+#ENDPREPARE
+#!
+#BOXED('Documentation'),AT(,,454)
+  #DISPLAY(''),AT(,,,1)
+  #!DISPLAY(%RYB010Copyright01),AT(,,260,34)
+  #DISPLAY(%RYB010Docs00),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #DISPLAY(%RYB010Docs01),AT(,,436,32)
+  #DISPLAY(%RYB010Docs02),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #DISPLAY(%RYB010Docs03),AT(,,436,64)
+  #DISPLAY(%RYB010Docs04),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #DISPLAY(%RYB010Docs05),AT(,,436,44)
+  #DISPLAY(%RYB010Docs06),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #DISPLAY(%RYB010Docs07),AT(,,436,42)
+#ENDBOXED
+#!
+#GROUP(%RYB010TabDocumentation)
+#TAB('GIT-RED'),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #DISPLAY(''),AT(,,,1)
+  #INSERT(%RYB010Docs)
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB010SheetVersions)
+#SHEET,AT(,,458),HSCROLL,ADJUST
+#TAB('Templates')
+  #DISPLAY('RYB011: 2023.09.28 RAYS: Utility:<9>ISO-639-1: Language Definitions')
+  #DISPLAY('RYB012: 2023.09.28 RAYS: Extension:<9>ISO-639-1: Language Definitions')
+  #DISPLAY('RYB101: 2023.11.03 RAYS: Utility:<9>ENTITY: Entity Definitions')
+  #DISPLAY('RYB102: 2023.11.03 RAYS: Extension:<9>ENTITY: Entity Definitions')
+  #DISPLAY('RYB111: 2021.03.14 RAYS: Utility:<9>Business System Tables')
+  #DISPLAY('RYB112: 2021.03.14 RAYS: Extension:<9>Business System Tables')
+#ENDTAB
+#TAB('Changes')
+  #DISPLAY('RYB012: 2023.11.10 RAYS: Created Extension from RYB011')
+  #DISPLAY('RYB102: 2023.11.10 RAYS: Created Extension from RYB101')
+  #DISPLAY('RYB010: 2023.09.28 RAYS: Template List and Changes')
+  #DISPLAY('RYB000: 2018.01.21 RAYS: Template skeleton')
+#ENDTAB
+#ENDSHEET
+#!
+#GROUP(%RYB010TabVersions)
+#TAB('Versions')
+  #INSERT(%RYB010SheetVersions)
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------

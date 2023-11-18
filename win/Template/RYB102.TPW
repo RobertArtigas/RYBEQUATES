@@ -1,0 +1,628 @@
+#!TEMPLATE(zzzEquateRYB102,'Equate RYB102 Definitions'),FAMILY('ABC')
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #GROUP(%PreambleRAYS)                                                               #! Basic copyright message
+#! #BOXED('RAYS: Application Templates'),PROP(PROP:FontStyle,700)
+#!   #DISPLAY(''),AT(,,,1)
+#!   #DISPLAY('Copyright © 1999-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+#!   #DISPLAY('All Rights Reserved World Wide.')
+#!   #DISPLAY('Commercial License and non-disclosure agreement required for use.')
+#!   #DISPLAY('E-mail: roberto.artigas.dev@gmail.com')
+#!   #DISPLAY('Skype: Clarion Live Chat | CW-Talk')
+#! #ENDBOXED
+#!
+#GROUP(%RYB102Copyright)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB102Copyright01))
+    #DECLARE(%RYB102Copyright01)
+  #ENDIF
+  #SET(%RYB102Copyright01, 'Generate Global EQUATES for ABC.')
+  #SET(%RYB102Copyright01, %RYB102Copyright01 & '<13,10>Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler.')
+  #SET(%RYB102Copyright01, %RYB102Copyright01 & '<13,10>All copyrights reserved world wide.')
+  #SET(%RYB102Copyright01, %RYB102Copyright01 & '<13,10>E-MAIL: roberto.artigas.dev@gmail.com')
+#ENDPREPARE
+#!BOXED('Version 1.0 [ 2018.09.11 ]'),AT(,,278),PROP(PROP:FontStyle,700)
+#BOXED('Version 1.0 [ 2018.12.31 ]'),AT(,,454),PROP(PROP:FontStyle,700)
+  #DISPLAY(''),AT(,,,1)
+  #!DISPLAY(%RYB102Copyright01),AT(,,260,34)
+  #DISPLAY(%RYB102Copyright01),AT(,,436,34)
+#ENDBOXED
+#!
+#GROUP(%RYB102License)
+#TAB('ENTITY'),PROP(PROP:FontStyle,700)
+  #INSERT(%RYB102Copyright) 
+  #INSERT(%MITLicenseRYB)
+  #!INSERT(%ClarionFamily)              #! RA.2023.09.04: Not for utilities [DO NOT USE]
+#ENDTAB
+#!
+#GROUP(%RYB102Explain)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB102Explain01))
+    #DECLARE(%RYB102Explain01)
+  #ENDIF
+  #SET(%RYB102Explain01, '')
+  #SET(%RYB102Explain01, %RYB102Explain01 & 'This template is used to generate table equates to use as global equates.')
+  #SET(%RYB102Explain01, %RYB102Explain01 & '<13,10><13,10>')
+  #SET(%RYB102Explain01, %RYB102Explain01 & 'This template has been tested with the ABC template chain.')
+  #SET(%RYB102Explain01, %RYB102Explain01 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB102Explain02))
+    #DECLARE(%RYB102Explain02)
+  #ENDIF
+  #!
+  #SET(%RYB102Explain02, '')
+  #SET(%RYB102Explain02, %RYB102Explain02 & 'NOTE: Make sure the COMPLETE DIRECTORY PATH exists on your machine.')
+#ENDPREPARE
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #EXTENSION(RYB102_Equates_Tables,'RA.2021.03.14: Equates for Tables'),DESCRIPTION('RAYS | Equate for Tables (EQU).'),APPLICATION
+#!UTILITY(RYB102_Equates,'RA.2023.11.03: RYB102: Global Equates')
+#EXTENSION(RYB102_Equates,'RA.2023.11.10: RYB102: ENTITY Equates'),DESCRIPTION('RYB | RYB102: ENTITY Global Equates (EQU,CSV,TXT).'),APPLICATION
+#!-----------------------------------------------------------------------------
+#INSERT(%PreambleRYB)
+#!-----------------------------------------------------------------------------
+#! RA.2023.11.03.FRI      Roberto Artigas Jr
+#!  *   Created for the ABC templates
+#!-----------------------------------------------------------------------------
+#PREPARE
+  #DECLARE(%BegDate)
+  #DECLARE(%BegTime)
+  #SET(%BegDate, TODAY())                     #! Begin date
+  #SET(%BegTime, CLOCK())                     #! Begin time
+  #!
+  #!INSERT(%PrepareTheIncludes)
+#ENDPREPARE
+#!
+#DISPLAY('')
+#!SHEET,AT(,,288),HSCROLL
+#SHEET,AT(,,464),HSCROLL
+#INSERT(%RYB102License)
+#INSERT(%RYB102Explain)
+#TAB(UPPER(%Application) & '.' & UPPER(%ProgramExtension))
+  #BOXED('Hidden'),AT(,,456),HIDE
+    #!PROMPT('NextLine: ',@S120),%NextLine,AT(102,,346)
+    #PROMPT('BegDate: '     ,@S120) ,%BegDate         ,AT(102,,346)
+    #PROMPT('BegTime: '     ,@S120) ,%BegTime         ,AT(102,,346)
+    #PROMPT('CSVRecord: '   ,@S120) ,%RYB102Record    ,AT(102,,346)
+    #PROMPT('FieldText: '   ,@S120) ,%RYB102FText     ,AT(102,,346)
+    #PROMPT('CSVFields: '   ,@N4)   ,%RYB102Fields    ,AT(102,,40)
+    #PROMPT('FieldLoop: '   ,@N4)   ,%RYB102FLoop     ,AT(102,,40)
+    #PROMPT('Start: '       ,@N4)   ,%Start           ,AT(102,,40)
+    #PROMPT('Next: '        ,@N4)   ,%Next            ,AT(102,,40)
+    #PROMPT('Begin: '       ,@N4)   ,%N1Beg           ,AT(102,,40)
+    #PROMPT('End: '         ,@N4)   ,%N2End           ,AT(102,,40)
+    #PROMPT('LineShow: '    ,@S120) ,%LineShow        ,AT(102,,346)
+    #PROMPT('LineWork: '    ,@S120) ,%LineWork        ,AT(102,,346)
+    #PROMPT('LineCmnt: '    ,@S120) ,%LineCmnt        ,AT(102,,346)
+    #PROMPT('LineNext: '    ,@S120) ,%LineNext        ,AT(102,,346)
+    #PROMPT('LineText: '    ,@S120) ,%LineText        ,AT(102,,346)
+    #PROMPT('CountEquate: ' ,@N8)   ,%CountEquate     ,AT(102,,40)
+    #PROMPT('zNames: '      ,@N8)   ,%zNamesRYB102    ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zGroup: '      ,@N8)   ,%zGroupRYB102    ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zItems: '      ,@N8)   ,%zItemsRYB102    ,AT(102,,40)    , DEFAULT(32)
+    #PROMPT('zCmnts: '      ,@N8)   ,%zCmntsRYB102    ,AT(102,,40)    , DEFAULT(50)
+  #ENDBOXED
+  #!
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create EQUATES from existing entries?'        , CHECK), %RYB102OptExpEQU, DEFAULT(1)  , AT(10)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB102Comment  , REQ   , DEFAULT(140), AT(220,,40)
+  #ENDBOXED
+  #!
+  #BOXED('Global Includes'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB102Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED(''),AT(,,446)
+      #PROMPT('Directory: '   ,@S120)   , %RYB102Directory           , REQ   , DEFAULT('.\Generators\Temp\') , AT(100,,344)
+      #PROMPT('Name: '        ,@S120)   , %RYB102TableName           , REQ   , DEFAULT('RYB102_EQUATES.EQU') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB102IncludeLocation , %RYB102Directory & %RYB102TableName)
+      #ENDPREPARE
+      #PROMPT('Location: ',@S120),%RYB102IncludeLocation,REQ,DEFAULT(%RYB102IncludeLocation),PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Equate: '      ,@S120)   , %RYB102TableID             , REQ   , DEFAULT('RYB102_EQUATE_')     , AT(100,,344)
+      #PROMPT('Description: ' ,@S120)   , %RYB102TableDescr          , REQ   , DEFAULT('RYB102_DESCR_')      , AT(100,,344)
+      #PROMPT('Value: '       ,@S120)   , %RYB102TablePrefix         , REQ   , DEFAULT('RYB102_VALUE_')      , AT(100,,344)
+      #PROMPT('Value Size: '  ,@N8  )   , %RYB102DataSize            , REQ   , DEFAULT(16)                   , AT(100,,40)
+    #ENDBOXED
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB102Explain01),AT(,,436,34)
+  #ENDBOXED
+#ENDTAB
+#!
+#TAB('Documents')
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB102OptExpCSV, DEFAULT(1)  , AT(10)
+    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB102OptExpTXT, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Documents'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB102Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED('Export'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('CSV Directory: '     ,@S120)   , %RYB102CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
+      #PROMPT('CSV Name: '          ,@S120)   , %RYB102CsvName       , REQ   , DEFAULT('RYB102_EQUATES.CSV')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB102CsvLocation     , %RYB102CsvDirectory & %RYB102CsvName)
+      #ENDPREPARE
+      #PROMPT('CSV Location: '  ,@S120),%RYB102CsvLocation    ,REQ,DEFAULT(%RYB102CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #BOXED('Import'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('TXT Directory: '     ,@S120)   , %RYB102TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('TXT Name: '          ,@S120)   , %RYB102TxtName       , REQ   , DEFAULT('RYB102_ENTRIES.TXT')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB102TxtLocation     , %RYB102TxtDirectory & %RYB102TxtName)
+      #ENDPREPARE
+      #PROMPT('TXT Location: '  ,@S120),%RYB102TxtLocation    ,REQ,DEFAULT(%RYB102CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+  #ENDBOXED
+#ENDTAB
+#!
+#PREPARE
+  #CALL(%RYB102DefaultTheIncludes)
+#ENDPREPARE
+#!+++
+#TAB('Equates')
+  #!BOXED(''),AT(,,280)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(''),AT(,,,1)
+    #BUTTON('File name'),MULTI(%RYB102Includes, '(' & FORMAT(%RYB102Number,@N03) & ') ' & %RYB102Code & ' :: ' & %RYB102Value & ' :: ' & %RYB102Descr & ' ::'),INLINE,AT(,,,150)
+    #INSERT(%PreambleRYB)
+      #!BOXED('Table Item'),AT(,,288)
+      #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+        #DISPLAY(''),AT(,,,1)
+        #PROMPT('Field Equate: '        ,@N8)     , %RYB102Number                     , AT(100,,362)
+        #PROMPT('Field Code:  '         ,@S120)   , %RYB102Code     , REQ             , AT(100,,362)
+        #PROMPT('Field Value: '         ,@S120)   , %RYB102Value                      , AT(100,,362)
+        #PROMPT('Field Description: '   ,@S120)   , %RYB102Descr                      , AT(100,,362)
+       #ENDBOXED
+    #ENDBUTTON
+  #ENDBOXED
+#ENDTAB
+#!
+#INSERT(%RYB010TabDocumentation)
+#INSERT(%RYB010TabVersions)
+#!INSERT(%TabClarionVersion)
+#ENDSHEET
+#!
+#ATSTART
+#!COMMENT(90)
+#COMMENT(%RYB102Comment)
+#!
+#IF(%RYB102OptExpEQU)
+  #SET(%RYB102IncludeLocation , %RYB102Directory    & %RYB102TableName)
+  #CREATE(%RYB102IncludeLocation)
+  #INSERT(%RYB102BuildTheIncludes)
+  #CLOSE (%RYB102IncludeLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB102IncludeLocation & '"')
+#ENDIF
+#!
+#IF(%RYB102OptExpCSV)
+  #SET(%RYB102CsvLocation     , %RYB102CsvDirectory & %RYB102CsvName)
+  #CREATE(%RYB102CsvLocation)
+  #INSERT(%RYB102BuildTheCSV)
+  #CLOSE (%RYB102CsvLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB102CsvLocation & '"')
+#ENDIF
+#!
+#IF(%RYB102OptExpTXT)
+  #SET(%RYB102TxtLocation     , %RYB102TxtDirectory & %RYB102TxtName)
+  #CREATE(%RYB102TxtLocation)
+  #INSERT(%RYB102LoadCsvEntries)
+  #CLOSE (%RYB102TxtLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB102TxtLocation & '"')
+#ENDIF
+#!
+#COMMENT(60)
+#ENDAT
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB102BuildTheCSV)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & 'SEQUENCE'     & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'CODE'         & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'VALUE'        & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'DESCRIPTION'  & '"')
+%LineNext
+#SET(%CountEquate, 0)
+#FOR (%RYB102Includes)
+    #SET(%CountEquate, %CountEquate + 1)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & FORMAT(%CountEquate,@N03)  & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB102Code)          & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB102Value)         & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB102Descr)         & '"')
+%LineNext
+#ENDFOR
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB102BuildTheIncludes)
+!ABCIncludeFile
+  OMIT('_EndOfInclude_', _RYB102_)
+_RYB102_ EQUATE(1)
+!BOF
+!
+! File:         %RYB102IncludeLocation
+! Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+! Purpose:      Define global table includes for applications
+#SET(%LineText, '! Author:       Copyright © 2023-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+!               All Rights Reserved World Wide.
+!               MIT License.
+!
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+! The EQUATES ---might--- have cross uses in other areas in the architecture.
+! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+!Region EQUATE
+  #SET(%LineShow, ITEMS(%RYB102Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB102Includes)
+#!
+#! !!! %%RYB102Includes=%RYB102Includes, %%RYB102Number=%RYB102Number, %%RYB102Code=%RYB102Code, %%RYB102Value=%RYB102Value
+#! !!! %%RYB102Descr=%RYB102Descr
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB102TableID & %RYB102Code)
+#SET(%LineNext, 'EQUATE(' & FORMAT(%CountEquate,@N03) & ')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB102Descr)
+%[%zNamesRYB102]LineWork %[%zItemsRYB102-%zNamesRYB102]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion EQUATE
+!Region VALUE
+!                                         1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB102Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB102TablePrefix & %RYB102Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB102Value) & ''')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB102Descr)
+%[%zNamesRYB102]LineWork %[%zItemsRYB102-%zNamesRYB102]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!                                         1234567890123456
+!EndRegion VALUE
+!Region DESCRIPTION
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB102Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB102TableDescr & %RYB102Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB102Descr) & ''')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB102Descr)
+%[%zNamesRYB102]LineWork %[%zItemsRYB102-%zNamesRYB102]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion DESCRIPTION
+!
+!EOF
+!  _EndOfInclude_
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB102LoadCsvEntries)
+#!
+#!ERROR(%RYB102TxtLocation)
+#!FREE(%RYB102Includes)
+#!
+#OPEN(%RYB102CsvLocation),READ
+#SET(%CountEquate, 0)
+#LOOP
+  #READ(%RYB102Record)
+  #IF(%RYB102Record = %EOF)
+    #BREAK
+  #ELSE
+    #SET(%CountEquate, %CountEquate + 1)
+    #IF(%CountEquate = 1)
+      #CALL(%RYB102Header)
+#!%RYB102Fields
+#!%RYB102Record
+    #ELSE
+      #SET(%RYB102Record, CLIP(%RYB102Record) & ',')
+      #CALL(%RYB102Detail)
+#!%RYB102Record
+    #ENDIF
+  #END
+#END
+#SET(%LineNext, '#RETURN')
+%LineNext
+#CLOSE(%RYB102CsvLocation)
+#!---------------------------------------------------------------------
+#GROUP(%RYB102Header)
+#SET(%RYB102Fields, 0)
+#SET(%Start,1)
+#LOOP
+  #SET(%Next,INSTRING(',',%RYB102Record,1,%Start))
+  #SET(%RYB102Fields,%RYB102Fields+1)
+  #IF (%Next=0)
+    #BREAK
+  #ENDIF
+  #SET(%Start,%Next+1)
+#ENDLOOP
+#SET(%LineNext, '#GROUP(%RYB102IncludesDefault)')
+%LineNext
+#SET(%LineNext, '#FREE(%RYB102Includes)')
+%LineNext
+#SET(%LineNext, '#!')
+%LineNext
+#RETURN
+#!---------------------------------------------------------------------
+#GROUP(%RYB102Detail)
+#SET(%RYB102FText, '')
+#SET(%RYB102FLoop, 1)
+#SET(%Start,1)
+#LOOP
+  #SET(%N1Beg,INSTRING('"',%RYB102Record,1,%Start))
+  #IF (%N1Beg=0)
+    #RETURN
+  #ENDIF
+  #SET(%N2End,INSTRING('"',%RYB102Record,1,%N1Beg+1))
+  #SET(%RYB102FText,SUB(%RYB102Record,%N1Beg+1,%N2End-%N1Beg-1))
+#!%N1Beg :: %N2End :: %RYB102FText
+  #CASE(%RYB102FLoop)
+  #OF(1)
+    #SET(%LineNext, '#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)')
+%LineNext
+    #SET(%LineNext, '#SET(%RYB102Number     , %RYB102Includes)')
+%LineNext
+    #ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+    #SET(%RYB102Number     , %RYB102Includes)    
+  #OF(2)
+    #SET(%LineNext, '#SET(%RYB102Code       , <39>' & %RYB102FText & '<39>)')
+%LineNext
+    #SET(%RYB102Code       , %RYB102FText)
+  #OF(3)
+    #SET(%LineNext, '#SET(%RYB102Value      , <39>' & %RYB102FText & '<39>)')
+%LineNext
+    #SET(%RYB102Value      , %RYB102FText)
+  #OF(4)
+    #SET(%LineNext, '#SET(%RYB102Descr      , <39>' & %RYB102FText & '<39>)')
+%LineNext
+    #SET(%RYB102Descr      , %RYB102FText)
+    #!
+    #SET(%LineNext, '#!')
+%LineNext
+  #ENDCASE
+  #SET(%Start,%N2End+2)
+  #SET(%RYB102FLoop,%RYB102FLoop+1)
+#!%RYB102FText
+#ENDLOOP
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB102DefaultTheIncludes)
+#FREE(%RYB102Includes)
+#!
+#SET(%LineShow, ITEMS(%RYB102Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! #FREE: Is this correct?
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'FIRST')
+#SET(%RYB102Value      , ALL('-',%RYB102DataSize))
+#SET(%RYB102Descr      , 'First Entry')
+#!
+#!
+#!
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'AI')
+#SET(%RYB102Value      , 'AI')
+#SET(%RYB102Descr      , 'Artificial Intelligence - Programmed')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'AZ')
+#SET(%RYB102Value      , 'AZ')
+#SET(%RYB102Descr      , 'Artificial Intelligence - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'CH')
+#SET(%RYB102Value      , 'CH')
+#SET(%RYB102Descr      , 'Cyborg - Human with Biological Brain and Robotic Parts')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'CR')
+#SET(%RYB102Value      , 'CR')
+#SET(%RYB102Descr      , 'Cyborg - Robot with Artificial Intelligence and Human Skin')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'CZ')
+#SET(%RYB102Value      , 'CZ')
+#SET(%RYB102Descr      , 'Cyborg - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'EE')
+#SET(%RYB102Value      , 'EE')
+#SET(%RYB102Descr      , 'Energy - Enhanced Individual Energy Being')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'EI')
+#SET(%RYB102Value      , 'EI')
+#SET(%RYB102Descr      , 'Energy - Individual Energy Being')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'EZ')
+#SET(%RYB102Value      , 'EZ')
+#SET(%RYB102Descr      , 'Energy - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'HE')
+#SET(%RYB102Value      , 'HE')
+#SET(%RYB102Descr      , 'Human - Enhanced Biological Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'HG')
+#SET(%RYB102Value      , 'HG')
+#SET(%RYB102Descr      , 'Human - Guardianship of Biological Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'HH')
+#SET(%RYB102Value      , 'HH')
+#SET(%RYB102Descr      , 'Human - Hospice of Biological Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'HI')
+#SET(%RYB102Value      , 'HI')
+#SET(%RYB102Descr      , 'Human - Biological Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'HR')
+#SET(%RYB102Value      , 'HR')
+#SET(%RYB102Descr      , 'Human - Retired Home of Biological Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'HZ')
+#SET(%RYB102Value      , 'HZ')
+#SET(%RYB102Descr      , 'Human - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LC')
+#SET(%RYB102Value      , 'LC')
+#SET(%RYB102Descr      , 'Legal - C Corporation')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LI')
+#SET(%RYB102Value      , 'LI')
+#SET(%RYB102Descr      , 'Legal - Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LG')
+#SET(%RYB102Value      , 'LG')
+#SET(%RYB102Descr      , 'Legal - Guardian')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LL')
+#SET(%RYB102Value      , 'LL')
+#SET(%RYB102Descr      , 'Legal - Limited Liability Partnership')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LP')
+#SET(%RYB102Value      , 'LP')
+#SET(%RYB102Descr      , 'Legal - Partnership')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LS')
+#SET(%RYB102Value      , 'LS')
+#SET(%RYB102Descr      , 'Legal - S Corporation')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LT')
+#SET(%RYB102Value      , 'LT')
+#SET(%RYB102Descr      , 'Legal - Trustee')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LZ')
+#SET(%RYB102Value      , 'LZ')
+#SET(%RYB102Descr      , 'Legal - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'PI')
+#SET(%RYB102Value      , 'PI')
+#SET(%RYB102Descr      , 'Politician - Individual')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'PZ')
+#SET(%RYB102Value      , 'PZ')
+#SET(%RYB102Descr      , 'Politician - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'RA')
+#SET(%RYB102Value      , 'RA')
+#SET(%RYB102Descr      , 'Robot - Artificial Intelligence')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'RP')
+#SET(%RYB102Value      , 'RP')
+#SET(%RYB102Descr      , 'Robot - Programmed')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'RZ')
+#SET(%RYB102Value      , 'RZ')
+#SET(%RYB102Descr      , 'Robot - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'XE')
+#SET(%RYB102Value      , 'XE')
+#SET(%RYB102Descr      , 'Extraterrestrial - Enhanced Biological Individual not from Earth')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'XT')
+#SET(%RYB102Value      , 'XT')
+#SET(%RYB102Descr      , 'Extraterrestrial - Biological Individual not from Earth')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'XZ')
+#SET(%RYB102Value      , 'XZ')
+#SET(%RYB102Descr      , 'Extraterrestrial - Unknown')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'ZZ')
+#SET(%RYB102Value      , 'ZZ')
+#SET(%RYB102Descr      , 'Unknown - Unknown Entity')
+#!
+#!
+#!
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LAST')
+#SET(%RYB102Value      , ALL('~',%RYB102DataSize))
+#SET(%RYB102Descr      , 'Last Entry')
+#!
+#!
+#SET(%LineShow, ITEMS(%RYB102Includes) & ' AFTER ADD')
+#! !!! %%LineShow=%LineShow
+#! !!! ADD: Is this correct?
+#RETURN
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
