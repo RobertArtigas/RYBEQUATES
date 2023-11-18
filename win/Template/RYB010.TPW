@@ -62,6 +62,8 @@
   #SET(%RYB010Docs05, %RYB010Docs05 & ' This will allow the compiler to pick up the generated sources that have')
   #SET(%RYB010Docs05, %RYB010Docs05 & ' been moved into production.')
   #SET(%RYB010Docs05, %RYB010Docs05 & '')
+  #SET(%RYB010Docs05, %RYB010Docs05 & '')
+  #SET(%RYB010Docs05, %RYB010Docs05 & '')
   #!
   #IF(NOT VAREXISTS(%RYB010Docs06))
     #DECLARE(%RYB010Docs06)
