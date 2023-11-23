@@ -1,0 +1,658 @@
+#!TEMPLATE(zzzEquateRYB015,'Equate RYB015 Definitions'),FAMILY('ABC')
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #GROUP(%PreambleRAYS)                                                               #! Basic copyright message
+#! #BOXED('RAYS: Application Templates'),PROP(PROP:FontStyle,700)
+#!   #DISPLAY(''),AT(,,,1)
+#!   #DISPLAY('Copyright © 1999-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+#!   #DISPLAY('All Rights Reserved World Wide.')
+#!   #DISPLAY('Commercial License and non-disclosure agreement required for use.')
+#!   #DISPLAY('E-mail: roberto.artigas.dev@gmail.com')
+#!   #DISPLAY('Skype: Clarion Live Chat | CW-Talk')
+#! #ENDBOXED
+#!
+#GROUP(%RYB015Copyright)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB015Copyright01))
+    #DECLARE(%RYB015Copyright01)
+  #ENDIF
+  #SET(%RYB015Copyright01, 'Generate Global EQUATES for ABC.')
+  #SET(%RYB015Copyright01, %RYB015Copyright01 & '<13,10>Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler.')
+  #SET(%RYB015Copyright01, %RYB015Copyright01 & '<13,10>All copyrights reserved world wide.')
+  #SET(%RYB015Copyright01, %RYB015Copyright01 & '<13,10>E-MAIL: roberto.artigas.dev@gmail.com')
+#ENDPREPARE
+#!BOXED('Version 1.0 [ 2018.09.11 ]'),AT(,,278),PROP(PROP:FontStyle,700)
+#BOXED('Version 1.0 [ 2018.12.31 ]'),AT(,,454),PROP(PROP:FontStyle,700)
+  #DISPLAY(''),AT(,,,1)
+  #!DISPLAY(%RYB015Copyright01),AT(,,260,34)
+  #DISPLAY(%RYB015Copyright01),AT(,,436,34)
+#ENDBOXED
+#!
+#GROUP(%RYB015License)
+#TAB('PLANETS'),PROP(PROP:FontStyle,700)
+  #INSERT(%RYB015Copyright) 
+  #INSERT(%MITLicenseRYB)
+  #!INSERT(%ClarionFamily)              #! RA.2023.09.04: Not for utilities
+#ENDTAB
+#!
+#GROUP(%RYB015Explain)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB015Explain01))
+    #DECLARE(%RYB015Explain01)
+  #ENDIF
+  #SET(%RYB015Explain01, '')
+  #SET(%RYB015Explain01, %RYB015Explain01 & 'This template is used to generate table equates to use as global equates.')
+  #SET(%RYB015Explain01, %RYB015Explain01 & '<13,10><13,10>')
+  #SET(%RYB015Explain01, %RYB015Explain01 & 'This template has been tested with the ABC template chain.')
+  #SET(%RYB015Explain01, %RYB015Explain01 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB015Explain02))
+    #DECLARE(%RYB015Explain02)
+  #ENDIF
+  #!
+  #SET(%RYB015Explain02, '')
+  #SET(%RYB015Explain02, %RYB015Explain02 & 'NOTE: Make sure the COMPLETE DIRECTORY PATH exists on your machine.')
+#ENDPREPARE
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #EXTENSION(RYB015_Equates_Tables,'RA.2021.03.14: Equates for Tables'),DESCRIPTION('RAYS | Equate for Tables (EQU).'),APPLICATION
+#UTILITY(RYB015_Equates,'RA.2023.11.22: RYB015: PLANETARY BODY Global Equates')
+#!-----------------------------------------------------------------------------
+#INSERT(%PreambleRYB)
+#!-----------------------------------------------------------------------------
+#! RA.2023.11.22.WED      Roberto Artigas Jr
+#!  *   Created for the ABC templates
+#!-----------------------------------------------------------------------------
+#PREPARE
+  #DECLARE(%BegDate)
+  #DECLARE(%BegTime)
+  #SET(%BegDate, TODAY())                     #! Begin date
+  #SET(%BegTime, CLOCK())                     #! Begin time
+  #!
+  #!INSERT(%PrepareTheIncludes)
+#ENDPREPARE
+#!
+#DISPLAY('')
+#!SHEET,AT(,,288),HSCROLL
+#SHEET,AT(,,464),HSCROLL
+#INSERT(%RYB015License)
+#INSERT(%RYB015Explain)
+#TAB(UPPER(%Application) & '.' & UPPER(%ProgramExtension))
+  #BOXED('Hidden'),AT(,,456),HIDE
+    #!PROMPT('NextLine: ',@S120),%NextLine,AT(102,,346)
+    #PROMPT('BegDate: '     ,@S120) ,%BegDate         ,AT(102,,346)
+    #PROMPT('BegTime: '     ,@S120) ,%BegTime         ,AT(102,,346)
+    #PROMPT('CSVRecord: '   ,@S120) ,%RYB015Record    ,AT(102,,346)
+    #PROMPT('FieldText: '   ,@S120) ,%RYB015FText     ,AT(102,,346)
+    #PROMPT('CSVFields: '   ,@N4)   ,%RYB015Fields    ,AT(102,,40)
+    #PROMPT('FieldLoop: '   ,@N4)   ,%RYB015FLoop     ,AT(102,,40)
+    #PROMPT('Start: '       ,@N4)   ,%Start           ,AT(102,,40)
+    #PROMPT('Next: '        ,@N4)   ,%Next            ,AT(102,,40)
+    #PROMPT('Begin: '       ,@N4)   ,%N1Beg           ,AT(102,,40)
+    #PROMPT('End: '         ,@N4)   ,%N2End           ,AT(102,,40)
+    #PROMPT('LineShow: '    ,@S120) ,%LineShow        ,AT(102,,346)
+    #PROMPT('LineWork: '    ,@S120) ,%LineWork        ,AT(102,,346)
+    #PROMPT('LineCmnt: '    ,@S120) ,%LineCmnt        ,AT(102,,346)
+    #PROMPT('LineNext: '    ,@S120) ,%LineNext        ,AT(102,,346)
+    #PROMPT('LineText: '    ,@S120) ,%LineText        ,AT(102,,346)
+    #PROMPT('CountEquate: ' ,@N8)   ,%CountEquate     ,AT(102,,40)
+    #PROMPT('zNames: '      ,@N8)   ,%zNamesRYB015    ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zGroup: '      ,@N8)   ,%zGroupRYB015    ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zItems: '      ,@N8)   ,%zItemsRYB015    ,AT(102,,40)    , DEFAULT(32)
+    #PROMPT('zCmnts: '      ,@N8)   ,%zCmntsRYB015    ,AT(102,,40)    , DEFAULT(50)
+  #ENDBOXED
+  #!
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create EQUATES from existing entries?'        , CHECK), %RYB015OptExpEQU, DEFAULT(1)  , AT(10)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB015Comment  , REQ   , DEFAULT(140), AT(220,,40)
+  #ENDBOXED
+  #!
+  #BOXED('Global Includes'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB015Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED(''),AT(,,446)
+      #PROMPT('Directory: '   ,@S120)   , %RYB015Directory           , REQ   , DEFAULT('.\Generators\Temp\') , AT(100,,344)
+      #PROMPT('Name: '        ,@S120)   , %RYB015TableFile           , REQ   , DEFAULT('RYB015_EQUATES.EQU') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB015IncludeLocation , %RYB015Directory & %RYB015TableFile)
+      #ENDPREPARE
+      #PROMPT('Location: ',@S120),%RYB015IncludeLocation,REQ,DEFAULT(%RYB015IncludeLocation),PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Equate: '      ,@S120)   , %RYB015TableID             , REQ   , DEFAULT('RYB015_EQUATE_')     , AT(100,,344)
+      #PROMPT('Name: '        ,@S120)   , %RYB015TableName           , REQ   , DEFAULT('RYB015_NAME_')       , AT(100,,344)
+      #PROMPT('Value: '       ,@S120)   , %RYB015TablePrefix         , REQ   , DEFAULT('RYB015_VALUE_')      , AT(100,,344)
+      #PROMPT('Value Size: '  ,@N8  )   , %RYB015DataSize            , REQ   , DEFAULT(16)                   , AT(100,,40)
+    #ENDBOXED
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB015Explain01),AT(,,436,34)
+  #ENDBOXED
+#ENDTAB
+#!
+#TAB('Documents')
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB015OptExpCSV, DEFAULT(1)  , AT(10)
+    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB015OptExpTXT, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Documents'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB015Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED('Export'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('CSV Directory: '     ,@S120)   , %RYB015CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
+      #PROMPT('CSV Name: '          ,@S120)   , %RYB015CsvName       , REQ   , DEFAULT('RYB015_EQUATES.CSV')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB015CsvLocation     , %RYB015CsvDirectory & %RYB015CsvName)
+      #ENDPREPARE
+      #PROMPT('CSV Location: '  ,@S120),%RYB015CsvLocation    ,REQ,DEFAULT(%RYB015CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #BOXED('Import'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('TXT Directory: '     ,@S120)   , %RYB015TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('TXT Name: '          ,@S120)   , %RYB015TxtName       , REQ   , DEFAULT('RYB015_ENTRIES.TXT')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB015TxtLocation     , %RYB015TxtDirectory & %RYB015TxtName)
+      #ENDPREPARE
+      #PROMPT('TXT Location: '  ,@S120),%RYB015TxtLocation    ,REQ,DEFAULT(%RYB015CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+  #ENDBOXED
+#ENDTAB
+#!
+#PREPARE
+  #CALL(%RYB015DefaultTheIncludes)
+#ENDPREPARE
+#!+++
+#TAB('Equates')
+  #!BOXED(''),AT(,,280)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(''),AT(,,,1)
+    #BUTTON('File name'),MULTI(%RYB015Includes, '(' & FORMAT(%RYB015Number,@N03) & ') ' & %RYB015Code & ' :: ' & %RYB015Value & ' :: ' & %RYB015Name & ' ::'),INLINE,AT(,,,150)
+    #INSERT(%PreambleRYB)
+      #!BOXED('Table Item'),AT(,,288)
+      #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+        #DISPLAY(''),AT(,,,1)
+        #PROMPT('Field Equate: '        ,@N8)     , %RYB015Number                     , AT(100,,362)
+        #PROMPT('Field Code:  '         ,@S120)   , %RYB015Code     , REQ             , AT(100,,362)
+        #PROMPT('Field Value: '         ,@S120)   , %RYB015Value                      , AT(100,,362)
+        #PROMPT('Field Name: '          ,@S120)   , %RYB015Name                       , AT(100,,362)
+       #ENDBOXED
+    #ENDBUTTON
+  #ENDBOXED
+#ENDTAB
+#!
+#INSERT(%RYB010TabDocumentation)
+#INSERT(%RYB010TabVersions)
+#!INSERT(%TabClarionVersion)
+#ENDSHEET
+#!
+#!COMMENT(90)
+#COMMENT(%RYB015Comment)
+#!
+#IF(%RYB015OptExpEQU)
+  #SET(%RYB015IncludeLocation , %RYB015Directory    & %RYB015TableFile)
+  #CREATE(%RYB015IncludeLocation)
+  #INSERT(%RYB015BuildTheIncludes)
+  #CLOSE (%RYB015IncludeLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB015IncludeLocation & '"')
+#ENDIF
+#!
+#IF(%RYB015OptExpCSV)
+  #SET(%RYB015CsvLocation     , %RYB015CsvDirectory & %RYB015CsvName)
+  #CREATE(%RYB015CsvLocation)
+  #INSERT(%RYB015BuildTheCSV)
+  #CLOSE (%RYB015CsvLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB015CsvLocation & '"')
+#ENDIF
+#!
+#IF(%RYB015OptExpTXT)
+  #SET(%RYB015TxtLocation     , %RYB015TxtDirectory & %RYB015TxtName)
+  #CREATE(%RYB015TxtLocation)
+  #INSERT(%RYB015LoadCsvEntries)
+  #CLOSE (%RYB015TxtLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB015TxtLocation & '"')
+#ENDIF
+#!
+#COMMENT(60)
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB015BuildTheCSV)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & 'SEQUENCE'     & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'CODE'         & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'VALUE'        & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'NAME'         & '"')
+%LineNext
+#SET(%CountEquate, 0)
+#FOR (%RYB015Includes)
+    #SET(%CountEquate, %CountEquate + 1)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & FORMAT(%CountEquate,@N03)  & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB015Code)          & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB015Value)         & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB015Name)          & '"')
+%LineNext
+#ENDFOR
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB015BuildTheIncludes)
+!ABCIncludeFile
+  OMIT('_EndOfInclude_', _RYB015_)
+_RYB015_ EQUATE(1)
+!BOF
+!
+! File:         %RYB015IncludeLocation
+! Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+! Purpose:      Define global table includes for applications
+#SET(%LineText, '! Author:       Copyright © 2023-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+!               All Rights Reserved World Wide.
+!               MIT License.
+!
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+! The EQUATES ---might--- have cross uses in other areas in the architecture.
+! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+!Region EQUATE
+  #SET(%LineShow, ITEMS(%RYB015Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB015Includes)
+#!
+#! !!! %%RYB015Includes=%RYB015Includes, %%RYB015Number=%RYB015Number, %%RYB015Code=%RYB015Code, %%RYB015Value=%RYB015Value
+#! !!! %%RYB015Name=%RYB015Name
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB015TableID & %RYB015Code)
+#SET(%LineNext, 'EQUATE(' & FORMAT(%CountEquate,@N03) & ')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB015Name)
+%[%zNamesRYB015]LineWork %[%zItemsRYB015-%zNamesRYB015]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion EQUATE
+!Region VALUE
+!                                         1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB015Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB015TablePrefix & %RYB015Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB015Value) & ''')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB015Name)
+%[%zNamesRYB015]LineWork %[%zItemsRYB015-%zNamesRYB015]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!                                         1234567890123456
+!EndRegion VALUE
+!Region PLANETARY-BODY-NAME
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB015Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB015TableName & %RYB015Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB015Name) & ''')')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB015Name)
+%[%zNamesRYB015]LineWork %[%zItemsRYB015-%zNamesRYB015]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion PLANETARY-BODY-NAME
+!
+!EOF
+!  _EndOfInclude_
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB015LoadCsvEntries)
+#!
+#!ERROR(%RYB015TxtLocation)
+#!FREE(%RYB015Includes)
+#!
+#OPEN(%RYB015CsvLocation),READ
+#SET(%CountEquate, 0)
+#LOOP
+  #READ(%RYB015Record)
+  #IF(%RYB015Record = %EOF)
+    #BREAK
+  #ELSE
+    #SET(%CountEquate, %CountEquate + 1)
+    #IF(%CountEquate = 1)
+      #CALL(%RYB015Header)
+#!%RYB015Fields
+#!%RYB015Record
+    #ELSE
+      #SET(%RYB015Record, CLIP(%RYB015Record) & ',')
+      #CALL(%RYB015Detail)
+#!%RYB015Record
+    #ENDIF
+  #END
+#END
+#SET(%LineNext, '#RETURN')
+%LineNext
+#CLOSE(%RYB015CsvLocation)
+#!---------------------------------------------------------------------
+#GROUP(%RYB015Header)
+#SET(%RYB015Fields, 0)
+#SET(%Start,1)
+#LOOP
+  #SET(%Next,INSTRING(',',%RYB015Record,1,%Start))
+  #SET(%RYB015Fields,%RYB015Fields+1)
+  #IF (%Next=0)
+    #BREAK
+  #ENDIF
+  #SET(%Start,%Next+1)
+#ENDLOOP
+#SET(%LineNext, '#GROUP(%RYB015IncludesDefault)')
+%LineNext
+#SET(%LineNext, '#FREE(%RYB015Includes)')
+%LineNext
+#SET(%LineNext, '#!')
+%LineNext
+#RETURN
+#!---------------------------------------------------------------------
+#GROUP(%RYB015Detail)
+#SET(%RYB015FText, '')
+#SET(%RYB015FLoop, 1)
+#SET(%Start,1)
+#LOOP
+  #SET(%N1Beg,INSTRING('"',%RYB015Record,1,%Start))
+  #IF (%N1Beg=0)
+    #RETURN
+  #ENDIF
+  #SET(%N2End,INSTRING('"',%RYB015Record,1,%N1Beg+1))
+  #SET(%RYB015FText,SUB(%RYB015Record,%N1Beg+1,%N2End-%N1Beg-1))
+#!%N1Beg :: %N2End :: %RYB015FText
+  #CASE(%RYB015FLoop)
+  #OF(1)
+    #SET(%LineNext, '#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)')
+%LineNext
+    #SET(%LineNext, '#SET(%RYB015Number     , %RYB015Includes)')
+%LineNext
+    #ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+    #SET(%RYB015Number     , %RYB015Includes)    
+  #OF(2)
+    #SET(%LineNext, '#SET(%RYB015Code       , <39>' & %RYB015FText & '<39>)')
+%LineNext
+    #SET(%RYB015Code       , %RYB015FText)
+  #OF(3)
+    #SET(%LineNext, '#SET(%RYB015Value      , <39>' & %RYB015FText & '<39>)')
+%LineNext
+    #SET(%RYB015Value      , %RYB015FText)
+  #OF(4)
+    #SET(%LineNext, '#SET(%RYB015Name      , <39>' & %RYB015FText & '<39>)')
+%LineNext
+    #SET(%RYB015Name      , %RYB015FText)
+    #!
+    #SET(%LineNext, '#!')
+%LineNext
+  #ENDCASE
+  #SET(%Start,%N2End+2)
+  #SET(%RYB015FLoop,%RYB015FLoop+1)
+#!%RYB015FText
+#ENDLOOP
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB015DefaultTheIncludes)
+#FREE(%RYB015Includes)
+#!
+#SET(%LineShow, ITEMS(%RYB015Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! #FREE: Is this correct?
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'FIRST')
+#SET(%RYB015Value      , ALL('-',%RYB015DataSize))
+#SET(%RYB015Name       , 'First Entry')
+#!
+#!
+#!
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'ME')
+#SET(%RYB015Value      , 'ME')
+#SET(%RYB015Name       , 'Mercury')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'VE')
+#SET(%RYB015Value      , 'VE')
+#SET(%RYB015Name      , 'Venus')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'EA')
+#SET(%RYB015Value      , 'EA')
+#SET(%RYB015Name       , 'Earth')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'EAMO')
+#SET(%RYB015Value      , 'EAMO')
+#SET(%RYB015Name       , 'Moon')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'MA')
+#SET(%RYB015Value      , 'MA')
+#SET(%RYB015Name       , 'Mars')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'MADE')
+#SET(%RYB015Value      , 'MADE')
+#SET(%RYB015Name       , 'Deimos')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'MAPH')
+#SET(%RYB015Value      , 'MAPH')
+#SET(%RYB015Name       , 'Phobos')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'JU')
+#SET(%RYB015Value      , 'JU')
+#SET(%RYB015Name       , 'Jupiter')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'JUCA')
+#SET(%RYB015Value      , 'JUCA')
+#SET(%RYB015Name       , 'Calisto')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'JUEU')
+#SET(%RYB015Value      , 'JUEU')
+#SET(%RYB015Name       , 'Europa')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'JUGA')
+#SET(%RYB015Value      , 'JUGA')
+#SET(%RYB015Name       , 'Ganymede')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'JUIO')
+#SET(%RYB015Value      , 'JUIO')
+#SET(%RYB015Name       , 'Io')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SA')
+#SET(%RYB015Value      , 'SA')
+#SET(%RYB015Name       , 'Saturn')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SADI')
+#SET(%RYB015Value      , 'SADI')
+#SET(%RYB015Name       , 'Dione')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SAEN')
+#SET(%RYB015Value      , 'SAEN')
+#SET(%RYB015Name       , 'Enceladus')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SAMI')
+#SET(%RYB015Value      , 'SAMI')
+#SET(%RYB015Name       , 'Mimas')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SARH')
+#SET(%RYB015Value      , 'SARH')
+#SET(%RYB015Name       , 'Rhea')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SATE')
+#SET(%RYB015Value      , 'SATE')
+#SET(%RYB015Name       , 'Tethys')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SATI')
+#SET(%RYB015Value      , 'SATI')
+#SET(%RYB015Name       , 'Titan')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'UR')
+#SET(%RYB015Value      , 'UR')
+#SET(%RYB015Name       , 'Uranus')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'URAR')
+#SET(%RYB015Value      , 'URAR')
+#SET(%RYB015Name       , 'Arial')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'URMI')
+#SET(%RYB015Value      , 'URMI')
+#SET(%RYB015Name       , 'Miranda')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'UROB')
+#SET(%RYB015Value      , 'UROB')
+#SET(%RYB015Name       , 'Oberon')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'URTI')
+#SET(%RYB015Value      , 'URTI')
+#SET(%RYB015Name       , 'Titania')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'URUM')
+#SET(%RYB015Value      , 'URUM')
+#SET(%RYB015Name       , 'Umbriel')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'NE')
+#SET(%RYB015Value      , 'NE')
+#SET(%RYB015Name       , 'Neptune')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'NETR')
+#SET(%RYB015Value      , 'NETR')
+#SET(%RYB015Name       , 'Triton')
+#!
+#!
+#!
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'CE')
+#SET(%RYB015Value      , 'CE')
+#SET(%RYB015Name       , 'Ceres')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'ER')
+#SET(%RYB015Value      , 'ER')
+#SET(%RYB015Name       , 'Eris')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'GO')
+#SET(%RYB015Value      , 'GO')
+#SET(%RYB015Name       , 'Gonegone')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'HA')
+#SET(%RYB015Value      , 'HA')
+#SET(%RYB015Name       , 'Haumea')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'MA')
+#SET(%RYB015Value      , 'MA')
+#SET(%RYB015Name       , 'Makemake')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'OR')
+#SET(%RYB015Value      , 'OR')
+#SET(%RYB015Name       , 'Orcus')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'PL')
+#SET(%RYB015Value      , 'PL')
+#SET(%RYB015Name       , 'Pluto')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'QU')
+#SET(%RYB015Value      , 'QU')
+#SET(%RYB015Name       , 'Quaoar')
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'SE')
+#SET(%RYB015Value      , 'SE')
+#SET(%RYB015Name       , 'Sedna')
+#!
+#!
+#!
+#!
+#ADD(%RYB015Includes   , ITEMS(%RYB015Includes) + 1)
+#SET(%RYB015Number     , ITEMS(%RYB015Includes))
+#SET(%RYB015Code       , 'LAST')
+#SET(%RYB015Value      , ALL('~',%RYB015DataSize))
+#SET(%RYB015Name       , 'Last Entry')
+#!
+#!
+#SET(%LineShow, ITEMS(%RYB015Includes) & ' AFTER ADD')
+#! !!! %%LineShow=%LineShow
+#! !!! ADD: Is this correct?
+#RETURN
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
