@@ -185,6 +185,8 @@
 #INCLUDE('RYB014.TPW')          ! RA.2023.10.28: Extension: Star System (EQU,CSV,TXT)
 #INCLUDE('RYB015.TPW')          ! RA.2023.11.22: Utility:   Planetary Body (EQU,CSV,TXT)
 #INCLUDE('RYB016.TPW')          ! RA.2023.11.23: Extension: Planetary Body (EQU,CSV,TXT)
+#INCLUDE('RYB017.TPW')          ! RA.2023.11.24: Utility:   Continent (EQU,CSV,TXT)
+#INCLUDE('RYB018.TPW')          ! RA.2023.11.24: Extension: Continent (EQU,CSV,TXT)
 #INCLUDE('RYB101.TPW')          ! RA.2018.02.15: Utility:   Entities (EQU,CSV,TXT)
 #INCLUDE('RYB102.TPW')          ! RA.2018.02.15: Extension: Entities (EQU,CSV,TXT)
 #INCLUDE('RYB111.TPW')          ! RA.2018.02.15: Utility:   Create equates RAYS (EQU,CSV,TXT)
