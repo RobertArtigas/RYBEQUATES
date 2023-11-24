@@ -112,18 +112,20 @@
 #GROUP(%RYB010SheetVersions)
 #SHEET,AT(,,458),HSCROLL,ADJUST
 #TAB('Templates')
-  #DISPLAY('RYB000: 2018.01.21 RAYS: Template:<9>Skeleton and Common Groups')
-  #DISPLAY('RYB010: 2023.09.28 RAYS: Template:<9>Documentation and Template List')
-  #DISPLAY('RYB011: 2023.09.28 RAYS: Utility:<9>ISO-639-1: Language Definitions')
-  #DISPLAY('RYB012: 2023.09.28 RAYS: Extension:<9>ISO-639-1: Language Definitions')
-  #DISPLAY('RYB013: 2023.11.18 RAYS: Utility:<9>SUNS: Star System Definitions')
-  #DISPLAY('RYB014: 2023.11.18 RAYS: Extension:<9>SUNS: Star System Definitions')
+  #DISPLAY('RYB000:<9><9>2018.01.21 RAYS:<9>Template:<9>Skeleton and Common Groups')
+  #DISPLAY('RYB010:<9><9>2023.09.28 RAYS:<9>Template:<9>Documentation and Template List')
+  #DISPLAY('RYB011:<9><9>2023.09.28 RAYS:<9>Utility:<9><9>ISO-639-1: Language Definitions')
+  #DISPLAY('RYB012:<9><9>2023.09.28 RAYS:<9>Extension:<9>ISO-639-1: Language Definitions')
+  #DISPLAY('RYB013:<9><9>2023.11.18 RAYS:<9>Utility:<9><9>SUNS: Star System Definitions')
+  #DISPLAY('RYB014:<9><9>2023.11.18 RAYS:<9>Extension:<9>SUNS: Star System Definitions')
+  #DISPLAY('RYB015:<9><9>2023.11.22 RAYS:<9>Utility:<9><9>PLANETS: Planetary Body Definitions')
+  #DISPLAY('RYB016:<9><9>2023.11.23 RAYS:<9>Extension:<9>PLANETS: Planetary Body Definitions')
 #ENDTAB
 #TAB('Templates')
-  #DISPLAY('RYB101: 2023.11.03 RAYS: Utility:<9>ENTITY: Entity Definitions')
-  #DISPLAY('RYB102: 2023.11.03 RAYS: Extension:<9>ENTITY: Entity Definitions')
-  #DISPLAY('RYB111: 2021.03.14 RAYS: Utility:<9>BUSINESS: System Tables')
-  #DISPLAY('RYB112: 2021.03.14 RAYS: Extension:<9>BUSINESS: System Tables')
+  #DISPLAY('RYB101:<9><9>2023.11.03 RAYS:<9>Utility:<9><9>ENTITY: Entity Definitions')
+  #DISPLAY('RYB102:<9><9>2023.11.03 RAYS:<9>Extension:<9>ENTITY: Entity Definitions')
+  #DISPLAY('RYB111:<9><9>2021.03.14 RAYS:<9>Utility:<9><9>BUSINESS: System Tables')
+  #DISPLAY('RYB112:<9><9>2021.03.14 RAYS:<9>Extension:<9>BUSINESS: System Tables')
 #ENDTAB
 #ENDSHEET
 #!
