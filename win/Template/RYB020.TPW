@@ -63,7 +63,7 @@
 #!-----------------------------------------------------------------------------
 #INSERT(%PreambleRYB)
 #!-----------------------------------------------------------------------------
-#! RA.2023.11.22.WED      Roberto Artigas Jr
+#! RA.2023.11.24.FRI      Roberto Artigas Jr
 #!  *   Created for the ABC templates
 #!-----------------------------------------------------------------------------
 #PREPARE
@@ -112,6 +112,7 @@
     #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB020Comment  , REQ   , DEFAULT(140), AT(220,,40)
   #ENDBOXED
   #!
+  #ENABLE(%RYB020OptExpEQU)
   #BOXED('Global Includes'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB020Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
@@ -131,6 +132,9 @@
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB020Explain01),AT(,,436,34)
   #ENDBOXED
+  #ENDENABLE
+  #DISPLAY(''),AT(,,,1)
+  #DISPLAY(%RYB020Explain01),AT(,,436,34)
 #ENDTAB
 #!
 #TAB('Documents')
@@ -142,7 +146,8 @@
   #!
   #BOXED('Documents'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #DISPLAY(%RYB020Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #DISPLAY(%RYB020Explain02),AT(,,436,10),PROP(PROP:FontStyle,700)
+    #ENABLE(%RYB020OptExpCSV) 
     #BOXED('Export'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('CSV Directory: '     ,@S120)   , %RYB020CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
@@ -153,7 +158,9 @@
       #PROMPT('CSV Location: '  ,@S120),%RYB020CsvLocation    ,REQ,DEFAULT(%RYB020CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
-    #BOXED('Import'),AT(,,446)
+    #ENDENABLE
+    #ENABLE(%RYB020OptExpTXT)
+    #BOXED('Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB020TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
       #PROMPT('TXT Name: '          ,@S120)   , %RYB020TxtName       , REQ   , DEFAULT('RYB020_ENTRIES.TXT')  , AT(100,,344)
@@ -163,6 +170,7 @@
       #PROMPT('TXT Location: '  ,@S120),%RYB020TxtLocation    ,REQ,DEFAULT(%RYB020CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
+    #ENDENABLE
   #ENDBOXED
 #ENDTAB
 #!
@@ -532,7 +540,7 @@ _RYB020_ EQUATE(1)
 #SET(%RYB020Number     , ITEMS(%RYB020Includes))
 #SET(%RYB020Code       , 'SE')
 #SET(%RYB020Value      , 'AS.SE')
-#SET(%RYB020Name       , 'Eastern Asia')
+#SET(%RYB020Name       , 'South Eastern Asia')
 #SET(%RYB020GeonameID  , 0)
 #!
 #ADD(%RYB020Includes   , ITEMS(%RYB020Includes) + 1)

@@ -59,11 +59,11 @@
 #!---------------------------------------------------------------------
 #! #EXTENSION(RYB014_Equates_Tables,'RA.2021.03.14: Equates for Tables'),DESCRIPTION('RAYS | Equate for Tables (EQU).'),APPLICATION
 #!UTILITY(RYB014_Equates,'RA.2023.11.03: RYB014: STAR SYSTEM Global Equates')
-#EXTENSION(RYB014_Equates,'RA.2021.11.18: RYB014: STAR SYSTEM Equates'),DESCRIPTION('RYB | RYB014: STAR SYSTEM Global Equates (EQU,CSV,TXT)'),APPLICATION
+#EXTENSION(RYB014_Equates,'RA.2023.11.18: RYB014: STAR SYSTEM Equates'),DESCRIPTION('RYB | RYB014: STAR SYSTEM Global Equates (EQU,CSV,TXT)'),APPLICATION
 #!-----------------------------------------------------------------------------
 #INSERT(%PreambleRYB)
 #!-----------------------------------------------------------------------------
-#! RA.2023.11.03.FRI      Roberto Artigas Jr
+#! RA.2023.11.18.SAT      Roberto Artigas Jr
 #!  *   Created for the ABC templates
 #!-----------------------------------------------------------------------------
 #PREPARE
@@ -112,6 +112,7 @@
     #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB014Comment  , REQ   , DEFAULT(140), AT(220,,40)
   #ENDBOXED
   #!
+  #ENABLE(%RYB014OptExpEQU)
   #BOXED('Global Includes'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB014Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
@@ -128,9 +129,10 @@
       #PROMPT('Value: '       ,@S120)   , %RYB014TablePrefix         , REQ   , DEFAULT('RYB014_VALUE_')      , AT(100,,344)
       #PROMPT('Value Size: '  ,@N8  )   , %RYB014DataSize            , REQ   , DEFAULT(16)                   , AT(100,,40)
     #ENDBOXED
-    #DISPLAY(''),AT(,,,1)
-    #DISPLAY(%RYB014Explain01),AT(,,436,34)
   #ENDBOXED
+  #ENDENABLE
+  #DISPLAY(''),AT(,,,1)
+  #DISPLAY(%RYB014Explain01),AT(,,436,34)
 #ENDTAB
 #!
 #TAB('Documents')
@@ -142,7 +144,8 @@
   #!
   #BOXED('Documents'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #DISPLAY(%RYB014Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #DISPLAY(%RYB014Explain02),AT(,,436,10),PROP(PROP:FontStyle,700)
+    #ENABLE(%RYB014OptExpCSV) 
     #BOXED('Export'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('CSV Directory: '     ,@S120)   , %RYB014CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
@@ -153,7 +156,9 @@
       #PROMPT('CSV Location: '  ,@S120),%RYB014CsvLocation    ,REQ,DEFAULT(%RYB014CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
-    #BOXED('Import'),AT(,,446)
+    #ENDENABLE
+    #ENABLE(%RYB014OptExpTXT)
+    #BOXED('Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB014TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
       #PROMPT('TXT Name: '          ,@S120)   , %RYB014TxtName       , REQ   , DEFAULT('RYB014_ENTRIES.TXT')  , AT(100,,344)
@@ -163,6 +168,7 @@
       #PROMPT('TXT Location: '  ,@S120),%RYB014TxtLocation    ,REQ,DEFAULT(%RYB014CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
+    #ENDENABLE
   #ENDBOXED
 #ENDTAB
 #!

@@ -63,7 +63,7 @@
 #!-----------------------------------------------------------------------------
 #INSERT(%PreambleRYB)
 #!-----------------------------------------------------------------------------
-#! RA.2023.11.22.WED      Roberto Artigas Jr
+#! RA.2023.11.23.THU      Roberto Artigas Jr
 #!  *   Created for the ABC templates
 #!-----------------------------------------------------------------------------
 #PREPARE
@@ -112,6 +112,7 @@
     #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB016Comment  , REQ   , DEFAULT(140), AT(220,,40)
   #ENDBOXED
   #!
+  #ENABLE(%RYB016OptExpEQU)
   #BOXED('Global Includes'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB016Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
@@ -131,6 +132,7 @@
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB016Explain01),AT(,,436,34)
   #ENDBOXED
+  #ENDENABLE
 #ENDTAB
 #!
 #TAB('Documents')
@@ -142,7 +144,8 @@
   #!
   #BOXED('Documents'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #DISPLAY(%RYB016Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #DISPLAY(%RYB016Explain02),AT(,,436,10),PROP(PROP:FontStyle,700)
+    #ENABLE(%RYB016OptExpCSV) 
     #BOXED('Export'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('CSV Directory: '     ,@S120)   , %RYB016CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
@@ -153,7 +156,9 @@
       #PROMPT('CSV Location: '  ,@S120),%RYB016CsvLocation    ,REQ,DEFAULT(%RYB016CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
-    #BOXED('Import'),AT(,,446)
+    #ENDENABLE
+    #ENABLE(%RYB016OptExpTXT)
+    #BOXED('Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB016TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
       #PROMPT('TXT Name: '          ,@S120)   , %RYB016TxtName       , REQ   , DEFAULT('RYB016_ENTRIES.TXT')  , AT(100,,344)
@@ -163,6 +168,7 @@
       #PROMPT('TXT Location: '  ,@S120),%RYB016TxtLocation    ,REQ,DEFAULT(%RYB016CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
+    #ENDENABLE
   #ENDBOXED
 #ENDTAB
 #!

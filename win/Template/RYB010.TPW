@@ -120,8 +120,10 @@
   #DISPLAY('RYB014:<9><9>2023.11.18 RAYS:<9>Extension:<9>SUNS: Star System Definitions')
   #DISPLAY('RYB015:<9><9>2023.11.22 RAYS:<9>Utility:<9><9>PLANETS: Planetary Body Definitions')
   #DISPLAY('RYB016:<9><9>2023.11.23 RAYS:<9>Extension:<9>PLANETS: Planetary Body Definitions')
-  #DISPLAY('RYB017:<9><9>2023.11.22 RAYS:<9>Utility:<9><9>CONTINENT: Continent Definitions')
-  #DISPLAY('RYB018:<9><9>2023.11.23 RAYS:<9>Extension:<9>CONTINENT: Continent Definitions')
+  #DISPLAY('RYB017:<9><9>2023.11.24 RAYS:<9>Utility:<9><9>CONTINENT: Continent Definitions')
+  #DISPLAY('RYB018:<9><9>2023.11.24 RAYS:<9>Extension:<9>CONTINENT: Continent Definitions')
+  #DISPLAY('RYB019:<9><9>2023.11.24 RAYS:<9>Utility:<9><9>CONTINENT AREA: Continent Area Definitions')
+  #DISPLAY('RYB020:<9><9>2023.11.24 RAYS:<9>Extension:<9>CONTINENT AREA: Continent Area Definitions')
 #ENDTAB
 #TAB('Templates')
   #DISPLAY('RYB101:<9><9>2023.11.03 RAYS:<9>Utility:<9><9>ENTITY: Entity Definitions')

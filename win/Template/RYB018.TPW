@@ -63,7 +63,7 @@
 #!-----------------------------------------------------------------------------
 #INSERT(%PreambleRYB)
 #!-----------------------------------------------------------------------------
-#! RA.2023.11.22.WED      Roberto Artigas Jr
+#! RA.2023.11.24.FRI      Roberto Artigas Jr
 #!  *   Created for the ABC templates
 #!-----------------------------------------------------------------------------
 #PREPARE
@@ -112,6 +112,7 @@
     #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB018Comment  , REQ   , DEFAULT(140), AT(220,,40)
   #ENDBOXED
   #!
+  #ENABLE(%RYB018OptExpEQU)
   #BOXED('Global Includes'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB018Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
@@ -128,9 +129,10 @@
       #PROMPT('Value: '       ,@S120)   , %RYB018TablePrefix         , REQ   , DEFAULT('RYB018_VALUE_')      , AT(100,,344)
       #PROMPT('Value Size: '  ,@N8  )   , %RYB018DataSize            , REQ   , DEFAULT(16)                   , AT(100,,40)
     #ENDBOXED
-    #DISPLAY(''),AT(,,,1)
-    #DISPLAY(%RYB018Explain01),AT(,,436,34)
   #ENDBOXED
+  #ENDENABLE
+  #DISPLAY(''),AT(,,,1)
+  #DISPLAY(%RYB018Explain01),AT(,,436,34)
 #ENDTAB
 #!
 #TAB('Documents')
@@ -142,7 +144,8 @@
   #!
   #BOXED('Documents'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #DISPLAY(%RYB018Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #DISPLAY(%RYB018Explain02),AT(,,436,10),PROP(PROP:FontStyle,700)
+    #ENABLE(%RYB018OptExpCSV) 
     #BOXED('Export'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('CSV Directory: '     ,@S120)   , %RYB018CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
@@ -153,7 +156,9 @@
       #PROMPT('CSV Location: '  ,@S120),%RYB018CsvLocation    ,REQ,DEFAULT(%RYB018CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
-    #BOXED('Import'),AT(,,446)
+    #ENDENABLE
+    #ENABLE(%RYB018OptExpTXT)
+    #BOXED('Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB018TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
       #PROMPT('TXT Name: '          ,@S120)   , %RYB018TxtName       , REQ   , DEFAULT('RYB018_ENTRIES.TXT')  , AT(100,,344)
@@ -163,6 +168,7 @@
       #PROMPT('TXT Location: '  ,@S120),%RYB018TxtLocation    ,REQ,DEFAULT(%RYB018CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
+    #ENDENABLE
   #ENDBOXED
 #ENDTAB
 #!
@@ -183,7 +189,7 @@
         #PROMPT('Field Code:  '         ,@S120)   , %RYB018Code     , REQ             , AT(100,,362)
         #PROMPT('Field Value: '         ,@S120)   , %RYB018Value                      , AT(100,,362)
         #PROMPT('Field Name: '          ,@S120)   , %RYB018Name                       , AT(100,,362)
-        #PROMPT('Field GeonameId: '     ,@S120)   , %RYB018GeonameId                  , AT(100,,362)
+        #PROMPT('Field GeonameId: '     ,@S120)   , %RYB018GeonameID                  , AT(100,,362)
        #ENDBOXED
     #ENDBUTTON
   #ENDBOXED
