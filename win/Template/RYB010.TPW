@@ -124,6 +124,8 @@
   #DISPLAY('RYB018:<9><9>2023.11.24 RAYS:<9>Extension:<9>CONTINENT: Continent Definitions')
   #DISPLAY('RYB019:<9><9>2023.11.24 RAYS:<9>Utility:<9><9>CONTINENT AREA: Continent Area Definitions')
   #DISPLAY('RYB020:<9><9>2023.11.24 RAYS:<9>Extension:<9>CONTINENT AREA: Continent Area Definitions')
+  #DISPLAY('RYB021:<9><9>2023.11.24 RAYS:<9>Utility:<9><9>COUNTRY: Country Definitions')
+  #DISPLAY('RYB022:<9><9>2023.11.25 RAYS:<9>Extension:<9>COUNTRY: Country Definitions')
 #ENDTAB
 #TAB('Templates')
   #DISPLAY('RYB101:<9><9>2023.11.03 RAYS:<9>Utility:<9><9>ENTITY: Entity Definitions')

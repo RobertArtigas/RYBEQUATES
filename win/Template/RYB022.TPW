@@ -439,7 +439,7 @@ _RYB022_ EQUATE(1)
   #RESUME
 !                                         1234567890123456
 !EndRegion VALUE
-!Region CONTINENTS-NAME
+!Region NAME
   #SET(%CountEquate, 0)
   #SUSPEND
     #FOR (%RYB022Includes)
@@ -451,7 +451,7 @@ _RYB022_ EQUATE(1)
 #!
     #ENDFOR
   #RESUME
-!EndRegion CONTINENTS-NAME
+!EndRegion NAME
 !
 !EOF
 !  _EndOfInclude_
