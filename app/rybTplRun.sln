@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+# Clarion 2.1.0.2447
+Project("{12B76EC0-1D7B-4FA7-A7D0-C524288B48A1}") = "rybTplRun", "rybTplRun.cwproj", "{3CB4835B-9BD1-41EC-89A8-57BFAA6FD806}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
+	ProjectSection(SolutionItems) = postProject
+		rybTplRun.app = rybTplRun.app
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CB4835B-9BD1-41EC-89A8-57BFAA6FD806}.Debug|Win32.Build.0 = Debug|Win32
+		{3CB4835B-9BD1-41EC-89A8-57BFAA6FD806}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3CB4835B-9BD1-41EC-89A8-57BFAA6FD806}.Release|Win32.Build.0 = Release|Win32
+		{3CB4835B-9BD1-41EC-89A8-57BFAA6FD806}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+EndGlobal
