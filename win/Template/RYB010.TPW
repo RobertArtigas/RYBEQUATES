@@ -2,7 +2,6 @@
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
-#!
 #GROUP(%RYB010Docs)
 #PREPARE
   #IF(NOT VAREXISTS(%RYB010Docs00))
@@ -126,6 +125,8 @@
   #DISPLAY('RYB020:<9><9>2023.11.24 RAYS:<9>Extension:<9>CONTINENT AREA: Continent Area Definitions')
   #DISPLAY('RYB021:<9><9>2023.11.24 RAYS:<9>Utility:<9><9>COUNTRY: Country Definitions')
   #DISPLAY('RYB022:<9><9>2023.11.25 RAYS:<9>Extension:<9>COUNTRY: Country Definitions')
+  #DISPLAY('RYB023:<9><9>2023.12.07 RAYS:<9>Utility:<9><9>ADMIN1: Administrative Division 1 Definitions (US: States)')
+  #DISPLAY('RYB024:<9><9>2023.12.07 RAYS:<9>Extension:<9>ADMIN1: Administrative Division 1 Definitions (US: States)')
 #ENDTAB
 #TAB('Templates')
   #DISPLAY('RYB101:<9><9>2023.11.03 RAYS:<9>Utility:<9><9>ENTITY: Entity Definitions')
@@ -138,6 +139,82 @@
 #GROUP(%RYB010TabVersions)
 #TAB('Versions')
   #INSERT(%RYB010SheetVersions)
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB010Narrative)
+#PREPARE
+#IF(NOT VAREXISTS(%RYB010Say01))
+  #DECLARE(%RYB010Say01)
+#ENDIF
+#SET(%RYB010Say01, '')
+#SET(%RYB010Say01, %RYB010Say01 & 'The Equates are')
+#!
+#IF(NOT VAREXISTS(%RYB010Say02))
+  #DECLARE(%RYB010Say02)
+#ENDIF
+#SET(%RYB010Say02, '')
+#SET(%RYB010Say02, %RYB010Say02 & 'The Data is')
+#!
+#IF(NOT VAREXISTS(%RYB010Say03))
+  #DECLARE(%RYB010Say03)
+#ENDIF
+#SET(%RYB010Say03, '')
+#SET(%RYB010Say03, %RYB010Say03 & 'The Text is')
+#!
+#IF(NOT VAREXISTS(%RYB010Say04))
+  #DECLARE(%RYB010Say04)
+#ENDIF
+#SET(%RYB010Say04, '')
+#SET(%RYB010Say04, %RYB010Say04 & 'The Import is')
+#!
+#IF(NOT VAREXISTS(%RYB010Say05))
+  #DECLARE(%RYB010Say05)
+#ENDIF
+#SET(%RYB010Say05, '')
+#SET(%RYB010Say05, %RYB010Say05 & 'The data Source is')
+#!
+#ENDPREPARE
+#!
+#GROUP(%RYB010SheetNarrative)
+#INSERT(%RYB010Narrative)
+#SHEET,AT(,,457),HSCROLL,ADJUST
+#TAB('Equates')
+  #BOXED(''),AT(,,448)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB010Say01),AT(,,436,64)
+  #ENDBOXED
+#ENDTAB
+#TAB('Data')
+  #BOXED(''),AT(,,448)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB010Say02),AT(,,436,64)
+  #ENDBOXED
+#ENDTAB
+#TAB('Text')
+  #BOXED(''),AT(,,448)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB010Say03),AT(,,436,64)
+  #ENDBOXED
+#ENDTAB
+#TAB('Import')
+  #BOXED(''),AT(,,448)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB010Say04),AT(,,436,64)
+  #ENDBOXED
+#ENDTAB
+#TAB('Source')
+  #BOXED(''),AT(,,448)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB010Say05),AT(,,436,64)
+  #ENDBOXED
+#ENDTAB
+#ENDSHEET
+#!
+#GROUP(%RYB010TabNarrative)
+#TAB('Narrative')
+  #INSERT(%RYB010SheetNarrative)
 #ENDTAB
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------

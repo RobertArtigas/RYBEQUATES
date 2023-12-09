@@ -401,11 +401,11 @@ _RYB018_ EQUATE(1)
 %LineNext
     #SET(%RYB018Value      , %RYB018FText)
   #OF(4)
-    #SET(%LineNext, '#SET(%RYB018Name      , <39>' & %RYB018FText & '<39>)')
+    #SET(%LineNext, '#SET(%RYB018Name       , <39>' & %RYB018FText & '<39>)')
 %LineNext
     #SET(%RYB018Name      , %RYB018FText)
   #OF(5)
-    #SET(%LineNext, '#SET(%RYB018GeonameID , <39>' & %RYB018FText & '<39>)')
+    #SET(%LineNext, '#SET(%RYB018GeonameID  , <39>' & %RYB018FText & '<39>)')
 %LineNext
     #SET(%RYB018GeonameID , %RYB018FText)
     #!

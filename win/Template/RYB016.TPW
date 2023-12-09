@@ -398,7 +398,7 @@ _RYB016_ EQUATE(1)
 %LineNext
     #SET(%RYB016Value      , %RYB016FText)
   #OF(4)
-    #SET(%LineNext, '#SET(%RYB016Name      , <39>' & %RYB016FText & '<39>)')
+    #SET(%LineNext, '#SET(%RYB016Name       , <39>' & %RYB016FText & '<39>)')
 %LineNext
     #SET(%RYB016Name      , %RYB016FText)
     #!

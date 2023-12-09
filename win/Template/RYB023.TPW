@@ -1,0 +1,603 @@
+#!TEMPLATE(zzzEquateRYB023,'Equate RYB023 Definitions'),FAMILY('ABC')
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #GROUP(%PreambleRAYS)                                                               #! Basic copyright message
+#! #BOXED('RAYS: Application Templates'),PROP(PROP:FontStyle,700)
+#!   #DISPLAY(''),AT(,,,1)
+#!   #DISPLAY('Copyright © 1999-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+#!   #DISPLAY('All Rights Reserved World Wide.')
+#!   #DISPLAY('Commercial License and non-disclosure agreement required for use.')
+#!   #DISPLAY('E-mail: roberto.artigas.dev@gmail.com')
+#!   #DISPLAY('Skype: Clarion Live Chat | CW-Talk')
+#! #ENDBOXED
+#!
+#GROUP(%RYB023Copyright)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB023Copyright01))
+    #DECLARE(%RYB023Copyright01)
+  #ENDIF
+  #SET(%RYB023Copyright01, 'Generate Global EQUATES for ABC.')
+  #SET(%RYB023Copyright01, %RYB023Copyright01 & '<13,10>Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler.')
+  #SET(%RYB023Copyright01, %RYB023Copyright01 & '<13,10>All copyrights reserved world wide.')
+  #SET(%RYB023Copyright01, %RYB023Copyright01 & '<13,10>E-MAIL: roberto.artigas.dev@gmail.com')
+#ENDPREPARE
+#!BOXED('Version 1.0 [ 2018.09.11 ]'),AT(,,278),PROP(PROP:FontStyle,700)
+#BOXED('Version 1.0 [ 2018.12.31 ]'),AT(,,454),PROP(PROP:FontStyle,700)
+  #DISPLAY(''),AT(,,,1)
+  #!DISPLAY(%RYB023Copyright01),AT(,,260,34)
+  #DISPLAY(%RYB023Copyright01),AT(,,436,34)
+#ENDBOXED
+#!
+#GROUP(%RYB023License)
+#TAB('CONTINENT'),PROP(PROP:FontStyle,700)
+  #INSERT(%RYB023Copyright) 
+  #INSERT(%MITLicenseRYB)
+  #!INSERT(%ClarionFamily)              #! RA.2023.09.04: Not for utilities
+#ENDTAB
+#!
+#GROUP(%RYB023Explain)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB023Explain01))
+    #DECLARE(%RYB023Explain01)
+  #ENDIF
+  #SET(%RYB023Explain01, '')
+  #SET(%RYB023Explain01, %RYB023Explain01 & 'This template is used to generate table equates to use as global equates.')
+  #SET(%RYB023Explain01, %RYB023Explain01 & '<13,10><13,10>')
+  #SET(%RYB023Explain01, %RYB023Explain01 & 'This template has been tested with the ABC template chain.')
+  #SET(%RYB023Explain01, %RYB023Explain01 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB023Explain02))
+    #DECLARE(%RYB023Explain02)
+  #ENDIF
+  #!
+  #SET(%RYB023Explain02, '')
+  #SET(%RYB023Explain02, %RYB023Explain02 & 'NOTE: Make sure the COMPLETE DIRECTORY PATH exists on your machine.')
+#ENDPREPARE
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#! #EXTENSION(RYB023_Equates_Tables,'RA.2021.03.14: Equates for Tables'),DESCRIPTION('RAYS | Equate for Tables (EQU).'),APPLICATION
+#UTILITY(RYB023_Equates,'RA.2023.12.07: RYB023: ADMIN1 Global Equates')
+#!-----------------------------------------------------------------------------
+#INSERT(%PreambleRYB)
+#!-----------------------------------------------------------------------------
+#! RA.2023.11.24.FRI      Roberto Artigas Jr
+#!  *   Created for the ABC templates
+#!-----------------------------------------------------------------------------
+#PREPARE
+  #DECLARE(%BegDate)
+  #DECLARE(%BegTime)
+  #SET(%BegDate, TODAY())                     #! Begin date
+  #SET(%BegTime, CLOCK())                     #! Begin time
+  #!
+  #!INSERT(%PrepareTheIncludes)
+#ENDPREPARE
+#!
+#DISPLAY('')
+#!SHEET,AT(,,288),HSCROLL
+#SHEET,AT(,,464),HSCROLL
+#INSERT(%RYB023License)
+#INSERT(%RYB023Explain)
+#TAB(UPPER(%Application) & '.' & UPPER(%ProgramExtension))
+  #BOXED('Hidden'),AT(,,456),HIDE
+    #!PROMPT('NextLine: ',@S120),%NextLine,AT(102,,346)
+    #PROMPT('BegDate: '     ,@S120) ,%BegDate         ,AT(102,,346)
+    #PROMPT('BegTime: '     ,@S120) ,%BegTime         ,AT(102,,346)
+    #PROMPT('CSVRecord: '   ,@S120) ,%RYB023Record    ,AT(102,,346)
+    #PROMPT('FieldText: '   ,@S120) ,%RYB023FText     ,AT(102,,346)
+    #PROMPT('CSVFields: '   ,@N4)   ,%RYB023Fields    ,AT(102,,40)
+    #PROMPT('FieldLoop: '   ,@N4)   ,%RYB023FLoop     ,AT(102,,40)
+    #PROMPT('Start: '       ,@N4)   ,%Start           ,AT(102,,40)
+    #PROMPT('Next: '        ,@N4)   ,%Next            ,AT(102,,40)
+    #PROMPT('Begin: '       ,@N4)   ,%N1Beg           ,AT(102,,40)
+    #PROMPT('End: '         ,@N4)   ,%N2End           ,AT(102,,40)
+    #PROMPT('Ix: '          ,@N4)   ,%Ix              ,AT(102,,40)
+    #PROMPT('LineShow: '    ,@S120) ,%LineShow        ,AT(102,,346)
+    #PROMPT('LineWork: '    ,@S120) ,%LineWork        ,AT(102,,346)
+    #PROMPT('LineCmnt: '    ,@S120) ,%LineCmnt        ,AT(102,,346)
+    #PROMPT('LineNext: '    ,@S120) ,%LineNext        ,AT(102,,346)
+    #PROMPT('LineText: '    ,@S120) ,%LineText        ,AT(102,,346)
+    #PROMPT('CountEquate: ' ,@N8)   ,%CountEquate     ,AT(102,,40)
+    #PROMPT('zNames: '      ,@N8)   ,%zNamesRYB023    ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zGroup: '      ,@N8)   ,%zGroupRYB023    ,AT(102,,40)    , DEFAULT(30)
+    #PROMPT('zItems: '      ,@N8)   ,%zItemsRYB023    ,AT(102,,40)    , DEFAULT(32)
+    #PROMPT('zCmnts: '      ,@N8)   ,%zCmntsRYB023    ,AT(102,,40)    , DEFAULT(50)
+  #ENDBOXED
+  #!
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create EQUATES from existing entries?'        , CHECK), %RYB023OptExpEQU, DEFAULT(1)  , AT(10)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT('Comment starts at position: '  ,@N8  )         , %RYB023Comment  , REQ   , DEFAULT(140), AT(220,,40)
+  #ENDBOXED
+  #!
+  #ENABLE(%RYB023OptExpEQU)
+  #BOXED('Global Includes'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB023Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #BOXED(''),AT(,,446)
+      #PROMPT('Directory: '   ,@S120)   , %RYB023Directory           , REQ   , DEFAULT('.\Generators\Temp\') , AT(100,,344)
+      #PROMPT('Name: '        ,@S120)   , %RYB023TableFile           , REQ   , DEFAULT('RYB023_EQUATES.EQU') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB023IncludeLocation , %RYB023Directory & %RYB023TableFile)
+      #ENDPREPARE
+      #PROMPT('Location: ',@S120),%RYB023IncludeLocation,REQ,DEFAULT(%RYB023IncludeLocation),PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Equate: '      ,@S120)   , %RYB023TableID             , REQ   , DEFAULT('RYB023_EQUATE_')     , AT(100,,344)
+      #PROMPT('Name: '        ,@S120)   , %RYB023TableName           , REQ   , DEFAULT('RYB023_NAME_')       , AT(100,,344)
+      #PROMPT('Name ASCII: '  ,@S120)   , %RYB023TableNameASCII      , REQ   , DEFAULT('RYB023_ASCII_')      , AT(100,,344)
+      #PROMPT('Value: '       ,@S120)   , %RYB023TablePrefix         , REQ   , DEFAULT('RYB023_VALUE_')      , AT(100,,344)
+      #PROMPT('Value Size: '  ,@N8  )   , %RYB023DataSize            , REQ   , DEFAULT(16)                   , AT(100,,40)
+    #ENDBOXED
+  #ENDBOXED
+  #ENDENABLE
+  #DISPLAY(''),AT(,,,1)
+  #DISPLAY(%RYB023Explain01),AT(,,436,34)
+#ENDTAB
+#!
+#TAB('Documents')
+  #BOXED('Options'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Export CSV from existing entries?'                , CHECK), %RYB023OptExpCSV, DEFAULT(1)  , AT(10)
+    #PROMPT ('Create TXT entries from importing CSV file?'      , CHECK), %RYB023OptExpTXT, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create TXT entries from importing IMP file?'      , CHECK), %RYB023OptExpIMP, DEFAULT(0)  , AT(10)
+    #PREPARE
+    #IF(%RYB023OptExpEQU OR %RYB023OptExpCSV OR %RYB023OptExpTXT OR %RYB023OptExpIMP)
+      #SET(%RYB023OptExpIAO, %FALSE)
+    #ENDIF
+    #ENDPREPARE
+    #ENABLE(~%RYB023OptExpEQU AND ~%RYB023OptExpCSV AND ~%RYB023OptExpTXT AND ~%RYB023OptExpIMP)
+      #PROMPT ('Read IMP entries, write EQUATES and CSV file? ' , CHECK), %RYB023OptExpIAO, DEFAULT(0)  ,AT(10) ,PROP(PROP:FontColor,0C79A3H)
+    #ENDENABLE
+  #ENDBOXED
+  #!
+  #BOXED('Documents'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB023Explain02),AT(,,436,10),PROP(PROP:FontStyle,700)
+    #ENABLE(%RYB023OptExpCSV) 
+    #BOXED('Export'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('CSV Directory: '     ,@S120)   , %RYB023CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
+      #PROMPT('CSV Name: '          ,@S120)   , %RYB023CsvName       , REQ   , DEFAULT('RYB023_EQUATES.CSV')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB023CsvLocation     , %RYB023CsvDirectory & %RYB023CsvName)
+      #ENDPREPARE
+      #PROMPT('CSV Location: '  ,@S120),%RYB023CsvLocation    ,REQ,DEFAULT(%RYB023CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+    #ENABLE(%RYB023OptExpTXT)
+    #BOXED('Source'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('TXT Directory: '     ,@S120)   , %RYB023TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('TXT Name: '          ,@S120)   , %RYB023TxtName       , REQ   , DEFAULT('RYB023_ENTRIES.TXT')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB023TxtLocation     , %RYB023TxtDirectory & %RYB023TxtName)
+      #ENDPREPARE
+      #PROMPT('TXT Location: '  ,@S120),%RYB023TxtLocation    ,REQ,DEFAULT(%RYB023CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+    #ENABLE(%RYB023OptExpIMP OR %RYB023OptExpIAO)
+    #BOXED('Import')
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('IMP Directory: '     ,@S120)   , %RYB023ImpDirectory  , REQ   , DEFAULT('.\DataSources\Temp\') , AT(100,,344)
+      #PROMPT('IMP Name: '          ,@S120)   , %RYB023ImpName       , REQ   , DEFAULT('geonames_admin1CodesASCII.tab') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB023ImpLocation     , %RYB023ImpDirectory & %RYB023ImpName)
+      #ENDPREPARE
+      #PROMPT('IMP Location: '  ,@S120),%RYB023ImpLocation    ,REQ,DEFAULT(%RYB023ImpLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+  #ENDBOXED
+#ENDTAB
+#!
+#PREPARE
+  #CALL(%RYB023DefaultTheIncludes)
+#ENDPREPARE
+#!+++
+#TAB('Equates')
+  #!BOXED(''),AT(,,280)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(''),AT(,,,1)
+    #BUTTON('File name'),MULTI(%RYB023Includes, '(' & FORMAT(%RYB023Number,@N04) & ') ' & %RYB023Code & ' :: ' & %RYB023Value & ' :: ' & %RYB023NameASCII & ' ::'),INLINE,AT(,,,150)
+    #INSERT(%PreambleRYB)
+      #!BOXED('Table Item'),AT(,,288)
+      #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+        #DISPLAY(''),AT(,,,1)
+        #PROMPT('Field Equate: '        ,@N8)     , %RYB023Number                     , AT(100,,362)
+        #PROMPT('Field Code:  '         ,@S120)   , %RYB023Code     , REQ             , AT(100,,362)
+        #PROMPT('Field Value: '         ,@S120)   , %RYB023Value                      , AT(100,,362)
+        #PROMPT('Field Name: '          ,@S120)   , %RYB023Name                       , AT(100,,362)
+        #PROMPT('Field Name ASCII: '    ,@S120)   , %RYB023NameASCII                  , AT(100,,362)
+        #PROMPT('Field GeonameId: '     ,@S120)   , %RYB023GeonameId                  , AT(100,,362)
+       #ENDBOXED
+    #ENDBUTTON
+  #ENDBOXED
+#ENDTAB
+#!
+#INSERT(%RYB010TabDocumentation)
+#INSERT(%RYB010TabVersions)
+#!INSERT(%TabClarionVersion)
+#ENDSHEET
+#!
+#!COMMENT(90)
+#COMMENT(%RYB023Comment)
+#!
+#IF(%RYB023OptExpEQU)
+  #CALL(%RYB023RunExpEQU)
+#ENDIF
+#!
+#IF(%RYB023OptExpCSV)
+  #CALL(%RYB023RunExpCSV)
+#ENDIF
+#!
+#IF(%RYB023OptExpTXT)
+  #CALL(%RYB023RunExpTXT)
+#ENDIF
+#!
+#IF(%RYB023OptExpIAO)
+  #CALL(%RYB023RunExpIAO)
+  #CALL(%RYB023RunExpEQU)
+  #CALL(%RYB023RunExpCSV)
+  #CALL(%RYB023RunExpTXT)
+#ENDIF
+#!
+#COMMENT(60)
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB023RunExpEQU)
+#SET(%RYB023IncludeLocation , %RYB023Directory    & %RYB023TableFile)
+#CREATE(%RYB023IncludeLocation)
+#INSERT(%RYB023BuildTheIncludes)
+#CLOSE (%RYB023IncludeLocation)
+#RUN('NOTEPAD.EXE "' & %RYB023IncludeLocation & '"')
+#!---------------------------------------------------------------------
+#GROUP(%RYB023RunExpCSV)
+#SET(%RYB023CsvLocation     , %RYB023CsvDirectory & %RYB023CsvName)
+#CREATE(%RYB023CsvLocation)
+#INSERT(%RYB023BuildTheCSV)
+#CLOSE (%RYB023CsvLocation)
+#RUN('NOTEPAD.EXE "' & %RYB023CsvLocation & '"')
+#!---------------------------------------------------------------------
+#GROUP(%RYB023RunExpTXT)
+#SET(%RYB023TxtLocation     , %RYB023TxtDirectory & %RYB023TxtName)
+#CREATE(%RYB023TxtLocation)
+#INSERT(%RYB023LoadCsvEntries)
+#CLOSE (%RYB023TxtLocation)
+#RUN('NOTEPAD.EXE "' & %RYB023TxtLocation & '"')
+#!---------------------------------------------------------------------
+#GROUP(%RYB023RunExpIAO)
+#SET(%RYB023ImpLocation      , %RYB023ImpDirectory & %RYB023ImpName)
+#INSERT(%RYB023IoaLoadEntries)
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB023BuildTheCSV)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & 'SEQUENCE'     & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'CODE'         & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'VALUE'        & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'NAME'         & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'NAME_ASCII'   & '"')
+    #SET(%LineNext, %LineNext & ',"' & 'GEONAMEID'    & '"')
+%LineNext
+#SET(%CountEquate, 0)
+#FOR (%RYB023Includes)
+    #SET(%CountEquate, %CountEquate + 1)
+    #SET(%LineNext,'')
+    #SET(%LineNext, %LineNext &  '"' & FORMAT(%CountEquate,@N04)  & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB023Code)          & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB023Value)         & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB023Name)          & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB023NameASCII)     & '"')
+    #SET(%LineNext, %LineNext & ',"' & CLIP(%RYB023GeonameID)     & '"')
+%LineNext
+#ENDFOR
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB023BuildTheIncludes)
+!ABCIncludeFile
+  OMIT('_EndOfInclude_', _RYB023_)
+_RYB023_ EQUATE(1)
+!BOF
+!
+! File:         %RYB023IncludeLocation
+! Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+! Purpose:      Define global table includes for applications
+#SET(%LineText, '! Author:       Copyright © 2023-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+!               All Rights Reserved World Wide.
+!               MIT License.
+!
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+! The EQUATES ---might--- have cross uses in other areas in the architecture.
+! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+!Region EQUATE
+  #SET(%LineShow, ITEMS(%RYB023Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB023Includes)
+#!
+#! !!! %%RYB023Includes=%RYB023Includes, %%RYB023Number=%RYB023Number, %%RYB023Code=%RYB023Code, %%RYB023Value=%RYB023Value
+#! !!! %%RYB023Name=%RYB023Name
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB023TableID & %RYB023Code)
+#SET(%LineNext, 'EQUATE(' & FORMAT(%CountEquate,@N04) & ')')
+#SET(%LineText, %RYB023NameASCII)
+#CALL(%ReplaceSubString,%LineText,'<39><39>','<39>')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N04) & ': ' & %LineText)
+%[%zNamesRYB023]LineWork %[%zItemsRYB023-%zNamesRYB023]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion EQUATE
+!Region VALUE
+!                                         1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB023Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB023TablePrefix & %RYB023Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB023Value) & ''')')
+#SET(%LineText, %RYB023NameASCII)
+#CALL(%ReplaceSubString,%LineText,'<39><39>','<39>')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N04) & ': ' & %LineText)
+%[%zNamesRYB023]LineWork %[%zItemsRYB023-%zNamesRYB023]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!                                         1234567890123456
+!EndRegion VALUE
+!Region NAME-ASCII
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB023Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, %RYB023TableName & %RYB023Code)
+#SET(%LineNext, 'EQUATE(''' & CLIP(%RYB023NameASCII) & ''')')
+#SET(%LineText, %RYB023NameASCII)
+#CALL(%ReplaceSubString,%LineText,'<39><39>','<39>')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N04) & ': ' & %LineText)
+%[%zNamesRYB023]LineWork %[%zItemsRYB023-%zNamesRYB023]NULL %LineNext #<!%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+!EndRegion NAME-ASCII 
+!
+!EOF
+!  _EndOfInclude_
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB023LoadCsvEntries)
+#!
+#!ERROR(%RYB023TxtLocation)
+#!FREE(%RYB023Includes)
+#!
+#OPEN(%RYB023CsvLocation),READ
+#SET(%CountEquate, 0)
+#LOOP
+  #READ(%RYB023Record)
+  #IF(%RYB023Record = %EOF)
+    #BREAK
+  #ELSE
+    #SET(%CountEquate, %CountEquate + 1)
+    #IF(%CountEquate = 1)
+      #CALL(%RYB023Header)
+#!%RYB023Fields
+#!%RYB023Record
+    #ELSE
+      #SET(%RYB023Record, CLIP(%RYB023Record) & ',')
+      #CALL(%RYB023Detail)
+#!%RYB023Record
+    #ENDIF
+  #END
+#END
+#SET(%LineNext, '#RETURN')
+%LineNext
+#CLOSE(%RYB023CsvLocation)
+#!---------------------------------------------------------------------
+#GROUP(%RYB023Header)
+#SET(%RYB023Fields, 0)
+#SET(%Start,1)
+#LOOP
+  #SET(%Next,INSTRING(',',%RYB023Record,1,%Start))
+  #SET(%RYB023Fields,%RYB023Fields+1)
+  #IF (%Next=0)
+    #BREAK
+  #ENDIF
+  #SET(%Start,%Next+1)
+#ENDLOOP
+#SET(%LineNext, '#GROUP(%RYB023DefaultTheIncludes)')
+%LineNext
+#SET(%LineNext, '#FREE(%RYB023Includes)')
+%LineNext
+#SET(%LineNext, '#!')
+%LineNext
+#RETURN
+#!---------------------------------------------------------------------
+#GROUP(%RYB023Detail)
+#SET(%RYB023FText, '')
+#SET(%RYB023FLoop, 1)
+#SET(%Start,1)
+#LOOP
+  #SET(%N1Beg,INSTRING('"',%RYB023Record,1,%Start))
+  #IF (%N1Beg=0)
+    #RETURN
+  #ENDIF
+  #SET(%N2End,INSTRING('"',%RYB023Record,1,%N1Beg+1))
+  #SET(%RYB023FText,SUB(%RYB023Record,%N1Beg+1,%N2End-%N1Beg-1))
+#!%N1Beg :: %N2End :: %RYB023FText
+  #CASE(%RYB023FLoop)
+  #OF(1)
+    #SET(%LineNext, '#ADD(%RYB023Includes   , ITEMS(%RYB023Includes) + 1)')
+%LineNext
+    #SET(%LineNext, '#SET(%RYB023Number     , %RYB023Includes)')
+%LineNext
+    #ADD(%RYB023Includes   , ITEMS(%RYB023Includes) + 1)
+    #SET(%RYB023Number     , %RYB023Includes)    
+  #OF(2)
+    #SET(%LineNext, '#SET(%RYB023Code       , <39>' & %RYB023FText & '<39>)')
+%LineNext
+    #SET(%RYB023Code       , %RYB023FText)
+  #OF(3)
+    #SET(%LineNext, '#SET(%RYB023Value      , <39>' & %RYB023FText & '<39>)')
+%LineNext
+    #SET(%RYB023Value      , %RYB023FText)
+  #OF(4)
+    #SET(%LineNext, '#SET(%RYB023Name       , <39>' & %RYB023FText & '<39>)')
+%LineNext
+    #SET(%RYB023Name      , %RYB023FText)
+  #OF(5)
+    #SET(%LineNext, '#SET(%RYB023NameASCII  , <39>' & %RYB023FText & '<39>)')
+%LineNext
+    #SET(%RYB023Name      , %RYB023FText)
+  #OF(6)
+    #SET(%LineNext, '#SET(%RYB023GeonameID  , <39>' & %RYB023FText & '<39>)')
+%LineNext
+    #SET(%RYB023GeonameID , %RYB023FText)
+    #!
+    #SET(%LineNext, '#!')
+%LineNext
+  #ENDCASE
+  #SET(%Start,%N2End+2)
+  #SET(%RYB023FLoop,%RYB023FLoop+1)
+#!%RYB023FText
+#ENDLOOP
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB023IoaLoadEntries)
+#!
+#!ERROR('OPEN: ' & %RYB023IMPLocation)
+#!FREE(%RYB023Includes)
+#!
+#OPEN(%RYB023ImpLocation),READ
+#SET(%CountEquate, 0)
+#LOOP
+  #READ(%RYB023Record)
+  #IF(%RYB023Record = %EOF)
+    #BREAK
+  #ELSE
+    #SET(%CountEquate, %CountEquate + 1)
+    #IF(%CountEquate = 1)
+      #CALL(%RYB023IoaHeader)
+    #ELSE
+      #SET(%RYB023Record, CLIP(%RYB023Record) & '<9>')
+      #CALL(%RYB023IoaDetail)
+    #ENDIF
+  #END
+#END
+#CLOSE(%RYB023ImpLocation)
+#!ERROR('CLOSE: ' & %RYB023ImpLocation)
+#!---------------------------------------------------------------------
+#GROUP(%RYB023IoaHeader)
+#SET(%RYB023Fields, 0)
+#SET(%Start,1)
+#LOOP
+  #SET(%Next,INSTRING('<9>',%RYB023Record,1,%Start))
+  #SET(%RYB023Fields,%RYB023Fields+1)
+  #IF (%Next=0)
+    #BREAK
+  #ENDIF
+  #SET(%Start,%Next+1)
+#ENDLOOP
+#!
+#FREE(%RYB023Includes)
+#!
+#RETURN
+#!---------------------------------------------------------------------
+#GROUP(%RYB023IoaDetail)
+#SET(%RYB023FText, '')
+#SET(%RYB023FLoop, 1)
+#SET(%Start,1)
+#SET(%Next,-1)
+#LOOP
+  #SET(%Next,INSTRING('<9>',%RYB023Record,1,%Start))
+  #SET(%RYB023Fields,%RYB023Fields+1)
+  #IF (%Next=0)
+    #BREAK
+  #ENDIF
+#!--- %Start -> %Next
+  #!SET(%RYB023FText,'')
+  #!IF(%Next>%Start)
+    #SET(%RYB023FText,SUB(%RYB023Record,%Start,%Next-%Start))
+  #!ENDIF
+  #CALL(%ReplaceSubString,%RYB023FText,'<39>','<39><39>')
+  #CASE(%RYB023FLoop)
+  #OF(1)
+    #ADD(%RYB023Includes      , ITEMS(%RYB023Includes) + 1)
+    #SET(%RYB023Number        , %RYB023Includes)
+    #SET(%RYB023Value         , %RYB023FText)
+  #OF(2)
+    #SET(%RYB023Name          , %RYB023FText)
+  #OF(3)
+    #SET(%RYB023NameASCII     , %RYB023FText)
+  #OF(4)
+    #SET(%RYB023GeonameId     , %RYB023FText)
+  #!
+    #!SET(%Ix                  , INSTRING('.',%RYB023Value,1,1))
+    #!SET(%RYB023Code          , SUB(%RYB023Value,1,%Ix-1) & SUB(%RYB023Value,%Ix+1,LEN(%RYB023Value)))
+    #SET(%RYB023Code          , %RYB023Value)
+    #CALL(%ReplaceSubString,%RYB023Code,'.','_')
+  #!
+  #ENDCASE
+  #SET(%Start,%Next+1)
+  #SET(%RYB023FLoop,%RYB023FLoop+1)
+%RYB023FText
+#ENDLOOP
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB023DefaultTheIncludes)
+#FREE(%RYB023Includes)
+#!
+#SET(%LineShow, ITEMS(%RYB023Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! #FREE: Is this correct?
+#!
+#ADD(%RYB023Includes   , ITEMS(%RYB023Includes) + 1)
+#SET(%RYB023Number     , ITEMS(%RYB023Includes))
+#SET(%RYB023Code       , 'FIRST')
+#SET(%RYB023Value      , ALL('-',%RYB023DataSize))
+#SET(%RYB023Name       , 'First Entry')
+#SET(%RYB023NameASCII  , 'First Entry ASCII')
+#!
+#!
+#!
+#!
+#ADD(%RYB023Includes   , ITEMS(%RYB023Includes) + 1)
+#SET(%RYB023Number     , ITEMS(%RYB023Includes))
+#SET(%RYB023Code       , 'AD06')
+#SET(%RYB023Value      , 'AD.06')
+#SET(%RYB023Name       , 'Sant Julià de Loria')
+#SET(%RYB023NameASCII  , 'Sant Julia de Loria')
+#SET(%RYB023GeonameID  , 3039162)
+#!
+#!
+#!
+#!
+#!
+#ADD(%RYB023Includes   , ITEMS(%RYB023Includes) + 1)
+#SET(%RYB023Number     , ITEMS(%RYB023Includes))
+#SET(%RYB023Code       , 'LAST')
+#SET(%RYB023Value      , ALL('~',%RYB023DataSize))
+#SET(%RYB023Name       , 'Last Entry')
+#SET(%RYB023NameASCII  , 'Last Entry ASCII')
+#!
+#!
+#SET(%LineShow, ITEMS(%RYB023Includes) & ' AFTER ADD')
+#! !!! %%LineShow=%LineShow
+#! !!! ADD: Is this correct?
+#RETURN
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------

@@ -234,6 +234,7 @@
 #!
 #INSERT(%RYB010TabDocumentation)
 #INSERT(%RYB010TabVersions)
+#INSERT(%RYB010TabNarrative)
 #!INSERT(%TabClarionVersion)
 #ENDSHEET
 #!
