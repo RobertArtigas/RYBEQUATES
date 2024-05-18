@@ -203,6 +203,8 @@
 #ENDSHEET
 #!
 #ATSTART
+#SET(%BegDate, TODAY())                     #! Begin date
+#SET(%BegTime, CLOCK())                     #! Begin time
 #!COMMENT(90)
 #COMMENT(%RYB020Comment)
 #!
