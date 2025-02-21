@@ -1,15 +1,15 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{A92A173A-B560-4FE1-9EC8-1515A6864A96}</ProjectGuid>
+    <ProjectGuid>{A8CCA825-D8B6-46DE-9BC9-FF446EDE8472}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>rybTplRun</RootNamespace>
     <AssemblyName>rybTplRun</AssemblyName>
     <OutputName>rybTplRun</OutputName>
     <CWOutputType>Exe</CWOutputType>
-    <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
     <Model>Dll</Model>
+    <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
     <ApplicationIcon>ryb.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -27,6 +27,7 @@
     <check_index>False</check_index>
   </PropertyGroup>
   <ItemGroup>
+    <FileDriver Include="ASCII" />
     <Compile Include="rybTplRun.clw">
       <Generated>true</Generated>
     </Compile>
@@ -60,9 +61,6 @@
     <Compile Include="rybTplRun_BC0.CLW">
       <Generated>true</Generated>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <FileDriver Include="ASCII" />
   </ItemGroup>
   <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
 </Project>

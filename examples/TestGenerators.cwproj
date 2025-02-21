@@ -3,12 +3,14 @@
     <ProjectGuid>{036DCF8C-E63C-4F83-B9C6-E9C390937461}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>TestGenerators</RootNamespace>
     <AssemblyName>TestGenerators</AssemblyName>
     <OutputName>TestGenerators</OutputName>
     <CWOutputType>Exe</CWOutputType>
     <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+    <ApplicationIcon>ryb.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>True</DebugSymbols>
