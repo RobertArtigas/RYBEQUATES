@@ -186,6 +186,8 @@
   #ENDBOXED
 #ENDTAB
 #!
+#INSERT(%RYB111CompLang00)
+#INSERT(%RYB111CompLang01)
 #INSERT(%RYB010TabDocumentation)
 #INSERT(%RYB010TabVersions)
 #!INSERT(%TabClarionVersion)
@@ -216,6 +218,42 @@
   #INSERT(%RYB111LoadCsvEntries)
   #CLOSE (%RYB111TxtLocation)
   #RUN('NOTEPAD.EXE "' & %RYB111TxtLocation & '"')
+#ENDIF
+#!
+#COMMENT(%RYB111CommentCS)
+#IF(%RYB111OptExpCs)
+  #SET(%RYB111CsLocation      , %RYB111CsDirectory & %RYB111CsName)
+  #CREATE(%RYB111CsLocation)
+  #INSERT(%RYB111BuildTheIncludesCS)
+  #CLOSE (%RYB111CsLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB111CsLocation & '"')
+#ENDIF
+#!
+#COMMENT(%RYB111CommentPY)
+#IF(%RYB111OptExpPY)
+  #SET(%RYB111PyLocation      , %RYB111PyDirectory & %RYB111PyName)
+  #CREATE(%RYB111PyLocation)
+  #INSERT(%RYB111BuildTheIncludesPY)
+  #CLOSE (%RYB111PyLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB111PyLocation & '"')
+#ENDIF
+#!
+#COMMENT(%RYB111CommentTS)
+#IF(%RYB111OptExpTS)
+  #SET(%RYB111TsLocation      , %RYB111TsDirectory & %RYB111TsName)
+  #CREATE(%RYB111TsLocation)
+  #INSERT(%RYB111BuildTheIncludesTS)
+  #CLOSE (%RYB111TsLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB111TsLocation & '"')
+#ENDIF
+#!
+#COMMENT(%RYB111CommentJS)
+#IF(%RYB111OptExpJS)
+  #SET(%RYB111JsLocation      , %RYB111JsDirectory & %RYB111JsName)
+  #CREATE(%RYB111JsLocation)
+  #INSERT(%RYB111BuildTheIncludesJS)
+  #CLOSE (%RYB111JsLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB111JsLocation & '"')
 #ENDIF
 #!
 #COMMENT(60)
@@ -257,10 +295,11 @@ _RYB111_ EQUATE(1)
 ! -----------------------------------------------------------------
 ! -----------------------------------------------------------------
 ! The EQUATES ---might--- have cross uses in other areas in the architecture.
-! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+! IMPORTANT: Please NOTE that the equates are syncronized up in the same order.
 ! -----------------------------------------------------------------
 ! -----------------------------------------------------------------
-!Region EQUATE
+!
+!region EQUATE
   #SET(%LineShow, ITEMS(%RYB111Includes))
 #! !!! %%LineShow=%LineShow
 #! !!! DISPLAY: Is this correct?
@@ -274,12 +313,13 @@ _RYB111_ EQUATE(1)
 #SET(%LineWork, %RYB111TableID & %RYB111Code)
 #SET(%LineNext, 'EQUATE(' & FORMAT(%CountEquate,@N03) & ')')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB111Descr)
-%[%zNames111]LineWork %[%zItems111-%zNames111]NULL %LineNext #<!%LineCmnt
+%[%zNames111]LineWork %[%zItems111-%zNames111]NULL %LineNext #<!:%LineCmnt
 #!
     #ENDFOR
   #RESUME
-!EndRegion EQUATE
-!Region VALUE
+!endregion EQUATE
+!
+!region VALUE
 !                                         1234567890123456
   #SET(%CountEquate, 0)
   #SUSPEND
@@ -288,13 +328,14 @@ _RYB111_ EQUATE(1)
 #SET(%LineWork, %RYB111TablePrefix & %RYB111Code)
 #SET(%LineNext, 'EQUATE(''' & CLIP(%RYB111Value) & ''')')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB111Descr)
-%[%zNames111]LineWork %[%zItems111-%zNames111]NULL %LineNext #<!%LineCmnt
+%[%zNames111]LineWork %[%zItems111-%zNames111]NULL %LineNext #<!:%LineCmnt
 #!
     #ENDFOR
   #RESUME
 !                                         1234567890123456
-!EndRegion VALUE
-!Region DESCRIPTION
+!endregion VALUE
+!
+!region DESCRIPTION
   #SET(%CountEquate, 0)
   #SUSPEND
     #FOR (%RYB111Includes)
@@ -302,11 +343,11 @@ _RYB111_ EQUATE(1)
 #SET(%LineWork, %RYB111TableDescr & %RYB111Code)
 #SET(%LineNext, 'EQUATE(''' & CLIP(%RYB111Descr) & ''')')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ': ' & %RYB111Descr)
-%[%zNames111]LineWork %[%zItems111-%zNames111]NULL %LineNext #<!%LineCmnt
+%[%zNames111]LineWork %[%zItems111-%zNames111]NULL %LineNext #<!:%LineCmnt
 #!
     #ENDFOR
   #RESUME
-!EndRegion DESCRIPTION
+!endregion DESCRIPTION
 !
 !EOF
 !  _EndOfInclude_
@@ -399,6 +440,473 @@ _RYB111_ EQUATE(1)
   #SET(%RYB111FLoop,%RYB111FLoop+1)
 #!%RYB111FText
 #ENDLOOP
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111CompLang00)
+#TAB('CS/PY')
+  #BOXED('Languages'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create .NET (CS) from existing entries?'              , CHECK), %RYB111OptExpCS, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create Python (PY) from existing entries?'            , CHECK), %RYB111OptExpPY, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Global Generators'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #ENABLE(%RYB111OptExpCS)
+    #BOXED('CS Source'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentCS       , REQ   , DEFAULT(150) , AT(220,,80)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('CS Directory: '      ,@S120)   , %RYB111CsDirectory   , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('CS Name: '           ,@S120)   , %RYB111CsName        , REQ   , DEFAULT('RYB111_EQUATES.CS')   , AT(100,,344)
+      #PREPARE
+        #SET(%RYB111CsLocation      , %RYB111CsDirectory & %RYB111CsName)
+      #ENDPREPARE
+      #PROMPT('CS Location: '  ,@S120),%RYB111CsLocation    ,REQ,DEFAULT(%RYB111CsLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+    #!
+    #ENABLE(%RYB111OptExpPY)
+    #BOXED('PY Source'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentPY       , REQ   , DEFAULT(140) , AT(220,,80)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('PY Directory: '      ,@S120)   , %RYB111PyDirectory   , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('PY Name: '           ,@S120)   , %RYB111PyName        , REQ   , DEFAULT('RYB111_EQUATES.PY')   , AT(100,,344)
+      #PREPARE
+        #SET(%RYB111PyLocation      , %RYB111PyDirectory & %RYB111PyName)
+      #ENDPREPARE
+      #PROMPT('PY Location: '  ,@S120),%RYB111PyLocation    ,REQ,DEFAULT(%RYB111PyLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+    #ENDBOXED
+    #ENDENABLE
+  #ENDBOXED
+  #!
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111BuildTheIncludesCS)
+//BOF
+//
+// File:         %RYB111CsLocation
+// Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+// Purpose:      Define global table includes for applications
+#SET(%LineText, '// Author:       Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+//               All Rights Reserved World Wide.
+//               MIT License.
+//
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// The EQUATES ---might--- have cross uses in other areas in the architecture.
+// IMPORTANT: Please NOTE that the equates are syncronized up in the same order.
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+#SET(%LineWork, '#region EQUATES')
+%LineWork
+#!
+  #SET(%LineShow, ITEMS(%RYB111Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+#!
+#! !!! %%RYB111Includes=%RYB111Includes, %%RYB111Number=%RYB111Number, %%RYB111Code=%RYB111Code, %%RYB111Value=%RYB111Value
+#! !!! %%RYB111Descr=%RYB111Descr
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'public const int ' & %RYB111TableID & %RYB111Code)
+#!SET(%LineNext, '= ' & FORMAT(%CountEquate,@N03) & ';')
+#SET(%LineNext, '= ' & %CountEquate & ';')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '#endregion EQUATES')
+%LineWork
+//
+#SET(%LineWork, '#region VALUES')
+%LineWork
+//                                                      1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'public const string ' & %RYB111TableID & %RYB111Code)
+#SET(%LineNext,'= "' & CLIP(%RYB111Value) & '";')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+//                                                      1234567890123456
+#SET(%LineWork, '#endregion VALUES')
+%LineWork
+//
+#SET(%LineWork, '#region DESCRIPTIONS')
+%LineWork
+#!//       1         2         3         4         5         6         7
+#!//34567890123456789012345678901234567890123456789012345678901234567890
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'public const string ' & %RYB111TableID & %RYB111Code)
+#SET(%LineNext, '= "' & CLIP(%RYB111Descr) & '";')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '#endregion DESCRIPTIONS')
+%LineWork
+//
+//EOF
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111BuildTheIncludesPY)
+#SET(%LineWork, '#BOF')
+%LineWork
+#SET(%LineWork, '#')
+%LineWork
+#SET(%LineWork, '# File:         '  & %RYB111PyLocation & '')
+%LineWork
+#SET(%LineWork, '# Date-Time:    '  & FORMAT(%BegDate,@D10-) & ' - ' & FORMAT(%BegTime,@T06) & '')
+%LineWork
+#SET(%LineWork, '# Purpose:      Define global equates for applications')
+%LineWork
+#SET(%LineText, '# Author:       Copyright (c) 2023-' & YEAR(TODAY()) & ' by ENERCALC, LLC.')
+%LineText
+#SET(%LineWork, '#               All Rights Reserved World Wide.')
+%LineWork
+#SET(%LineWork, '#               Commercial License and non-disclosure agreement required for use.')
+%LineWork
+#SET(%LineWork, '#')
+%LineWork
+#SET(%LineWork, '# -----------------------------------------------------------------')
+%LineWork
+#SET(%LineWork, '# -----------------------------------------------------------------')
+%LineWork
+#SET(%LineWork, '# The EQUATES ---might--- have cross uses in other areas in the system.')
+%LineWork
+#SET(%LineWork, '# IMPORTANT: Please NOTE that the equates are syncronized up in the same order.')
+%LineWork
+#SET(%LineWork, '# -----------------------------------------------------------------')
+%LineWork
+#SET(%LineWork, '# -----------------------------------------------------------------')
+%LineWork
+#SET(%LineWork, '#')
+%LineWork
+#SET(%LineWork, '#region EQUATES')
+%LineWork
+  #SET(%LineShow, ITEMS(%RYB111Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+#!
+#! !!! %%RYB111Includes=%RYB111Includes, %%RYB111Number=%RYB111Number, %%RYB111Code=%RYB111Code, %%RYB111Value=%RYB111Value
+#! !!! %%RYB111Descr=%RYB111Descr
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '' & %RYB111TableID & %RYB111Code)
+#!SET(%LineNext, '= ' & FORMAT(%CountEquate,@N03) & '')
+#SET(%LineNext, '= ' & %CountEquate & '')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[43]LineWork %LineNext #<#:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '#endregion EQUATES')
+%LineWork
+#SET(%LineWork, '#')
+%LineWork
+#SET(%LineWork, '#region VALUES')
+%LineWork
+#SET(%LineWork, '#                                              1234567890123456')
+%LineWork
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '' & %RYB111TableID & %RYB111Code)
+#SET(%LineNext, '= "' & CLIP(%RYB111Value) & '"')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[43]LineWork %LineNext #<#:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '#                                              1234567890123456')
+%LineWork
+#SET(%LineWork, '#endregion VALUES')
+%LineWork
+#SET(%LineWork, '#')
+%LineWork
+#SET(%LineWork, '#region DESCRIPTIONS')
+%LineWork
+#!//       1         2         3         4         5         6         7
+#!//34567890123456789012345678901234567890123456789012345678901234567890
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '' & %RYB111TableID & %RYB111Code)
+#SET(%LineNext, '= "' & CLIP(%RYB111Descr) & '"')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[43]LineWork %LineNext #<#:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '#endregion DESCRIPTIONS')
+%LineWork
+#SET(%LineWork, '#')
+%LineWork
+#SET(%LineWork, '#EOF')
+%LineWork
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111CompLang01)
+#TAB('TS/JS')
+  #BOXED('Languages'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create TypeScript (ts) from existing entries?'         , CHECK), %RYB111OptExpTS, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create Javascript (js) from existing entries?'         , CHECK), %RYB111OptExpJS, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Global Generators'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #ENABLE(%RYB111OptExpTS)
+    #BOXED('Documents'),AT(,,446)
+     #DISPLAY(''),AT(,,,1)
+      #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentTS       , REQ   , DEFAULT(150) , AT(220,,80)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('TS Directory: '      ,@S120)   , %RYB111TsDirectory   , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('TS Name: '           ,@S120)   , %RYB111TsName        , REQ   , DEFAULT('RYB111_EQUATES.TS')   , AT(100,,344)
+      #PREPARE
+        #SET(%RYB111TsLocation      , %RYB111TsDirectory & %RYB111TsName)
+      #ENDPREPARE
+      #PROMPT('TS Location: '  ,@S120),%RYB111TsLocation    ,REQ,DEFAULT(%RYB111TsLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+    #!
+    #ENABLE(%RYB111OptExpJS)
+    #BOXED('Source'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentJS       , REQ   , DEFAULT(150) , AT(220,,80)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('JS Directory: '      ,@S120)   , %RYB111JsDirectory   , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
+      #PROMPT('JS Name: '           ,@S120)   , %RYB111JsName        , REQ   , DEFAULT('RYB111_EQUATES.JS')   , AT(100,,344)
+      #PREPARE
+        #SET(%RYB111JsLocation      , %RYB111JsDirectory & %RYB111JsName)
+      #ENDPREPARE
+      #PROMPT('JS Location: '  ,@S120),%RYB111JsLocation    ,REQ,DEFAULT(%RYB111JsLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+    #ENDBOXED
+    #ENDENABLE
+  #ENDBOXED
+  #!
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111BuildTheIncludesTS)
+//BOF
+//
+// File:         %RYB111TsLocation
+// Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+// Purpose:      Define global equates for applications
+#SET(%LineText, '// Author:       Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+//               All Rights Reserved World Wide.
+//               Commercial License and non-disclosure agreement required for use.
+//
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// The EQUATES ---might--- have cross uses in other areas in the system.
+// IMPORTANT: Please NOTE that the equates are syncronized up in the same order.
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+//
+  #SET(%LineShow, ITEMS(%RYB111Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+#SET(%LineWork, '//#region EQUATES')
+%LineWork
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+#!
+#! !!! %%RYB111Includes=%RYB111Includes, %%RYB111Number=%RYB111Number, %%RYB111Code=%RYB111Code, %%RYB111Value=%RYB111Value
+#! !!! %%RYB111Descr=%RYB111Descr
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'export const ' & %RYB111TableID & %RYB111Code & ': number')
+#!SET(%LineNext, '= ' & FORMAT(%CountEquate,@N03) & ';')
+#SET(%LineNext, '= ' & %CountEquate & ';')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '//#endregion EQUATES')
+%LineWork
+//
+#SET(%LineWork, '//#region VALUES')
+%LineWork
+//                                                      1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'export const ' & %RYB111TableID & %RYB111Code & ': string')
+#SET(%LineNext,'= <39>' & CLIP(%RYB111Value) & '<39>;')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+//                                                      1234567890123456
+#SET(%LineWork, '//#endregion VALUES')
+%LineWork
+//
+#SET(%LineWork, '//#region DESCRIPTIONS')
+%LineWork
+#!//       1         2         3         4         5         6         7
+#!//34567890123456789012345678901234567890123456789012345678901234567890
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'export const ' & %RYB111TableID & %RYB111Code & ': string')
+#SET(%LineNext, '= <39>' & CLIP(%RYB111Descr) & '<39>;')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '//#endregion DESCRIPTIONS')
+%LineWork
+//
+//EOF
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111BuildTheIncludesJS)
+//BOF
+//
+// File:         %RYB111JsLocation
+// Date-Time:    %@D010@(%BegDate) - %@T06@(%BegTime)
+// Purpose:      Define global equates for applications
+#SET(%LineText, '// Author:       Copyright © 2018-' & YEAR(TODAY()) & ' by Roberto Artigas y Soler')
+%LineText
+//               All Rights Reserved World Wide.
+//               Commercial License and non-disclosure agreement required for use.
+//
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// The EQUATES ---might--- have cross uses in other areas in the system.
+// IMPORTANT: Please NOTE that the equates are syncronized up in the same order.
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+//
+  #SET(%LineShow, ITEMS(%RYB111Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+#SET(%LineWork, '//#region EQUATES')
+%LineWork
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+#!
+#! !!! %%RYB111Includes=%RYB111Includes, %%RYB111Number=%RYB111Number, %%RYB111Code=%RYB111Code, %%RYB111Value=%RYB111Value
+#! !!! %%RYB111Descr=%RYB111Descr
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'const ' & %RYB111TableID & %RYB111Code & '')
+#!SET(%LineNext, '= ' & FORMAT(%CountEquate,@N03) & ';')
+#SET(%LineNext, '= ' & %CountEquate & ';')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '//#endregion EQUATES')
+%LineWork
+//
+#SET(%LineWork, '//#region VALUES')
+%LineWork
+//                                                      1234567890123456
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'const ' & %RYB111TableID & %RYB111Code & '')
+#SET(%LineNext,'= "' & CLIP(%RYB111Value) & '";')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+//                                                      1234567890123456
+#SET(%LineWork, '//#endregion VALUES')
+%LineWork
+//
+#SET(%LineWork, '//#region DESCRIPTIONS')
+%LineWork
+#!//       1         2         3         4         5         6         7
+#!//34567890123456789012345678901234567890123456789012345678901234567890
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, 'const ' & %RYB111TableID & %RYB111Code & '')
+#SET(%LineNext, '= "' & CLIP(%RYB111Descr) & '";')
+#SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
+#IF(%RYB111Descr)
+  #SET(%LineCmnt, %LineCmnt & ' ' & %RYB111Descr)
+#ENDIF
+%[52]LineWork %LineNext #<//:%LineCmnt
+#!
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '//#endregion DESCRIPTIONS')
+%LineWork
+//
+//EOF
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
@@ -545,6 +1053,13 @@ _RYB111_ EQUATE(1)
 #SET(%RYB111Code       , 'GOVERNMENT')
 #SET(%RYB111Value      , 'GOVERNMENT')
 #SET(%RYB111Descr      , 'GMS: Government Management System (Taxes, Everything)')
+#!
+#ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
+#SET(%RYB111Number     , ITEMS(%RYB111Includes))
+#SET(%RYB111Code       , 'MARKETING')
+#SET(%RYB111Value      , 'MARKETING')
+#SET(%RYB111Descr      , 'MMS: Marketing Management System (Development, Retention, Pricing, Costing, Sales)')
+#!
 #ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
 #SET(%RYB111Number     , ITEMS(%RYB111Includes))
 #SET(%RYB111Code       , 'CLIENT')
@@ -570,10 +1085,23 @@ _RYB111_ EQUATE(1)
 #SET(%RYB111Code       , 'FPL')
 #SET(%RYB111Value      , 'FPL')
 #SET(%RYB111Descr      , 'Financial Profit & Loss (Income - Expenses = Net Profit | Cash Flow)')
+#!
 #ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
 #SET(%RYB111Number     , ITEMS(%RYB111Includes))
-#SET(%RYB111Code       , 'KPI')
-#SET(%RYB111Value      , 'KPI')
+#SET(%RYB111Code       , 'KPICOUNTRY')
+#SET(%RYB111Value      , 'KPICOUNTRY')
+#SET(%RYB111Descr      , 'Key Performance Indicators (Country Level Markets and Financials)')
+#!
+#ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
+#SET(%RYB111Number     , ITEMS(%RYB111Includes))
+#SET(%RYB111Code       , 'KPIMARKETS')
+#SET(%RYB111Value      , 'KPIMARKETS')
+#SET(%RYB111Descr      , 'Key Performance Indicators (Industry Level Markets and Financials)')
+#!
+#ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
+#SET(%RYB111Number     , ITEMS(%RYB111Includes))
+#SET(%RYB111Code       , 'KPICOMPANY')
+#SET(%RYB111Value      , 'KPICOMPANY')
 #SET(%RYB111Descr      , 'Key Performance Indicators (Health Checkup | Cash Flow Checkup)')
 #!-----
 #! Employee: Learning/Growth, Employee Satisfaction (work/life balance)
@@ -643,16 +1171,18 @@ _RYB111_ EQUATE(1)
 #SET(%RYB111Code       , 'WAREHOUSE')
 #SET(%RYB111Value      , 'WAREHOUSE')
 #SET(%RYB111Descr      , 'Storage of Items (Sales, Material, Manufacturing, Overhead)')
-#ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
-#SET(%RYB111Number     , ITEMS(%RYB111Includes))
-#SET(%RYB111Code       , 'MARKETING')
-#SET(%RYB111Value      , 'MARKETING')
-#SET(%RYB111Descr      , 'Client and Customer Engagement (Sales)')
+#!
 #ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
 #SET(%RYB111Number     , ITEMS(%RYB111Includes))
 #SET(%RYB111Code       , 'PRICING')
 #SET(%RYB111Value      , 'PRICING')
 #SET(%RYB111Descr      , 'Historical Goods, Services, and Inventory Pricing (Sales)')
+#!
+#ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
+#SET(%RYB111Number     , ITEMS(%RYB111Includes))
+#SET(%RYB111Code       , 'COSTING')
+#SET(%RYB111Value      , 'COSTING')
+#SET(%RYB111Descr      , 'Historical Goods, Services, and Inventory Costing (Sales)')
 #!
 #ADD(%RYB111Includes   , ITEMS(%RYB111Includes) + 1)
 #SET(%RYB111Number     , ITEMS(%RYB111Includes))

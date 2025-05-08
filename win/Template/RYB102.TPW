@@ -535,6 +535,12 @@ _RYB102_ EQUATE(1)
 #!
 #ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
 #SET(%RYB102Number     , ITEMS(%RYB102Includes))
+#SET(%RYB102Code       , 'LN')
+#SET(%RYB102Value      , 'LN')
+#SET(%RYB102Descr      , 'Legal - Individual, Citizen')
+#!
+#ADD(%RYB102Includes   , ITEMS(%RYB102Includes) + 1)
+#SET(%RYB102Number     , ITEMS(%RYB102Includes))
 #SET(%RYB102Code       , 'LP')
 #SET(%RYB102Value      , 'LP')
 #SET(%RYB102Descr      , 'Legal - Partnership')
