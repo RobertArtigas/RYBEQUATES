@@ -79,6 +79,7 @@
 #SHEET,AT(,,464),HSCROLL
 #INSERT(%RYB111License)
 #INSERT(%RYB111Explain)
+#INSERT(%RYB111TabNarrative)                  #! 2025.05.11 RA:
 #TAB(UPPER(%Application) & '.' & UPPER(%ProgramExtension))
   #BOXED('Hidden'),AT(,,456),HIDE
     #!PROMPT('NextLine: ',@S120),%NextLine,AT(102,,346)
@@ -131,6 +132,28 @@
   #ENDBOXED
 #ENDTAB
 #!
+#PREPARE
+  #CALL(%RYB111DefaultTheIncludes)
+#ENDPREPARE
+#!+++
+#TAB('Equates')
+  #!BOXED(''),AT(,,280)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(''),AT(,,,1)
+    #BUTTON('File name'),MULTI(%RYB111Includes, '(' & FORMAT(%RYB111Number,@N03) & ') ' & %RYB111Code & ' :: ' & %RYB111Value & ' :: ' & %RYB111Descr & ' ::'),INLINE,AT(,,,150)
+    #INSERT(%PreambleRYB)
+      #!BOXED('Table Item'),AT(,,288)
+      #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+        #DISPLAY(''),AT(,,,1)
+        #PROMPT('Field Equate: '        ,@N8)     , %RYB111Number                     , AT(100,,362)
+        #PROMPT('Field Code:  '         ,@S120)   , %RYB111Code     , REQ             , AT(100,,362)
+        #PROMPT('Field Value: '         ,@S120)   , %RYB111Value                      , AT(100,,362)
+        #PROMPT('Field Description: '   ,@S120)   , %RYB111Descr                      , AT(100,,362)
+       #ENDBOXED
+    #ENDBUTTON
+  #ENDBOXED
+#ENDTAB
+#!
 #TAB('Documents')
   #BOXED('Options'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
@@ -161,28 +184,6 @@
       #PROMPT('TXT Location: '  ,@S120),%RYB111TxtLocation    ,REQ,DEFAULT(%RYB111CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
-  #ENDBOXED
-#ENDTAB
-#!
-#PREPARE
-  #CALL(%RYB111DefaultTheIncludes)
-#ENDPREPARE
-#!+++
-#TAB('Equates')
-  #!BOXED(''),AT(,,280)
-  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
-    #DISPLAY(''),AT(,,,1)
-    #BUTTON('File name'),MULTI(%RYB111Includes, '(' & FORMAT(%RYB111Number,@N03) & ') ' & %RYB111Code & ' :: ' & %RYB111Value & ' :: ' & %RYB111Descr & ' ::'),INLINE,AT(,,,150)
-    #INSERT(%PreambleRYB)
-      #!BOXED('Table Item'),AT(,,288)
-      #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
-        #DISPLAY(''),AT(,,,1)
-        #PROMPT('Field Equate: '        ,@N8)     , %RYB111Number                     , AT(100,,362)
-        #PROMPT('Field Code:  '         ,@S120)   , %RYB111Code     , REQ             , AT(100,,362)
-        #PROMPT('Field Value: '         ,@S120)   , %RYB111Value                      , AT(100,,362)
-        #PROMPT('Field Description: '   ,@S120)   , %RYB111Descr                      , AT(100,,362)
-       #ENDBOXED
-    #ENDBUTTON
   #ENDBOXED
 #ENDTAB
 #!
@@ -539,7 +540,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, 'public const string ' & %RYB111TableID & %RYB111Code)
+#SET(%LineWork, 'public const string ' & %RYB111TablePrefix & %RYB111Code)
 #SET(%LineNext,'= "' & CLIP(%RYB111Value) & '";')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -561,7 +562,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, 'public const string ' & %RYB111TableID & %RYB111Code)
+#SET(%LineWork, 'public const string ' & %RYB111TableDescr & %RYB111Code)
 #SET(%LineNext, '= "' & CLIP(%RYB111Descr) & '";')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -645,7 +646,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, '' & %RYB111TableID & %RYB111Code)
+#SET(%LineWork, '' & %RYB111TablePrefix & %RYB111Code)
 #SET(%LineNext, '= "' & CLIP(%RYB111Value) & '"')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -669,7 +670,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, '' & %RYB111TableID & %RYB111Code)
+#SET(%LineWork, '' & %RYB111TableDescr & %RYB111Code)
 #SET(%LineNext, '= "' & CLIP(%RYB111Descr) & '"')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -691,8 +692,8 @@ _RYB111_ EQUATE(1)
 #TAB('TS/JS')
   #BOXED('Languages'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #PROMPT ('Create TypeScript (ts) from existing entries?'         , CHECK), %RYB111OptExpTS, DEFAULT(0)  , AT(10)
-    #PROMPT ('Create Javascript (js) from existing entries?'         , CHECK), %RYB111OptExpJS, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create TypeScript (TS) from existing entries?'         , CHECK), %RYB111OptExpTS, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create Javascript (JS) from existing entries?'         , CHECK), %RYB111OptExpJS, DEFAULT(0)  , AT(10)
   #ENDBOXED
   #!
   #BOXED('Global Generators'),AT(,,456)
@@ -782,7 +783,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, 'export const ' & %RYB111TableID & %RYB111Code & ': string')
+#SET(%LineWork, 'export const ' & %RYB111TablePrefix & %RYB111Code & ': string')
 #SET(%LineNext,'= <39>' & CLIP(%RYB111Value) & '<39>;')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -804,7 +805,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, 'export const ' & %RYB111TableID & %RYB111Code & ': string')
+#SET(%LineWork, 'export const ' & %RYB111TableDescr & %RYB111Code & ': string')
 #SET(%LineNext, '= <39>' & CLIP(%RYB111Descr) & '<39>;')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -871,7 +872,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, 'const ' & %RYB111TableID & %RYB111Code & '')
+#SET(%LineWork, 'const ' & %RYB111TablePrefix & %RYB111Code & '')
 #SET(%LineNext,'= "' & CLIP(%RYB111Value) & '";')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -893,7 +894,7 @@ _RYB111_ EQUATE(1)
   #SUSPEND
     #FOR (%RYB111Includes)
       #SET(%CountEquate, %CountEquate + 1)
-#SET(%LineWork, 'const ' & %RYB111TableID & %RYB111Code & '')
+#SET(%LineWork, 'const ' & %RYB111TableDescr & %RYB111Code & '')
 #SET(%LineNext, '= "' & CLIP(%RYB111Descr) & '";')
 #SET(%LineCmnt, FORMAT(%CountEquate,@N03) & ':')
 #IF(%RYB111Descr)
@@ -907,6 +908,109 @@ _RYB111_ EQUATE(1)
 %LineWork
 //
 //EOF
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111Docs)
+#PREPARE
+  #IF(NOT VAREXISTS(%RYB111Docs00))
+    #DECLARE(%RYB111Docs00)
+  #ENDIF
+  #SET(%RYB111Docs00, '')
+  #SET(%RYB111Docs00, %RYB111Docs00 & 'Description')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs01))
+    #DECLARE(%RYB111Docs01)
+  #ENDIF
+  #SET(%RYB111Docs01, '')
+  #!SET(%RYB111Docs01, %RYB111Docs01 & '<9>Temp<13><10>')
+  #SET(%RYB111Docs01, %RYB111Docs01 & 'This will generate some business category global EQUATES to suggest some ') 
+  #SET(%RYB111Docs01, %RYB111Docs01 & ' organization structure when you build generalized or specific systems.')
+  #SET(%RYB111Docs01, %RYB111Docs01 & ' They are ideas that have been built in a number of management areas')
+  #SET(%RYB111Docs01, %RYB111Docs01 & ' to keep track of different business behaviors and metrics.')
+  #SET(%RYB111Docs01, %RYB111Docs01 & ' Not by any means a complete list, since there are from several industry')
+  #SET(%RYB111Docs01, %RYB111Docs01 & ' areas and they come from different levels of detail.')
+  #!SET(%RYB111Docs01, %RYB111Docs01 & '<13,10>')
+  #SET(%RYB111Docs01, %RYB111Docs01 & ' The usefulness of these EQUATES will vary.')
+  #SET(%RYB111Docs01, %RYB111Docs01 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs02))
+    #DECLARE(%RYB111Docs02)
+  #ENDIF
+  #SET(%RYB111Docs02, '')
+  #SET(%RYB111Docs02, %RYB111Docs02 & 'Items Generated')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs03))
+    #DECLARE(%RYB111Docs03)
+  #ENDIF
+  #SET(%RYB111Docs03, '')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111IncludeLocation & '<9>( Clarion )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111CsLocation & '<9>( CSharp )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111PyLocation & '<9>( Python )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111TsLocation & '<9>( TypeScript )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111JsLocation & '<9>( JavaScript )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111CsvLocation & '<9>( EQUATE Data )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & 'Any number of computer languages can be generated depending on requirements.')
+  #SET(%RYB111Docs03, %RYB111Docs03 & ' The only computer language generated by default is Clarion.')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '<13><10><13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & 'The CSV contains the data generated by the EQUATES template.')
+  #SET(%RYB111Docs03, %RYB111Docs03 & ' This can be used for management purposes or programmer programs that')
+  #SET(%RYB111Docs03, %RYB111Docs03 & ' generate additional source programs, documentation, other CSV''s as')
+  #SET(%RYB111Docs03, %RYB111Docs03 & ' complete sources or skeleton sources to be further processed by other ')
+  #SET(%RYB111Docs03, %RYB111Docs03 & ' generators in a production line.')
+  #SET(%RYB111Docs03, %RYB111Docs03 & ' Programs that write programs. Automation comes in handy.')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs04))
+    #DECLARE(%RYB111Docs04)
+  #ENDIF
+  #SET(%RYB111Docs04, '')
+  #!SET(%RYB111Docs04, %RYB111Docs04 & 'Redirection File')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs05))
+    #DECLARE(%RYB111Docs05)
+  #ENDIF
+  #SET(%RYB111Docs05, '')
+  #!SET(%RYB111Docs05, %RYB111Docs05 & '<9>*.* = .; %SEL20ROOT%\Classes; %SEL20ROOT%\Generators; %SEL20ROOT%\Includes')
+  #!SET(%RYB111Docs05, %RYB111Docs05 & '<13><10>')
+  #SET(%RYB111Docs05, %RYB111Docs05 & '')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs06))
+    #DECLARE(%RYB111Docs06)
+  #ENDIF
+  #SET(%RYB111Docs06, '')
+  #!SET(%RYB111Docs06, %RYB111Docs06 & 'Directions')
+  #!
+  #IF(NOT VAREXISTS(%RYB111Docs07))
+    #DECLARE(%RYB111Docs07)
+  #ENDIF
+  #SET(%RYB111Docs07, '')
+  #!SET(%RYB111Docs07, %RYB111Docs07 & 'Follow the instructions above.')
+  #SET(%RYB111Docs07, %RYB111Docs07 & '')
+  #SET(%RYB111Docs07, %RYB111Docs07 & '')
+#ENDPREPARE
+#!
+#GROUP(%RYB111TabNarrative)
+#INSERT(%RYB111Docs)
+#TAB('Narrative'),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #DISPLAY(''),AT(,,,1)
+  #BOXED('What this template does'),AT(,,454)
+    #DISPLAY(''),AT(,,,1)
+    #!DISPLAY(%RYB111Copyright01),AT(,,260,34)
+    #DISPLAY(%RYB111Docs00),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(%RYB111Docs01),AT(,,436,34)
+    #DISPLAY(%RYB111Docs02),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #DISPLAY(%RYB111Docs03),AT(,,436,134)
+    #!DISPLAY(%RYB111Docs04),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #!DISPLAY(%RYB111Docs05),AT(,,436,24)
+    #!DISPLAY(%RYB111Docs06),AT(,,436,8 ),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+    #!DISPLAY(%RYB111Docs07),AT(,,436,24)
+  #ENDBOXED
+#!
+#ENDTAB
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------

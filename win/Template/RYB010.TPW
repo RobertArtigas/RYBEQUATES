@@ -42,6 +42,7 @@
   #SET(%RYB010Docs03, %RYB010Docs03 & ' Normal setup, you would put these below the application directory.')
   #SET(%RYB010Docs03, %RYB010Docs03 & ' However, for larger systems, some individuals have one path for everything')
   #SET(%RYB010Docs03, %RYB010Docs03 & ' that is generated.')
+  #SET(%RYB010Docs03, %RYB010Docs03 & ' A fixed path is recommended.')
   #SET(%RYB010Docs03, %RYB010Docs03 & '')
   #!
   #IF(NOT VAREXISTS(%RYB010Docs04))
