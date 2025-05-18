@@ -59,7 +59,7 @@
 #!---------------------------------------------------------------------
 #!EXTENSION(RYB112_Equates_Tables,'RA.2021.03.14: Equates for Tables'),DESCRIPTION('RAYS | Equate for Tables (EQU).'),APPLICATION
 #!UTILITY(RYB112_Equates,'RA.2021.03.14: RYB112: Global Equates')
-#EXTENSION(RYB112_Equates,'RA.2021.03.14: RYB112: BUSINESS Equates'),DESCRIPTION('RYB | RYB112: BUSINESS Global Equates (EQU,CSV,TXT).'),APPLICATION
+#EXTENSION(RYB112_Equates,'RA.2021.03.14: RYB112: BUSINESS Equates'),DESCRIPTION('RYB | RYB112: BUSINESS Global Equates (EQU,CSV,TXT,XML,JSON,CS,PY,TS,JS).'),APPLICATION
 #!-----------------------------------------------------------------------------
 #INSERT(%PreambleRYB)
 #!-----------------------------------------------------------------------------
@@ -73,6 +73,13 @@
   #SET(%BegTime, CLOCK())                     #! Begin time
   #!
   #!INSERT(%PrepareTheIncludes)
+#!
+  #!FREE(%RYB112Includes)                #! 2025.05.17 RA: Clear all entries
+  #!CALL(%RYB112DefaultTheIncludes)
+  #!INSERT(%RYB112DefaultTheIncludes)    #! 2025.05.17 RA: Call not working
+  #!SET(%LineNext, ITEMS(%RYB112Includes) & ' [001]')
+  #!ERROR(%LineNext)
+#!
 #ENDPREPARE
 #!
 #DISPLAY('')
@@ -133,16 +140,26 @@
     #DISPLAY(%RYB112Explain01),AT(,,436,34)
   #ENDBOXED
 #ENDTAB
-#!
+#!+++010
 #PREPARE
-  #CALL(%RYB112DefaultTheIncludes)
+  #FREE(%RYB112Includes)                #! 2025.05.17 RA: Clear all entries
+  #SET(%LineNext, '!!! CLEARED TABLE=[ ' & ITEMS(%RYB112Includes) & ' ] [010]')
+  #!ERROR(%LineNext)
+  #!
+  #IF(ITEMS(%RYB112Includes) < 1)
+    #CALL(%RYB112DefaultTheIncludes)
+  #END
+  #!INSERT(%RYB112DefaultTheIncludes)    #! 2025.05.17 RA: Call not working
+  #!
+  #SET(%LineNext, '!!! ITEMS IN TABLE=[ ' & ITEMS(%RYB112Includes) & ' ] [011]')
+  #!ERROR(%LineNext)
 #ENDPREPARE
-#!+++
+#!+++010
 #TAB('Equates')
   #!BOXED(''),AT(,,280)
-  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension) & ' [' & ITEMS(%RYB112Includes) & ']'),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
     #DISPLAY(''),AT(,,,1)
-    #BUTTON('File name'),MULTI(%RYB112Includes, '(' & FORMAT(%RYB112Number,@N03) & ') ' & %RYB112Code & ' :: ' & %RYB112Value & ' :: ' & %RYB112Descr & ' ::'),INLINE,AT(,,,150)
+    #BUTTON('File name'),MULTI(%RYB112Includes, '(' & FORMAT(%RYB112Number,@N03) & ') ' & %RYB112Code & ' :: ' & %RYB112Value & ' :: ' & %RYB112Descr & ' ::'),INLINE,AT(,,,250)
     #INSERT(%PreambleRYB)
       #!BOXED('Table Item'),AT(,,288)
       #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
@@ -188,7 +205,9 @@
     #ENDBOXED
   #ENDBOXED
 #ENDTAB
-#!
+#!+++020
+#!+++020
+#INSERT(%RYB112DataLang00)
 #INSERT(%RYB112CompLang00)
 #INSERT(%RYB112CompLang01)
 #INSERT(%RYB010TabDocumentation)
@@ -199,6 +218,9 @@
 #ATSTART
 #SET(%BegDate, TODAY())                     #! Begin date
 #SET(%BegTime, CLOCK())                     #! Begin time
+#!FREE(%RYB112Includes)                #! 2025.05.17 RA: Clear all entries
+#!CALL(%RYB112DefaultTheIncludes)
+#!INSERT(%RYB112DefaultTheIncludes)    #! 2025.05.17 RA: Call not working
 #!COMMENT(90)
 #COMMENT(%RYB112Comment)
 #!
@@ -213,7 +235,7 @@
 #IF(%RYB112OptExpCSV)
   #SET(%RYB112CsvLocation     , %RYB112CsvDirectory & %RYB112CsvName)
   #CREATE(%RYB112CsvLocation)
-  #INSERT(%RYB112BuildTheCSV)
+#INSERT(%RYB112BuildTheCSV)
   #CLOSE (%RYB112CsvLocation)
   #!RUN('NOTEPAD.EXE "' & %RYB112CsvLocation & '"')
 #ENDIF
@@ -221,10 +243,29 @@
 #IF(%RYB112OptExpTXT)
   #SET(%RYB112TxtLocation     , %RYB112TxtDirectory & %RYB112TxtName)
   #CREATE(%RYB112TxtLocation)
-  #INSERT(%RYB112LoadCsvEntries)
+#INSERT(%RYB112LoadCsvEntries)
   #CLOSE (%RYB112TxtLocation)
   #!RUN('NOTEPAD.EXE "' & %RYB112TxtLocation & '"')
 #ENDIF
+#!
+#!COMMENT(%RYB112CommentXML)
+#IF(%RYB112OptExpXML)
+  #SET(%RYB112XmlLocation     , %RYB112XmlDirectory & %RYB112XmlName)
+  #CREATE(%RYB112XmlLocation)
+#INSERT(%RYB112BuildTheDataXml)
+  #CLOSE (%RYB112XmlLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB112XmlLocation & '"')
+#ENDIF
+#!
+#!COMMENT(%RYB112CommentJSON)
+#IF(%RYB112OptExpJSON)
+  #SET(%RYB112JsonLocation    , %RYB112JsonDirectory & %RYB112JsonName)
+  #CREATE(%RYB112JsonLocation)
+#INSERT(%RYB112BuildTheDataJson)
+  #CLOSE (%RYB112JsonLocation)
+  #!RUN('NOTEPAD.EXE "' & %RYB112JsonLocation & '"')
+#ENDIF
+#!
 #!
 #COMMENT(%RYB112CommentCS)
 #IF(%RYB112OptExpCs)
@@ -305,8 +346,8 @@ _RYB112_ EQUATE(1)
 ! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
 ! -----------------------------------------------------------------
 ! -----------------------------------------------------------------
-!Region EQUATE
-  #SET(%LineShow, ITEMS(%RYB112Includes))
+!region EQUATE
+  #SET(%LineShow, ITEMS(%RYB112Includes) & ' BEGIN EQUATES')
 #! !!! %%LineShow=%LineShow
 #! !!! DISPLAY: Is this correct?
   #SET(%CountEquate, 0)
@@ -323,8 +364,9 @@ _RYB112_ EQUATE(1)
 #!
     #ENDFOR
   #RESUME
-!EndRegion EQUATE
-!Region VALUE
+!endregion EQUATE
+!
+!region VALUE
 !                                         1234567890123456
   #SET(%CountEquate, 0)
   #SUSPEND
@@ -338,8 +380,9 @@ _RYB112_ EQUATE(1)
     #ENDFOR
   #RESUME
 !                                         1234567890123456
-!EndRegion VALUE
-!Region DESCRIPTION
+!endregion VALUE
+!
+!region DESCRIPTION
   #SET(%CountEquate, 0)
   #SUSPEND
     #FOR (%RYB112Includes)
@@ -351,7 +394,7 @@ _RYB112_ EQUATE(1)
 #!
     #ENDFOR
   #RESUME
-!EndRegion DESCRIPTION
+!endregion DESCRIPTION
 !
 !EOF
 !  _EndOfInclude_
@@ -451,6 +494,123 @@ _RYB112_ EQUATE(1)
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
+#GROUP(%RYB112DataLang00)
+#TAB('XML/JSON')
+  #BOXED('Languages'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create XML (XML) from existing entries?'              , CHECK), %RYB112OptExpXML, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create JSON (JSON) from existing entries?'            , CHECK), %RYB112OptExpJSON, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Global Generators'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB112Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #ENABLE(%RYB112OptExpXML)
+    #BOXED('XML Data'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #!PROMPT('Comment starts at position: '  ,@N8)           , %RYB112CommentXML      , REQ   , DEFAULT(150) , AT(220,,80)
+      #!DISPLAY(''),AT(,,,1)
+      #PROMPT('XML Directory: '     ,@S120)   , %RYB112XmlDirectory  , REQ   , DEFAULT('.\DataSources\Temp\') , AT(100,,344)
+      #PROMPT('XML Name: '          ,@S120)   , %RYB112XmlName       , REQ   , DEFAULT('RYB112_EQUATES.XML')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB112XmlLocation     , %RYB112XmlDirectory & %RYB112XmlName)
+      #ENDPREPARE
+      #PROMPT('XML Location: '  ,@S120),%RYB112XmlLocation    ,REQ,DEFAULT(%RYB112XmlLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+    #!
+    #ENABLE(%RYB112OptExpJSON)
+    #BOXED('JSON Data'),AT(,,446)
+      #!DISPLAY(''),AT(,,,1)
+      #!PROMPT('Comment starts at position: '  ,@N8)           , %RYB112CommentJSON     , REQ   , DEFAULT(140) , AT(220,,80)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('JSON Directory: '    ,@S120)   , %RYB112JsonDirectory , REQ   , DEFAULT('.\DataSources\Temp\') , AT(100,,344)
+      #PROMPT('JSON Name: '         ,@S120)   , %RYB112JsonName      , REQ   , DEFAULT('RYB112_EQUATES.JSON') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB112JsonLocation    , %RYB112JsonDirectory & %RYB112JsonName)
+      #ENDPREPARE
+      #PROMPT('JSON Location: '  ,@S120),%RYB112JsonLocation  ,REQ,DEFAULT(%RYB112JsonLocation)  ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+    #ENDBOXED
+    #ENDENABLE
+  #ENDBOXED
+  #!
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB112BuildTheDataXml)
+#!
+#SET(%LineWork, '<?xml version="1.0"?>')
+%LineWork
+#!
+#SET(%LineWork, '<FILE>')
+%LineWork
+  #SET(%LineShow, ITEMS(%RYB112Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB112Includes)
+#!
+#! !!! %%RYB112Includes=%RYB112Includes, %%RYB112Number=%RYB112Number, %%RYB112Code=%RYB112Code, %%RYB112Value=%RYB112Value
+#! !!! %%RYB112Descr=%RYB112Descr
+#SET(%LineWork, '  <RECORD>')
+%LineWork
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '    <' & %RYB112TableID & '>' & %CountEquate & '</' & %RYB112TableID & '>')
+%LineWork
+#SET(%LineWork, '    <' & %RYB112TablePrefix & '>' & CLIP(%RYB112Value) & '</' & %RYB112TablePrefix & '>')
+%LineWork
+#SET(%LineWork, '    <' & %RYB112TableDescr & '>' & CLIP(%RYB112Descr) & '</' & %RYB112TableDescr & '>')
+%LineWork
+#SET(%LineWork, '  </RECORD>')
+%LineWork
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '</FILE>')
+%LineWork
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB112BuildTheDataJson)
+#!
+#SET(%LineWork, '{')
+%LineWork
+#SET(%LineWork, '  "FILE": {')
+%LineWork
+#SET(%LineWork, '     "RECORD": [')
+%LineWork
+  #SET(%LineShow, ITEMS(%RYB112Includes))
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB112Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '      {')
+%LineWork
+#SET(%LineWork, '        "' & %RYB112TableID & '": ' & %CountEquate & ',')
+%LineWork
+#SET(%LineWork, '        "' & %RYB112TablePrefix & '": "' & CLIP(%RYB112Value) & '",')
+%LineWork
+#SET(%LineWork, '        "' & %RYB112TableDescr & '": "' & CLIP(%RYB112Descr) & '"')
+%LineWork
+      #IF(%CountEquate < ITEMS(%RYB112Includes))
+#SET(%LineWork, '      },')
+%LineWork
+      #ELSE
+#SET(%LineWork, '      }')
+%LineWork
+      #ENDIF
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '    ]')
+%LineWork
+#SET(%LineWork, '  }')
+%LineWork
+#SET(%LineWork, '}')
+%LineWork
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
 #GROUP(%RYB112CompLang00)
 #TAB('CS/PY')
   #BOXED('Languages'),AT(,,456)
@@ -515,9 +675,8 @@ _RYB112_ EQUATE(1)
 #SET(%LineWork, '#region EQUATES')
 %LineWork
 #!
-  #SET(%LineShow, ITEMS(%RYB112Includes))
+  #SET(%LineShow, ITEMS(%RYB112Includes) & ' BEGIN EQUATES')
 #! !!! %%LineShow=%LineShow
-#! !!! DISPLAY: Is this correct?
   #SET(%CountEquate, 0)
   #SUSPEND
     #FOR (%RYB112Includes)
@@ -619,7 +778,7 @@ _RYB112_ EQUATE(1)
 %LineWork
 #SET(%LineWork, '#region EQUATES')
 %LineWork
-  #SET(%LineShow, ITEMS(%RYB112Includes))
+  #SET(%LineShow, ITEMS(%RYB112Includes) & ' BEGIN EQUATES')
 #! !!! %%LineShow=%LineShow
 #! !!! DISPLAY: Is this correct?
   #SET(%CountEquate, 0)
@@ -756,7 +915,7 @@ _RYB112_ EQUATE(1)
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
 //
-  #SET(%LineShow, ITEMS(%RYB112Includes))
+  #SET(%LineShow, ITEMS(%RYB112Includes) & ' BEGIN EQUATES')
 #! !!! %%LineShow=%LineShow
 #! !!! DISPLAY: Is this correct?
 #SET(%LineWork, '//#region EQUATES')
@@ -845,7 +1004,7 @@ _RYB112_ EQUATE(1)
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
 //
-  #SET(%LineShow, ITEMS(%RYB112Includes))
+  #SET(%LineShow, ITEMS(%RYB112Includes) & ' BEGIN EQUATES')
 #! !!! %%LineShow=%LineShow
 #! !!! DISPLAY: Is this correct?
 #SET(%LineWork, '//#region EQUATES')
@@ -957,7 +1116,9 @@ _RYB112_ EQUATE(1)
   #SET(%RYB112Docs03, %RYB112Docs03 & '' & %RYB112TsLocation & '<9>( TypeScript )<13><10>')
   #SET(%RYB112Docs03, %RYB112Docs03 & '' & %RYB112JsLocation & '<9>( JavaScript )<13><10>')
   #SET(%RYB112Docs03, %RYB112Docs03 & '<13><10>')
-  #SET(%RYB112Docs03, %RYB112Docs03 & '' & %RYB112CsvLocation & '<9>( EQUATE Data )<13><10>')
+  #SET(%RYB112Docs03, %RYB112Docs03 & '' & %RYB112CsvLocation & '<9>( RAW Data )<13><10>')
+  #SET(%RYB112Docs03, %RYB112Docs03 & '' & %RYB112XmlLocation & '<9>( XML Data )<13><10>')
+  #SET(%RYB112Docs03, %RYB112Docs03 & '' & %RYB112JsonLocation & '<9>( JSON Data )<13><10>')
   #SET(%RYB112Docs03, %RYB112Docs03 & '<13><10>')
   #SET(%RYB112Docs03, %RYB112Docs03 & 'Any number of computer languages can be generated depending on requirements.')
   #SET(%RYB112Docs03, %RYB112Docs03 & ' The only computer language generated by default is Clarion.')
@@ -1027,6 +1188,8 @@ _RYB112_ EQUATE(1)
 #SET(%LineShow, ITEMS(%RYB112Includes))
 #! !!! %%LineShow=%LineShow
 #! !!! #FREE: Is this correct?
+#!SET(%LineNext, '!!! %RYB112DefaultTheIncludes: CLEARED TABLE=[ ' & ITEMS(%RYB112Includes) & ' ] [A]')
+#!ERROR(%LineNext)
 #!
 #ADD(%RYB112Includes   , ITEMS(%RYB112Includes) + 1)
 #SET(%RYB112Number     , ITEMS(%RYB112Includes))
@@ -1561,6 +1724,8 @@ _RYB112_ EQUATE(1)
 #SET(%LineShow, ITEMS(%RYB112Includes) & ' AFTER ADD')
 #! !!! %%LineShow=%LineShow
 #! !!! ADD: Is this correct?
+#!SET(%LineNext, '!!! %RYB112DefaultTheIncludes: ITEMS IN TABLE=[ ' & ITEMS(%RYB112Includes) & ' ] [Z]')
+#!ERROR(%LineNext)
 #RETURN
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
