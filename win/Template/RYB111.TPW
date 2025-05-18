@@ -115,7 +115,7 @@
   #BOXED('Global Includes'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
-    #BOXED(''),AT(,,446)
+    #BOXED('Clarion Source'),AT(,,446)
       #PROMPT('Directory: '   ,@S120)   , %RYB111Directory           , REQ   , DEFAULT('.\Generators\Temp\') , AT(100,,344)
       #PROMPT('Name: '        ,@S120)   , %RYB111TableName           , REQ   , DEFAULT('RYB111_EQUATES.EQU') , AT(100,,344)
       #PROMPT('Equate: '      ,@S120)   , %RYB111TableID             , REQ   , DEFAULT('RYB111_EQUATE_')     , AT(100,,344)
@@ -134,13 +134,14 @@
 #!
 #PREPARE
   #CALL(%RYB111DefaultTheIncludes)
+  #!INSERT(%RYB111DefaultTheIncludes)    #! 2025.05.17 RA: Call not working
 #ENDPREPARE
 #!+++
 #TAB('Equates')
   #!BOXED(''),AT(,,280)
-  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
+  #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension) & ' [' & ITEMS(%RYB111Includes) & ']'),AT(,,454),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
     #DISPLAY(''),AT(,,,1)
-    #BUTTON('File name'),MULTI(%RYB111Includes, '(' & FORMAT(%RYB111Number,@N03) & ') ' & %RYB111Code & ' :: ' & %RYB111Value & ' :: ' & %RYB111Descr & ' ::'),INLINE,AT(,,,150)
+    #BUTTON('File name'),MULTI(%RYB111Includes, '(' & FORMAT(%RYB111Number,@N03) & ') ' & %RYB111Code & ' :: ' & %RYB111Value & ' :: ' & %RYB111Descr & ' ::'),INLINE,AT(,,,250)
     #INSERT(%PreambleRYB)
       #!BOXED('Table Item'),AT(,,288)
       #BOXED(UPPER(%Application) & '.' & UPPER(%ProgramExtension)),AT(,,462),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H)
@@ -154,8 +155,8 @@
   #ENDBOXED
 #ENDTAB
 #!
-#TAB('Documents')
-  #BOXED('Options'),AT(,,456)
+#TAB('CSV/TXT')
+  #BOXED('Data Sources'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB111OptExpCSV, DEFAULT(1)  , AT(10)
     #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB111OptExpTXT, DEFAULT(0)  , AT(10)
@@ -164,7 +165,7 @@
   #BOXED('Documents'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
-    #BOXED('Export'),AT(,,446)
+    #BOXED('CSV Data (Export)'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('CSV Directory: '     ,@S120)   , %RYB111CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
       #PROMPT('CSV Name: '          ,@S120)   , %RYB111CsvName       , REQ   , DEFAULT('RYB111_EQUATES.CSV')  , AT(100,,344)
@@ -174,7 +175,7 @@
       #PROMPT('CSV Location: '  ,@S120),%RYB111CsvLocation    ,REQ,DEFAULT(%RYB111CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
-    #BOXED('Import'),AT(,,446)
+    #BOXED('TXT Data (Import)'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB111TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
       #PROMPT('TXT Name: '          ,@S120)   , %RYB111TxtName       , REQ   , DEFAULT('RYB111_ENTRIES.TXT')  , AT(100,,344)
@@ -187,6 +188,7 @@
   #ENDBOXED
 #ENDTAB
 #!
+#INSERT(%RYB111DataLang00)
 #INSERT(%RYB111CompLang00)
 #INSERT(%RYB111CompLang01)
 #INSERT(%RYB010TabDocumentation)
@@ -208,7 +210,7 @@
 #IF(%RYB111OptExpCSV)
   #SET(%RYB111CsvLocation     , %RYB111CsvDirectory & %RYB111CsvName)
   #CREATE(%RYB111CsvLocation)
-  #INSERT(%RYB111BuildTheCSV)
+#INSERT(%RYB111BuildTheCSV)
   #CLOSE (%RYB111CsvLocation)
   #RUN('NOTEPAD.EXE "' & %RYB111CsvLocation & '"')
 #ENDIF
@@ -216,10 +218,29 @@
 #IF(%RYB111OptExpTXT)
   #SET(%RYB111TxtLocation     , %RYB111TxtDirectory & %RYB111TxtName)
   #CREATE(%RYB111TxtLocation)
-  #INSERT(%RYB111LoadCsvEntries)
+#INSERT(%RYB111LoadCsvEntries)
   #CLOSE (%RYB111TxtLocation)
   #RUN('NOTEPAD.EXE "' & %RYB111TxtLocation & '"')
 #ENDIF
+#!
+#!COMMENT(%RYB111CommentXML)
+#IF(%RYB111OptExpXML)
+  #SET(%RYB111XmlLocation     , %RYB111XmlDirectory & %RYB111XmlName)
+  #CREATE(%RYB111XmlLocation)
+#INSERT(%RYB111BuildTheDataXml)
+  #CLOSE (%RYB111XmlLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB111XmlLocation & '"')
+#ENDIF
+#!
+#!COMMENT(%RYB111CommentJSON)
+#IF(%RYB111OptExpJSON)
+  #SET(%RYB111JsonLocation    , %RYB111JsonDirectory & %RYB111JsonName)
+  #CREATE(%RYB111JsonLocation)
+#INSERT(%RYB111BuildTheDataJson)
+  #CLOSE (%RYB111JsonLocation)
+  #RUN('NOTEPAD.EXE "' & %RYB111JsonLocation & '"')
+#ENDIF
+#!
 #!
 #COMMENT(%RYB111CommentCS)
 #IF(%RYB111OptExpCs)
@@ -445,11 +466,128 @@ _RYB111_ EQUATE(1)
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
 #!---------------------------------------------------------------------
+#GROUP(%RYB111DataLang00)
+#TAB('XML/JSON')
+  #BOXED('Data Sources'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #PROMPT ('Create XML (XML) from existing entries?'              , CHECK), %RYB111OptExpXML, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create JSON (JSON) from existing entries?'            , CHECK), %RYB111OptExpJSON, DEFAULT(0)  , AT(10)
+  #ENDBOXED
+  #!
+  #BOXED('Global Generators'),AT(,,456)
+    #DISPLAY(''),AT(,,,1)
+    #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #ENABLE(%RYB111OptExpXML)
+    #BOXED('XML Data'),AT(,,446)
+      #DISPLAY(''),AT(,,,1)
+      #!PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentXML      , REQ   , DEFAULT(150) , AT(220,,80)
+      #!DISPLAY(''),AT(,,,1)
+      #PROMPT('XML Directory: '     ,@S120)   , %RYB111XmlDirectory  , REQ   , DEFAULT('.\DataSources\Temp\') , AT(100,,344)
+      #PROMPT('XML Name: '          ,@S120)   , %RYB111XmlName       , REQ   , DEFAULT('RYB111_EQUATES.XML')  , AT(100,,344)
+      #PREPARE
+        #SET(%RYB111XmlLocation     , %RYB111XmlDirectory & %RYB111XmlName)
+      #ENDPREPARE
+      #PROMPT('XML Location: '  ,@S120),%RYB111XmlLocation    ,REQ,DEFAULT(%RYB111XmlLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+      #DISPLAY(''),AT(,,,1)
+    #ENDBOXED
+    #ENDENABLE
+    #!
+    #ENABLE(%RYB111OptExpJSON)
+    #BOXED('JSON Data'),AT(,,446)
+      #!DISPLAY(''),AT(,,,1)
+      #!PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentJSON     , REQ   , DEFAULT(140) , AT(220,,80)
+      #DISPLAY(''),AT(,,,1)
+      #PROMPT('JSON Directory: '    ,@S120)   , %RYB111JsonDirectory , REQ   , DEFAULT('.\DataSources\Temp\') , AT(100,,344)
+      #PROMPT('JSON Name: '         ,@S120)   , %RYB111JsonName      , REQ   , DEFAULT('RYB111_EQUATES.JSON') , AT(100,,344)
+      #PREPARE
+        #SET(%RYB111JsonLocation    , %RYB111JsonDirectory & %RYB111JsonName)
+      #ENDPREPARE
+      #PROMPT('JSON Location: '  ,@S120),%RYB111JsonLocation  ,REQ,DEFAULT(%RYB111JsonLocation)  ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
+    #ENDBOXED
+    #ENDENABLE
+  #ENDBOXED
+  #!
+#ENDTAB
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111BuildTheDataXml)
+#!
+#SET(%LineWork, '<?xml version="1.0"?>')
+%LineWork
+#!
+#SET(%LineWork, '<FILE>')
+%LineWork
+  #SET(%LineShow, ITEMS(%RYB111Includes))
+#! !!! %%LineShow=%LineShow
+#! !!! DISPLAY: Is this correct?
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+#!
+#! !!! %%RYB111Includes=%RYB111Includes, %%RYB111Number=%RYB111Number, %%RYB111Code=%RYB111Code, %%RYB111Value=%RYB111Value
+#! !!! %%RYB111Descr=%RYB111Descr
+#SET(%LineWork, '  <RECORD>')
+%LineWork
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '    <' & %RYB111TableID & '>' & %CountEquate & '</' & %RYB111TableID & '>')
+%LineWork
+#SET(%LineWork, '    <' & %RYB111TablePrefix & '>' & CLIP(%RYB111Value) & '</' & %RYB111TablePrefix & '>')
+%LineWork
+#SET(%LineWork, '    <' & %RYB111TableDescr & '>' & CLIP(%RYB111Descr) & '</' & %RYB111TableDescr & '>')
+%LineWork
+#SET(%LineWork, '  </RECORD>')
+%LineWork
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '</FILE>')
+%LineWork
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#GROUP(%RYB111BuildTheDataJson)
+#!
+#SET(%LineWork, '{')
+%LineWork
+#SET(%LineWork, '  "FILE": {')
+%LineWork
+#SET(%LineWork, '    "RECORD": [')
+%LineWork
+  #SET(%LineShow, ITEMS(%RYB111Includes))
+  #SET(%CountEquate, 0)
+  #SUSPEND
+    #FOR (%RYB111Includes)
+      #SET(%CountEquate, %CountEquate + 1)
+#SET(%LineWork, '      {')
+%LineWork
+#SET(%LineWork, '        "' & %RYB111TableID & '": ' & %CountEquate & ',')
+%LineWork
+#SET(%LineWork, '        "' & %RYB111TablePrefix & '": "' & CLIP(%RYB111Value) & '",')
+%LineWork
+#SET(%LineWork, '        "' & %RYB111TableDescr & '": "' & CLIP(%RYB111Descr) & '"')
+%LineWork
+      #IF(%CountEquate < ITEMS(%RYB111Includes))
+#SET(%LineWork, '      },')
+%LineWork
+      #ELSE
+#SET(%LineWork, '      }')
+%LineWork
+      #ENDIF
+    #ENDFOR
+  #RESUME
+#SET(%LineWork, '    ]')
+%LineWork
+#SET(%LineWork, '  }')
+%LineWork
+#SET(%LineWork, '}')
+%LineWork
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
+#!---------------------------------------------------------------------
 #GROUP(%RYB111CompLang00)
 #TAB('CS/PY')
-  #BOXED('Languages'),AT(,,456)
+  #BOXED('Computer Languages'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #PROMPT ('Create .NET (CS) from existing entries?'              , CHECK), %RYB111OptExpCS, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create CSharp (CS) from existing entries?'            , CHECK), %RYB111OptExpCS, DEFAULT(0)  , AT(10)
     #PROMPT ('Create Python (PY) from existing entries?'            , CHECK), %RYB111OptExpPY, DEFAULT(0)  , AT(10)
   #ENDBOXED
   #!
@@ -457,7 +595,7 @@ _RYB111_ EQUATE(1)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
     #ENABLE(%RYB111OptExpCS)
-    #BOXED('CS Source'),AT(,,446)
+    #BOXED('CSharp Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentCS       , REQ   , DEFAULT(150) , AT(220,,80)
       #DISPLAY(''),AT(,,,1)
@@ -472,7 +610,7 @@ _RYB111_ EQUATE(1)
     #ENDENABLE
     #!
     #ENABLE(%RYB111OptExpPY)
-    #BOXED('PY Source'),AT(,,446)
+    #BOXED('Python Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentPY       , REQ   , DEFAULT(140) , AT(220,,80)
       #DISPLAY(''),AT(,,,1)
@@ -690,7 +828,7 @@ _RYB111_ EQUATE(1)
 #!---------------------------------------------------------------------
 #GROUP(%RYB111CompLang01)
 #TAB('TS/JS')
-  #BOXED('Languages'),AT(,,456)
+  #BOXED('Computer Languages'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #PROMPT ('Create TypeScript (TS) from existing entries?'         , CHECK), %RYB111OptExpTS, DEFAULT(0)  , AT(10)
     #PROMPT ('Create Javascript (JS) from existing entries?'         , CHECK), %RYB111OptExpJS, DEFAULT(0)  , AT(10)
@@ -700,7 +838,7 @@ _RYB111_ EQUATE(1)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB111Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
     #ENABLE(%RYB111OptExpTS)
-    #BOXED('Documents'),AT(,,446)
+    #BOXED('TypeScript Source'),AT(,,446)
      #DISPLAY(''),AT(,,,1)
       #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentTS       , REQ   , DEFAULT(150) , AT(220,,80)
       #DISPLAY(''),AT(,,,1)
@@ -715,7 +853,7 @@ _RYB111_ EQUATE(1)
     #ENDENABLE
     #!
     #ENABLE(%RYB111OptExpJS)
-    #BOXED('Source'),AT(,,446)
+    #BOXED('JavaScript Source'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('Comment starts at position: '  ,@N8)           , %RYB111CommentJS       , REQ   , DEFAULT(150) , AT(220,,80)
       #DISPLAY(''),AT(,,,1)
@@ -951,7 +1089,9 @@ _RYB111_ EQUATE(1)
   #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111TsLocation & '<9>( TypeScript )<13><10>')
   #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111JsLocation & '<9>( JavaScript )<13><10>')
   #SET(%RYB111Docs03, %RYB111Docs03 & '<13><10>')
-  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111CsvLocation & '<9>( EQUATE Data )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111CsvLocation & '<9>( RAW Data )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111XmlLocation & '<9>( XML Data )<13><10>')
+  #SET(%RYB111Docs03, %RYB111Docs03 & '' & %RYB111JsonLocation & '<9>( JSON Data )<13><10>')
   #SET(%RYB111Docs03, %RYB111Docs03 & '<13><10>')
   #SET(%RYB111Docs03, %RYB111Docs03 & 'Any number of computer languages can be generated depending on requirements.')
   #SET(%RYB111Docs03, %RYB111Docs03 & ' The only computer language generated by default is Clarion.')
