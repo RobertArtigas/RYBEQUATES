@@ -30,7 +30,7 @@
 #ENDBOXED
 #!
 #GROUP(%RYB023License)
-#TAB('CONTINENT'),PROP(PROP:FontStyle,700)
+#TAB('ADMIN 1'),PROP(PROP:FontStyle,700)
   #INSERT(%RYB023Copyright) 
   #INSERT(%MITLicenseRYB)
   #!INSERT(%ClarionFamily)              #! RA.2023.09.04: Not for utilities
