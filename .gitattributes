@@ -1,3 +1,5 @@
+# 2025.05.05
+
 # https://help.github.com/articles/dealing-with-line-endings
 
 # Set the default behavior, in case people don't have core.autocrlf set.
@@ -5,58 +7,86 @@
 
 # Explicitly declare text files you want to always be normalized and converted
 # to native line endings on checkout.
-*.clw text
-*.inc text
-*.int text
-*.cwproj text
-*.sln text
+*.[Cc][Ll][Ww] text
+*.[Ii][Nn][Cc] text
+*.[Ii][Nn][Tt] text
+*.[Cc][Ww][Pp][Rr][Oo][Jj] text
+*.[Ss][Ll][Nn] text
+
 # Version control files 
-*.apv text
-*.dcv text
+*.[Aa][Pp][Vv] text
+*.[Dd][Cc][Vv] text
 
 # Declare files that will always have CRLF line endings on checkout.
-*.sln text eol=crlf
+*.[Ss][Ll][Nn] text eol=crlf
 
 # Denote all files that are truly binary and should not be modified.
-*.app binary
-*.bct binary
-*.bmp binary
-*.bpp binary
-*.chm binary
-*.dat binary
-*.dct binary
-*.dll binary
-*.exe binary
-*.gif binary
-*.hlp binary
-*.ico binary
-*.jpg binary
-*.lib binary
-*.png binary
-*.sbp binary
-*.tps binary
-*.zip binary
-
-
-*.[Tt][Pp][Ss] binary
 *.[Aa][Pp][Pp] binary
-*.[Dd][Cc][Tt] binary 
-
-
+*.[Dd][Cc][Tt] binary
+*.[Dd][Ll][Ll] binary
+*.[Ee][Xx][Ee] binary
+*.[Ll][Ii][Bb] binary
+*.[Bb][Mm][Pp] binary
+*.[Cc][Uu][Rr] binary
+*.[Gg][Ii][Ff] binary
+*.[Ii][Cc][Oo] binary
+*.[Jj][Pp][Gg] binary
+*.[Pp][Nn][Gg] binary
+*.[Ss][Bb][Pp] binary
+*.[Zz][Ii][Pp] binary
+*.[Hh][Ll][Pp] binary
+*.[Cc][Hh][Mm] binary
 
 # Declare help as documentation folder
-help/* linguist-documentation
+[Hh][Ee][Ll][Pp]/* linguist-documentation
 
 # Declare language association
-*.clw linguist-language=Clarion
-*.cwproj linguist-language=Clarion
-*.equ linguist-language=Clarion
-*.inc linguist-language=Clarion
-*.int linguist-language=Clarion
-*.sln linguist-language=Clarion
-*.tpl linguist-language=Clarion
-*.tpw linguist-language=Clarion
-*.txa linguist-language=Clarion
-*.txd linguist-language=Clarion
-.app.BinaryImport linguist-language=Clarion
-.dct.BinaryImport linguist-language=Clarion
+*.[Cc][Ll][Ww] linguist-language=Clarion
+*.[Cc][Ww][Pp][Rr][Oo][Jj] linguist-language=Clarion
+*.[Ee][Qq][Uu] linguist-language=Clarion
+*.[Ii][Nn][Cc] linguist-language=Clarion
+*.[Ii][Nn][Tt] linguist-language=Clarion
+*.[Ss][Ll][Nn] linguist-language=Clarion
+*.[Tt][Pp][Ll] linguist-language=Clarion
+*.[Tt][Pp][Ww] linguist-language=Clarion
+*.[Tt][Xx][Aa] linguist-language=Clarion
+*.[Tt][Xx][Dd] linguist-language=Clarion
+*.[Dd][Cc][Tt][Xx] linguist-language=Clarion
+*.[Aa][Pp][Pp][Xx] linguist-language=Clarion
+
+*.[Pp][Cc][Hh][Aa][Ss][Tt] filter=lfs diff=lfs merge=lfs -text
+*.[Dd][Ll][Ll] filter=lfs diff=lfs merge=lfs -text
+*.[Ee][Xx][Ee] filter=lfs diff=lfs merge=lfs -text
+*.[Pp][Nn][Gg] filter=lfs diff=lfs merge=lfs -text
+*.[Gg][Ii][Ff] filter=lfs diff=lfs merge=lfs -text
+*.[Jj][Pp][Gg] filter=lfs diff=lfs merge=lfs -text
+*.[Ii][Cc][Oo] filter=lfs diff=lfs merge=lfs -text
+*.[Cc][Uu][Rr] filter=lfs diff=lfs merge=lfs -text
+*.[Ll][Ii][Bb] filter=lfs diff=lfs merge=lfs -text
+*.[Ww][Mm][Ff] filter=lfs diff=lfs merge=lfs -text
+*.[Bb][Mm][Pp] filter=lfs diff=lfs merge=lfs -text
+*.[Pp][Dd][Ff] filter=lfs diff=lfs merge=lfs -text
+*.[Tt][Pp][Ss] filter=lfs diff=lfs merge=lfs -text
+*.[Zz][Ii][Pp] filter=lfs diff=lfs merge=lfs -text
+*.[Xx][Ll][Ss][Xx] filter=lfs diff=lfs merge=lfs -text
+*.[Xx][Ll][Ss]* filter=lfs diff=lfs merge=lfs -text
+*.[Aa][Pp][Pp] filter=lfs diff=lfs merge=lfs -text
+*.[Ff][Ll][Tt] filter=lfs diff=lfs merge=lfs -text
+*.[Dd][Oo][Cc] filter=lfs diff=lfs merge=lfs -text
+*.[Dd][Oo][Cc][Xx] filter=lfs diff=lfs merge=lfs -text
+*.[Cc][Dd][Rr] filter=lfs diff=lfs merge=lfs -text
+*.[Oo][Ll][Rr] filter=lfs diff=lfs merge=lfs -text
+*.[Dd][Cc][Tt] filter=lfs diff=lfs merge=lfs -text
+*.[Cc][Oo][Ll] filter=lfs diff=lfs merge=lfs -text
+*.[Cc][Oo][Ll]* filter=lfs diff=lfs merge=lfs -text
+*.[Ii][Dd][Bb] filter=lfs diff=lfs merge=lfs -text
+*.[Rr][Ee][Ss] filter=lfs diff=lfs merge=lfs -text
+*.[Dd][Rr][Ww] filter=lfs diff=lfs merge=lfs -text
+*.[Rr][Tt][Ff] filter=lfs diff=lfs merge=lfs -text
+*.[Ii][Oo][Bb][Jj] filter=lfs diff=lfs merge=lfs -text
+*.[Ii][Dd][Xx] filter=lfs diff=lfs merge=lfs -text
+*.[Tt][Bb][Ll] filter=lfs diff=lfs merge=lfs -text
+*.[Hh][Ll][Pp] filter=lfs diff=lfs merge=lfs -text
+*.[Cc][Hh][Mm] filter=lfs diff=lfs merge=lfs -text
+*.[Dd][Cc][Tt][Xx] filter=lfs diff=lfs merge=lfs -text
+*.[Aa][Pp][Pp][Xx] filter=lfs diff=lfs merge=lfs -text

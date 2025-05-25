@@ -1,62 +1,74 @@
-############
-## Clarion: RAYS
-############
+# 2025.05.05 
 
 ##.gitignore
 ##.gitattributes
 
 *.sublime-workspace
 *.sesion
- 
-_[aA][rR][cC][hH][iI][vV][eE]_
+_[Aa][Rr][Cc][Hh][Ii][Vv][Ee]_
+_[Ff][Ee][Ee][Dd][Bb][Aa][Cc][Kk]_
+_[Bb][Uu][Ii][Ll][Dd]_
 [hH][iI][dD][eE]
 [Tt][eE][mM][pP]
+_[Ss][Qq][Ll]_
+
+# Directories generated during compile
+[Ww][Oo][Rr][Kk][Ii][Nn][Gg]
+[Ss][Oo][Uu][Rr][Cc][Ee]
+[Vv][Ee][Rr]Ss][Ii][Oo]{Nn]
+[Ll][Ii][Bb]
+
+_database_*
+_csv_to_import
+_Clarion_
+Test
+Backup
+Database
+
+#setup
+SetupRYBEQUATES.sb~
+SetupRYBEQUATES.csv
+SetupRYBEQUATES.htm
+
+## generated computer languages
+Clarion
+CSharp
+Python
+TypeScript
+JavaScript
 
 ############
 ## Clarion
-############
-##*.app
-*.ap~
-*.bpp
-*.bct
-*.cache
-**/Cla*.dll
-*.dct
-*.exe
-*.FileList.xml
-*.ini
-*.MAP
-*.EXP
-obj/**
-*/obj/**
-*.obj
-PWEE*.txt
-*.rsc
-*.RSC
-*.images
-*.txa
-*.zip
-
 ############
 *.BAT
 *.SQL
 *.txt
 *.TPS
+*.DAT
 *.SCN
-############
-Backup
-##Classes
-Database
-##IconSets
-##Images
-Lib
-Source
-Version
-Working
-_database_*
-_csv_to_import
-_Clarion_
-Test
+
+*.[Oo][Bb][Jj]
+*.[Rr][Ss][Cc]
+*.[Mm][Aa][Pp]
+*.[Ee][Xx][Pp]
+*.[Bb][Kk][Pp]
+*.[Cc][Ww][Pp][Rr][Oo][Jj].[Ff][Ii][Ll][Ee][Ll][Ii][Ss][Tt].[Xx][Mm][Ll]
+*.[Ff][Ii][Ll][Ee][Ll][Ii][Ss][Tt].[Xx][Mm][Ll]
+*.[Ss][CC][Nn]
+*.[Ll][Nn][Kk]
+*.[Bb][Aa][Kk]
+*.$$$
+*.[Ee][Xx][Ee]
+*.[Dd][Ll][Ll]
+*.[Ii][Nn][Ii]
+*.[Cc][Aa][Cc][Hh][Ee]
+*.[Bb][Pp][Pp]
+*.[Ap][Pp]~
+[Pp][Ww][Ee][Ee]*.[Tt][Xx][Tx]
+**/[Cc][Ll][Aa]*.[Dd[[Ll][Ll]
+[Oo][Bb][Jj]/**
+*/[Oo][Bb][Jj]/**
+*.[Gg][Pp][Ff]
 
 ############
 ## Windows
@@ -64,3 +76,4 @@ Test
 # Windows image file caches
 Thumbs.db
 EC0*
+
