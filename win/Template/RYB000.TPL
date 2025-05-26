@@ -193,7 +193,7 @@
 #INCLUDE('RYB022.TPW')          ! RA.2023.11.25: Extension: Country (EQU,CSV,TXT,IMP)
 #INCLUDE('RYB023.TPW')          ! RA.2023.12.07: Utility:   Admin1 (EQU,CSV,TXT,IMP)
 #INCLUDE('RYB024.TPW')          ! RA.2023.12.07: Extension: Admin1 (EQU,CSV,TXT,IMP)
-#INCLUDE('RYB025.TPW')          ! RA.2023.12.08: Utility:   Admin2 (EQU,CSV,TXT,IMP)
+#!INCLUDE('RYB025.TPW')         ! RA.2023.12.08: Utility:   Admin2 (EQU,CSV,TXT,IMP) [NOT AT THIS TIME]
 #INCLUDE('RYB101.TPW')          ! RA.2018.02.15: Utility:   Entities (EQU,CSV,TXT)
 #INCLUDE('RYB102.TPW')          ! RA.2018.02.15: Extension: Entities (EQU,CSV,TXT)
 #INCLUDE('RYB111.TPW')          ! RA.2018.02.15: Utility:   Create equates RAYS (EQU,CSV,TXT)
