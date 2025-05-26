@@ -47,6 +47,9 @@ JavaScript
 *.DAT
 *.SCN
 
+*.[Tt][Xx][Aa]
+*.[Tt][Xx][Dd]
+
 *.[Oo][Bb][Jj]
 *.[Rr][Ss][Cc]
 *.[Mm][Aa][Pp]
