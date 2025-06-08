@@ -20,7 +20,7 @@ since the original release in those templates. This Template Set contain a bit m
 
 Look at the examples on the [Wiki](https://github.com/RobertArtigas/RYBEQUATES/wiki) documentation. 
 Specially take a look at the [BUSINESS](https://github.com/RobertArtigas/RYBEQUATES/wiki/The-BUSINESS-Equates) equates.
-That example contains five generated computer languages (Clarion, CSharp, Python, TypeScript, JavaScript) and 
+That is the most developed EQUATES example generator containing five generated computer languages (Clarion, CSharp, Python, TypeScript, JavaScript) and 
 three data sources (CSV, XML, JSON). 
 
 
