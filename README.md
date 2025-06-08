@@ -19,7 +19,7 @@ The [RYB Templates](https://github.com/RobertArtigas/RYB/wiki/Equate-Tables) con
 since the original release in those templates. This Template Set contain a bit more sophisticated examples.
 
 Look at the examples on the [Wiki](https://github.com/RobertArtigas/RYBEQUATES/wiki) documentation. 
-Specially take a look at the [BUSINESS](https://github.com/RobertArtigas/RYBEQUATES/wiki/The-BUSINESS-Equates) EQUATES generator template.
+Specially take a look at the [BUSINESS  EQUATES](https://github.com/RobertArtigas/RYBEQUATES/wiki/The-BUSINESS-Equates) generator template.
 That is the most developed EQUATES example generator containing five generated computer languages (Clarion, CSharp, Python, TypeScript, JavaScript) and 
 three data sources (CSV, XML, JSON). 
 
