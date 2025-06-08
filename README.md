@@ -18,7 +18,9 @@ every state executes some code, every state has to be identified, and each ident
 The [RYB Templates](https://github.com/RobertArtigas/RYB/wiki/Equate-Tables) contain a very simple example. The techniques have been improved
 since the original release in those templates. This Template Set contain a bit more sophisticated examples including ...
 
-Not making any sense yet. Look at some of the examples on the [Wiki](https://github.com/RobertArtigas/RYBEQUATES/wiki) documentation.
+Look at the examples on the [Wiki](https://github.com/RobertArtigas/RYBEQUATES/wiki) documentation.
+
+Specially take a look at the [BUSINESS]() 
 
 
 ##
