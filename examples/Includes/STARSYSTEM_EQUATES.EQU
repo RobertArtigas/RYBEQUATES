@@ -1,0 +1,38 @@
+  !ABCIncludeFile
+    OMIT('_EndOfInclude_', _RYB014_)
+  _RYB014_ EQUATE(1)
+  !BOF
+  !
+  ! File:         ..\Includes\Temp\STARSYSTEM_EQUATES.EQU
+  ! Date-Time:    2025/06/13 - 08:49:51PM
+  ! Purpose:      Define global table includes for applications
+  ! Author:       Copyright © 2023-2025 by Roberto Artigas y Soler
+  !               All Rights Reserved World Wide.
+  !               MIT License.
+  !
+  ! -----------------------------------------------------------------
+  ! -----------------------------------------------------------------
+  ! The EQUATES ---might--- have cross uses in other areas in the architecture.
+  ! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+  ! -----------------------------------------------------------------
+  ! -----------------------------------------------------------------
+  !Region EQUATE
+  STAR_EQUATE_FIRST                 EQUATE(001)                                          !001: First Entry
+  STAR_EQUATE_SOL                   EQUATE(002)                                          !002: Solar System
+  STAR_EQUATE_LAST                  EQUATE(003)                                          !003: Last Entry
+  !EndRegion EQUATE
+  !Region VALUE
+  !                                         1234567890123456
+  STAR_VALUE_FIRST                  EQUATE('----------------')                           !001: First Entry
+  STAR_VALUE_SOL                    EQUATE('SOL')                                        !002: Solar System
+  STAR_VALUE_LAST                   EQUATE('~~~~~~~~~~~~~~~~')                           !003: Last Entry
+  !                                         1234567890123456
+  !EndRegion VALUE
+  !Region DESCRIPTION
+  STAR_DESCR_FIRST                  EQUATE('First Entry')                                !001: First Entry
+  STAR_DESCR_SOL                    EQUATE('Solar System')                               !002: Solar System
+  STAR_DESCR_LAST                   EQUATE('Last Entry')                                 !003: Last Entry
+  !EndRegion DESCRIPTION
+  !
+  !EOF
+  !  _EndOfInclude_

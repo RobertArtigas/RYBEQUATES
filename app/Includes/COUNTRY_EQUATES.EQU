@@ -1,0 +1,785 @@
+!ABCIncludeFile
+  OMIT('_EndOfInclude_', _RYB022_)
+_RYB022_ EQUATE(1)
+!BOF
+!
+! File:         ..\Includes\Temp\COUNTRY_EQUATES.EQU
+! Date-Time:    2025/06/13 - 08:49:51PM
+! Purpose:      Define global table includes for applications
+! Author:       Copyright © 2023-2025 by Roberto Artigas y Soler
+!               All Rights Reserved World Wide.
+!               MIT License.
+!
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+! The EQUATES ---might--- have cross uses in other areas in the architecture.
+! IMPORTANT: Please NOTE that the equates are sync'ed up in the same order.
+! -----------------------------------------------------------------
+! -----------------------------------------------------------------
+!Region EQUATE
+COUNTRY_EQUATE_AND                EQUATE(001)                                            !001: Andorra
+COUNTRY_EQUATE_ARE                EQUATE(002)                                            !002: United Arab Emirates
+COUNTRY_EQUATE_AFG                EQUATE(003)                                            !003: Afghanistan
+COUNTRY_EQUATE_ATG                EQUATE(004)                                            !004: Antigua and Barbuda
+COUNTRY_EQUATE_AIA                EQUATE(005)                                            !005: Anguilla
+COUNTRY_EQUATE_ALB                EQUATE(006)                                            !006: Albania
+COUNTRY_EQUATE_ARM                EQUATE(007)                                            !007: Armenia
+COUNTRY_EQUATE_AGO                EQUATE(008)                                            !008: Angola
+COUNTRY_EQUATE_ATA                EQUATE(009)                                            !009: Antarctica
+COUNTRY_EQUATE_ARG                EQUATE(010)                                            !010: Argentina
+COUNTRY_EQUATE_ASM                EQUATE(011)                                            !011: American Samoa
+COUNTRY_EQUATE_AUT                EQUATE(012)                                            !012: Austria
+COUNTRY_EQUATE_AUS                EQUATE(013)                                            !013: Australia
+COUNTRY_EQUATE_ABW                EQUATE(014)                                            !014: Aruba
+COUNTRY_EQUATE_ALA                EQUATE(015)                                            !015: Aland Islands
+COUNTRY_EQUATE_AZE                EQUATE(016)                                            !016: Azerbaijan
+COUNTRY_EQUATE_BIH                EQUATE(017)                                            !017: Bosnia and Herzegovina
+COUNTRY_EQUATE_BRB                EQUATE(018)                                            !018: Barbados
+COUNTRY_EQUATE_BGD                EQUATE(019)                                            !019: Bangladesh
+COUNTRY_EQUATE_BEL                EQUATE(020)                                            !020: Belgium
+COUNTRY_EQUATE_BFA                EQUATE(021)                                            !021: Burkina Faso
+COUNTRY_EQUATE_BGR                EQUATE(022)                                            !022: Bulgaria
+COUNTRY_EQUATE_BHR                EQUATE(023)                                            !023: Bahrain
+COUNTRY_EQUATE_BDI                EQUATE(024)                                            !024: Burundi
+COUNTRY_EQUATE_BEN                EQUATE(025)                                            !025: Benin
+COUNTRY_EQUATE_BLM                EQUATE(026)                                            !026: Saint Barthelemy
+COUNTRY_EQUATE_BMU                EQUATE(027)                                            !027: Bermuda
+COUNTRY_EQUATE_BRN                EQUATE(028)                                            !028: Brunei
+COUNTRY_EQUATE_BOL                EQUATE(029)                                            !029: Bolivia
+COUNTRY_EQUATE_BES                EQUATE(030)                                            !030: Bonaire, Saint Eustatius and Saba 
+COUNTRY_EQUATE_BRA                EQUATE(031)                                            !031: Brazil
+COUNTRY_EQUATE_BHS                EQUATE(032)                                            !032: Bahamas
+COUNTRY_EQUATE_BTN                EQUATE(033)                                            !033: Bhutan
+COUNTRY_EQUATE_BVT                EQUATE(034)                                            !034: Bouvet Island
+COUNTRY_EQUATE_BWA                EQUATE(035)                                            !035: Botswana
+COUNTRY_EQUATE_BLR                EQUATE(036)                                            !036: Belarus
+COUNTRY_EQUATE_BLZ                EQUATE(037)                                            !037: Belize
+COUNTRY_EQUATE_CAN                EQUATE(038)                                            !038: Canada
+COUNTRY_EQUATE_CCK                EQUATE(039)                                            !039: Cocos Islands
+COUNTRY_EQUATE_COD                EQUATE(040)                                            !040: Democratic Republic of the Congo
+COUNTRY_EQUATE_CAF                EQUATE(041)                                            !041: Central African Republic
+COUNTRY_EQUATE_COG                EQUATE(042)                                            !042: Republic of the Congo
+COUNTRY_EQUATE_CHE                EQUATE(043)                                            !043: Switzerland
+COUNTRY_EQUATE_CIV                EQUATE(044)                                            !044: Ivory Coast
+COUNTRY_EQUATE_COK                EQUATE(045)                                            !045: Cook Islands
+COUNTRY_EQUATE_CHL                EQUATE(046)                                            !046: Chile
+COUNTRY_EQUATE_CMR                EQUATE(047)                                            !047: Cameroon
+COUNTRY_EQUATE_CHN                EQUATE(048)                                            !048: China
+COUNTRY_EQUATE_COL                EQUATE(049)                                            !049: Colombia
+COUNTRY_EQUATE_CRI                EQUATE(050)                                            !050: Costa Rica
+COUNTRY_EQUATE_CUB                EQUATE(051)                                            !051: Cuba
+COUNTRY_EQUATE_CPV                EQUATE(052)                                            !052: Cabo Verde
+COUNTRY_EQUATE_CUW                EQUATE(053)                                            !053: Curacao
+COUNTRY_EQUATE_CXR                EQUATE(054)                                            !054: Christmas Island
+COUNTRY_EQUATE_CYP                EQUATE(055)                                            !055: Cyprus
+COUNTRY_EQUATE_CZE                EQUATE(056)                                            !056: Czechia
+COUNTRY_EQUATE_DEU                EQUATE(057)                                            !057: Germany
+COUNTRY_EQUATE_DJI                EQUATE(058)                                            !058: Djibouti
+COUNTRY_EQUATE_DNK                EQUATE(059)                                            !059: Denmark
+COUNTRY_EQUATE_DMA                EQUATE(060)                                            !060: Dominica
+COUNTRY_EQUATE_DOM                EQUATE(061)                                            !061: Dominican Republic
+COUNTRY_EQUATE_DZA                EQUATE(062)                                            !062: Algeria
+COUNTRY_EQUATE_ECU                EQUATE(063)                                            !063: Ecuador
+COUNTRY_EQUATE_EST                EQUATE(064)                                            !064: Estonia
+COUNTRY_EQUATE_EGY                EQUATE(065)                                            !065: Egypt
+COUNTRY_EQUATE_ESH                EQUATE(066)                                            !066: Western Sahara
+COUNTRY_EQUATE_ERI                EQUATE(067)                                            !067: Eritrea
+COUNTRY_EQUATE_ESP                EQUATE(068)                                            !068: Spain
+COUNTRY_EQUATE_ETH                EQUATE(069)                                            !069: Ethiopia
+COUNTRY_EQUATE_FIN                EQUATE(070)                                            !070: Finland
+COUNTRY_EQUATE_FJI                EQUATE(071)                                            !071: Fiji
+COUNTRY_EQUATE_FLK                EQUATE(072)                                            !072: Falkland Islands
+COUNTRY_EQUATE_FSM                EQUATE(073)                                            !073: Micronesia
+COUNTRY_EQUATE_FRO                EQUATE(074)                                            !074: Faroe Islands
+COUNTRY_EQUATE_FRA                EQUATE(075)                                            !075: France
+COUNTRY_EQUATE_GAB                EQUATE(076)                                            !076: Gabon
+COUNTRY_EQUATE_GBR                EQUATE(077)                                            !077: United Kingdom
+COUNTRY_EQUATE_GRD                EQUATE(078)                                            !078: Grenada
+COUNTRY_EQUATE_GEO                EQUATE(079)                                            !079: Georgia
+COUNTRY_EQUATE_GUF                EQUATE(080)                                            !080: French Guiana
+COUNTRY_EQUATE_GGY                EQUATE(081)                                            !081: Guernsey
+COUNTRY_EQUATE_GHA                EQUATE(082)                                            !082: Ghana
+COUNTRY_EQUATE_GIB                EQUATE(083)                                            !083: Gibraltar
+COUNTRY_EQUATE_GRL                EQUATE(084)                                            !084: Greenland
+COUNTRY_EQUATE_GMB                EQUATE(085)                                            !085: Gambia
+COUNTRY_EQUATE_GIN                EQUATE(086)                                            !086: Guinea
+COUNTRY_EQUATE_GLP                EQUATE(087)                                            !087: Guadeloupe
+COUNTRY_EQUATE_GNQ                EQUATE(088)                                            !088: Equatorial Guinea
+COUNTRY_EQUATE_GRC                EQUATE(089)                                            !089: Greece
+COUNTRY_EQUATE_SGS                EQUATE(090)                                            !090: South Georgia and the South Sandwich Islands
+COUNTRY_EQUATE_GTM                EQUATE(091)                                            !091: Guatemala
+COUNTRY_EQUATE_GUM                EQUATE(092)                                            !092: Guam
+COUNTRY_EQUATE_GNB                EQUATE(093)                                            !093: Guinea-Bissau
+COUNTRY_EQUATE_GUY                EQUATE(094)                                            !094: Guyana
+COUNTRY_EQUATE_HKG                EQUATE(095)                                            !095: Hong Kong
+COUNTRY_EQUATE_HMD                EQUATE(096)                                            !096: Heard Island and McDonald Islands
+COUNTRY_EQUATE_HND                EQUATE(097)                                            !097: Honduras
+COUNTRY_EQUATE_HRV                EQUATE(098)                                            !098: Croatia
+COUNTRY_EQUATE_HTI                EQUATE(099)                                            !099: Haiti
+COUNTRY_EQUATE_HUN                EQUATE(100)                                            !100: Hungary
+COUNTRY_EQUATE_IDN                EQUATE(101)                                            !101: Indonesia
+COUNTRY_EQUATE_IRL                EQUATE(102)                                            !102: Ireland
+COUNTRY_EQUATE_ISR                EQUATE(103)                                            !103: Israel
+COUNTRY_EQUATE_IMN                EQUATE(104)                                            !104: Isle of Man
+COUNTRY_EQUATE_IND                EQUATE(105)                                            !105: India
+COUNTRY_EQUATE_IOT                EQUATE(106)                                            !106: British Indian Ocean Territory
+COUNTRY_EQUATE_IRQ                EQUATE(107)                                            !107: Iraq
+COUNTRY_EQUATE_IRN                EQUATE(108)                                            !108: Iran
+COUNTRY_EQUATE_ISL                EQUATE(109)                                            !109: Iceland
+COUNTRY_EQUATE_ITA                EQUATE(110)                                            !110: Italy
+COUNTRY_EQUATE_JEY                EQUATE(111)                                            !111: Jersey
+COUNTRY_EQUATE_JAM                EQUATE(112)                                            !112: Jamaica
+COUNTRY_EQUATE_JOR                EQUATE(113)                                            !113: Jordan
+COUNTRY_EQUATE_JPN                EQUATE(114)                                            !114: Japan
+COUNTRY_EQUATE_KEN                EQUATE(115)                                            !115: Kenya
+COUNTRY_EQUATE_KGZ                EQUATE(116)                                            !116: Kyrgyzstan
+COUNTRY_EQUATE_KHM                EQUATE(117)                                            !117: Cambodia
+COUNTRY_EQUATE_KIR                EQUATE(118)                                            !118: Kiribati
+COUNTRY_EQUATE_COM                EQUATE(119)                                            !119: Comoros
+COUNTRY_EQUATE_KNA                EQUATE(120)                                            !120: Saint Kitts and Nevis
+COUNTRY_EQUATE_PRK                EQUATE(121)                                            !121: North Korea
+COUNTRY_EQUATE_KOR                EQUATE(122)                                            !122: South Korea
+COUNTRY_EQUATE_XKX                EQUATE(123)                                            !123: Kosovo
+COUNTRY_EQUATE_KWT                EQUATE(124)                                            !124: Kuwait
+COUNTRY_EQUATE_CYM                EQUATE(125)                                            !125: Cayman Islands
+COUNTRY_EQUATE_KAZ                EQUATE(126)                                            !126: Kazakhstan
+COUNTRY_EQUATE_LAO                EQUATE(127)                                            !127: Laos
+COUNTRY_EQUATE_LBN                EQUATE(128)                                            !128: Lebanon
+COUNTRY_EQUATE_LCA                EQUATE(129)                                            !129: Saint Lucia
+COUNTRY_EQUATE_LIE                EQUATE(130)                                            !130: Liechtenstein
+COUNTRY_EQUATE_LKA                EQUATE(131)                                            !131: Sri Lanka
+COUNTRY_EQUATE_LBR                EQUATE(132)                                            !132: Liberia
+COUNTRY_EQUATE_LSO                EQUATE(133)                                            !133: Lesotho
+COUNTRY_EQUATE_LTU                EQUATE(134)                                            !134: Lithuania
+COUNTRY_EQUATE_LUX                EQUATE(135)                                            !135: Luxembourg
+COUNTRY_EQUATE_LVA                EQUATE(136)                                            !136: Latvia
+COUNTRY_EQUATE_LBY                EQUATE(137)                                            !137: Libya
+COUNTRY_EQUATE_MAR                EQUATE(138)                                            !138: Morocco
+COUNTRY_EQUATE_MCO                EQUATE(139)                                            !139: Monaco
+COUNTRY_EQUATE_MDA                EQUATE(140)                                            !140: Moldova
+COUNTRY_EQUATE_MNE                EQUATE(141)                                            !141: Montenegro
+COUNTRY_EQUATE_MAF                EQUATE(142)                                            !142: Saint Martin
+COUNTRY_EQUATE_MDG                EQUATE(143)                                            !143: Madagascar
+COUNTRY_EQUATE_MHL                EQUATE(144)                                            !144: Marshall Islands
+COUNTRY_EQUATE_MKD                EQUATE(145)                                            !145: North Macedonia
+COUNTRY_EQUATE_MLI                EQUATE(146)                                            !146: Mali
+COUNTRY_EQUATE_MMR                EQUATE(147)                                            !147: Myanmar
+COUNTRY_EQUATE_MNG                EQUATE(148)                                            !148: Mongolia
+COUNTRY_EQUATE_MAC                EQUATE(149)                                            !149: Macao
+COUNTRY_EQUATE_MNP                EQUATE(150)                                            !150: Northern Mariana Islands
+COUNTRY_EQUATE_MTQ                EQUATE(151)                                            !151: Martinique
+COUNTRY_EQUATE_MRT                EQUATE(152)                                            !152: Mauritania
+COUNTRY_EQUATE_MSR                EQUATE(153)                                            !153: Montserrat
+COUNTRY_EQUATE_MLT                EQUATE(154)                                            !154: Malta
+COUNTRY_EQUATE_MUS                EQUATE(155)                                            !155: Mauritius
+COUNTRY_EQUATE_MDV                EQUATE(156)                                            !156: Maldives
+COUNTRY_EQUATE_MWI                EQUATE(157)                                            !157: Malawi
+COUNTRY_EQUATE_MEX                EQUATE(158)                                            !158: Mexico
+COUNTRY_EQUATE_MYS                EQUATE(159)                                            !159: Malaysia
+COUNTRY_EQUATE_MOZ                EQUATE(160)                                            !160: Mozambique
+COUNTRY_EQUATE_NAM                EQUATE(161)                                            !161: Namibia
+COUNTRY_EQUATE_NCL                EQUATE(162)                                            !162: New Caledonia
+COUNTRY_EQUATE_NER                EQUATE(163)                                            !163: Niger
+COUNTRY_EQUATE_NFK                EQUATE(164)                                            !164: Norfolk Island
+COUNTRY_EQUATE_NGA                EQUATE(165)                                            !165: Nigeria
+COUNTRY_EQUATE_NIC                EQUATE(166)                                            !166: Nicaragua
+COUNTRY_EQUATE_NLD                EQUATE(167)                                            !167: The Netherlands
+COUNTRY_EQUATE_NOR                EQUATE(168)                                            !168: Norway
+COUNTRY_EQUATE_NPL                EQUATE(169)                                            !169: Nepal
+COUNTRY_EQUATE_NRU                EQUATE(170)                                            !170: Nauru
+COUNTRY_EQUATE_NIU                EQUATE(171)                                            !171: Niue
+COUNTRY_EQUATE_NZL                EQUATE(172)                                            !172: New Zealand
+COUNTRY_EQUATE_OMN                EQUATE(173)                                            !173: Oman
+COUNTRY_EQUATE_PAN                EQUATE(174)                                            !174: Panama
+COUNTRY_EQUATE_PER                EQUATE(175)                                            !175: Peru
+COUNTRY_EQUATE_PYF                EQUATE(176)                                            !176: French Polynesia
+COUNTRY_EQUATE_PNG                EQUATE(177)                                            !177: Papua New Guinea
+COUNTRY_EQUATE_PHL                EQUATE(178)                                            !178: Philippines
+COUNTRY_EQUATE_PAK                EQUATE(179)                                            !179: Pakistan
+COUNTRY_EQUATE_POL                EQUATE(180)                                            !180: Poland
+COUNTRY_EQUATE_SPM                EQUATE(181)                                            !181: Saint Pierre and Miquelon
+COUNTRY_EQUATE_PCN                EQUATE(182)                                            !182: Pitcairn
+COUNTRY_EQUATE_PRI                EQUATE(183)                                            !183: Puerto Rico
+COUNTRY_EQUATE_PSE                EQUATE(184)                                            !184: Palestinian Territory
+COUNTRY_EQUATE_PRT                EQUATE(185)                                            !185: Portugal
+COUNTRY_EQUATE_PLW                EQUATE(186)                                            !186: Palau
+COUNTRY_EQUATE_PRY                EQUATE(187)                                            !187: Paraguay
+COUNTRY_EQUATE_QAT                EQUATE(188)                                            !188: Qatar
+COUNTRY_EQUATE_REU                EQUATE(189)                                            !189: Reunion
+COUNTRY_EQUATE_ROU                EQUATE(190)                                            !190: Romania
+COUNTRY_EQUATE_SRB                EQUATE(191)                                            !191: Serbia
+COUNTRY_EQUATE_RUS                EQUATE(192)                                            !192: Russia
+COUNTRY_EQUATE_RWA                EQUATE(193)                                            !193: Rwanda
+COUNTRY_EQUATE_SAU                EQUATE(194)                                            !194: Saudi Arabia
+COUNTRY_EQUATE_SLB                EQUATE(195)                                            !195: Solomon Islands
+COUNTRY_EQUATE_SYC                EQUATE(196)                                            !196: Seychelles
+COUNTRY_EQUATE_SDN                EQUATE(197)                                            !197: Sudan
+COUNTRY_EQUATE_SSD                EQUATE(198)                                            !198: South Sudan
+COUNTRY_EQUATE_SWE                EQUATE(199)                                            !199: Sweden
+COUNTRY_EQUATE_SGP                EQUATE(200)                                            !200: Singapore
+COUNTRY_EQUATE_SHN                EQUATE(201)                                            !201: Saint Helena
+COUNTRY_EQUATE_SVN                EQUATE(202)                                            !202: Slovenia
+COUNTRY_EQUATE_SJM                EQUATE(203)                                            !203: Svalbard and Jan Mayen
+COUNTRY_EQUATE_SVK                EQUATE(204)                                            !204: Slovakia
+COUNTRY_EQUATE_SLE                EQUATE(205)                                            !205: Sierra Leone
+COUNTRY_EQUATE_SMR                EQUATE(206)                                            !206: San Marino
+COUNTRY_EQUATE_SEN                EQUATE(207)                                            !207: Senegal
+COUNTRY_EQUATE_SOM                EQUATE(208)                                            !208: Somalia
+COUNTRY_EQUATE_SUR                EQUATE(209)                                            !209: Suriname
+COUNTRY_EQUATE_STP                EQUATE(210)                                            !210: Sao Tome and Principe
+COUNTRY_EQUATE_SLV                EQUATE(211)                                            !211: El Salvador
+COUNTRY_EQUATE_SXM                EQUATE(212)                                            !212: Sint Maarten
+COUNTRY_EQUATE_SYR                EQUATE(213)                                            !213: Syria
+COUNTRY_EQUATE_SWZ                EQUATE(214)                                            !214: Eswatini
+COUNTRY_EQUATE_TCA                EQUATE(215)                                            !215: Turks and Caicos Islands
+COUNTRY_EQUATE_TCD                EQUATE(216)                                            !216: Chad
+COUNTRY_EQUATE_ATF                EQUATE(217)                                            !217: French Southern Territories
+COUNTRY_EQUATE_TGO                EQUATE(218)                                            !218: Togo
+COUNTRY_EQUATE_THA                EQUATE(219)                                            !219: Thailand
+COUNTRY_EQUATE_TJK                EQUATE(220)                                            !220: Tajikistan
+COUNTRY_EQUATE_TKL                EQUATE(221)                                            !221: Tokelau
+COUNTRY_EQUATE_TLS                EQUATE(222)                                            !222: Timor Leste
+COUNTRY_EQUATE_TKM                EQUATE(223)                                            !223: Turkmenistan
+COUNTRY_EQUATE_TUN                EQUATE(224)                                            !224: Tunisia
+COUNTRY_EQUATE_TON                EQUATE(225)                                            !225: Tonga
+COUNTRY_EQUATE_TUR                EQUATE(226)                                            !226: Turkey
+COUNTRY_EQUATE_TTO                EQUATE(227)                                            !227: Trinidad and Tobago
+COUNTRY_EQUATE_TUV                EQUATE(228)                                            !228: Tuvalu
+COUNTRY_EQUATE_TWN                EQUATE(229)                                            !229: Taiwan
+COUNTRY_EQUATE_TZA                EQUATE(230)                                            !230: Tanzania
+COUNTRY_EQUATE_UKR                EQUATE(231)                                            !231: Ukraine
+COUNTRY_EQUATE_UGA                EQUATE(232)                                            !232: Uganda
+COUNTRY_EQUATE_UMI                EQUATE(233)                                            !233: United States Minor Outlying Islands
+COUNTRY_EQUATE_USA                EQUATE(234)                                            !234: United States
+COUNTRY_EQUATE_URY                EQUATE(235)                                            !235: Uruguay
+COUNTRY_EQUATE_UZB                EQUATE(236)                                            !236: Uzbekistan
+COUNTRY_EQUATE_VAT                EQUATE(237)                                            !237: Vatican
+COUNTRY_EQUATE_VCT                EQUATE(238)                                            !238: Saint Vincent and the Grenadines
+COUNTRY_EQUATE_VEN                EQUATE(239)                                            !239: Venezuela
+COUNTRY_EQUATE_VGB                EQUATE(240)                                            !240: British Virgin Islands
+COUNTRY_EQUATE_VIR                EQUATE(241)                                            !241: U.S. Virgin Islands
+COUNTRY_EQUATE_VNM                EQUATE(242)                                            !242: Vietnam
+COUNTRY_EQUATE_VUT                EQUATE(243)                                            !243: Vanuatu
+COUNTRY_EQUATE_WLF                EQUATE(244)                                            !244: Wallis and Futuna
+COUNTRY_EQUATE_WSM                EQUATE(245)                                            !245: Samoa
+COUNTRY_EQUATE_YEM                EQUATE(246)                                            !246: Yemen
+COUNTRY_EQUATE_MYT                EQUATE(247)                                            !247: Mayotte
+COUNTRY_EQUATE_ZAF                EQUATE(248)                                            !248: South Africa
+COUNTRY_EQUATE_ZMB                EQUATE(249)                                            !249: Zambia
+COUNTRY_EQUATE_ZWE                EQUATE(250)                                            !250: Zimbabwe
+COUNTRY_EQUATE_SCG                EQUATE(251)                                            !251: Serbia and Montenegro
+COUNTRY_EQUATE_ANT                EQUATE(252)                                            !252: Netherlands Antilles
+!EndRegion EQUATE
+!Region VALUE
+!                                         1234567890123456
+COUNTRY_VALUE_AND                 EQUATE('EU.ES.AD')                                     !001: Andorra
+COUNTRY_VALUE_ARE                 EQUATE('AS.SW.AE')                                     !002: United Arab Emirates
+COUNTRY_VALUE_AFG                 EQUATE('AS.SC.AF')                                     !003: Afghanistan
+COUNTRY_VALUE_ATG                 EQUATE('NA.MR.AG')                                     !004: Antigua and Barbuda
+COUNTRY_VALUE_AIA                 EQUATE('NA.MR.AI')                                     !005: Anguilla
+COUNTRY_VALUE_ALB                 EQUATE('EU.ES.AL')                                     !006: Albania
+COUNTRY_VALUE_ARM                 EQUATE('AS.SW.AM')                                     !007: Armenia
+COUNTRY_VALUE_AGO                 EQUATE('AF.AC.AO')                                     !008: Angola
+COUNTRY_VALUE_ATA                 EQUATE('AN.TR.AQ')                                     !009: Antarctica
+COUNTRY_VALUE_ARG                 EQUATE('SA.MS.AR')                                     !010: Argentina
+COUNTRY_VALUE_ASM                 EQUATE('OC.OO.AS')                                     !011: American Samoa
+COUNTRY_VALUE_AUT                 EQUATE('EU.EW.AT')                                     !012: Austria
+COUNTRY_VALUE_AUS                 EQUATE('OC.OU.AU')                                     !013: Australia
+COUNTRY_VALUE_ABW                 EQUATE('NA.MR.AW')                                     !014: Aruba
+COUNTRY_VALUE_ALA                 EQUATE('EU.EN.AX')                                     !015: Aland Islands
+COUNTRY_VALUE_AZE                 EQUATE('AS.SW.AZ')                                     !016: Azerbaijan
+COUNTRY_VALUE_BIH                 EQUATE('EU.ES.BA')                                     !017: Bosnia and Herzegovina
+COUNTRY_VALUE_BRB                 EQUATE('NA.MR.BB')                                     !018: Barbados
+COUNTRY_VALUE_BGD                 EQUATE('AS.SC.BD')                                     !019: Bangladesh
+COUNTRY_VALUE_BEL                 EQUATE('EU.EW.BE')                                     !020: Belgium
+COUNTRY_VALUE_BFA                 EQUATE('AF.AW.BF')                                     !021: Burkina Faso
+COUNTRY_VALUE_BGR                 EQUATE('EU.EE.BG')                                     !022: Bulgaria
+COUNTRY_VALUE_BHR                 EQUATE('AS.SW.BH')                                     !023: Bahrain
+COUNTRY_VALUE_BDI                 EQUATE('AF.AE.BI')                                     !024: Burundi
+COUNTRY_VALUE_BEN                 EQUATE('AF.AW.BJ')                                     !025: Benin
+COUNTRY_VALUE_BLM                 EQUATE('NA.MR.BL')                                     !026: Saint Barthelemy
+COUNTRY_VALUE_BMU                 EQUATE('NA.MN.BM')                                     !027: Bermuda
+COUNTRY_VALUE_BRN                 EQUATE('AS.SE.BN')                                     !028: Brunei
+COUNTRY_VALUE_BOL                 EQUATE('SA.MS.BO')                                     !029: Bolivia
+COUNTRY_VALUE_BES                 EQUATE('NA.MR.BQ')                                     !030: Bonaire, Saint Eustatius and Saba 
+COUNTRY_VALUE_BRA                 EQUATE('SA.MS.BR')                                     !031: Brazil
+COUNTRY_VALUE_BHS                 EQUATE('NA.MR.BS')                                     !032: Bahamas
+COUNTRY_VALUE_BTN                 EQUATE('AS.SC.BT')                                     !033: Bhutan
+COUNTRY_VALUE_BVT                 EQUATE('AN.TR.BV')                                     !034: Bouvet Island
+COUNTRY_VALUE_BWA                 EQUATE('AF.AS.BW')                                     !035: Botswana
+COUNTRY_VALUE_BLR                 EQUATE('EU.EE.BY')                                     !036: Belarus
+COUNTRY_VALUE_BLZ                 EQUATE('NA.MC.BZ')                                     !037: Belize
+COUNTRY_VALUE_CAN                 EQUATE('NA.MN.CA')                                     !038: Canada
+COUNTRY_VALUE_CCK                 EQUATE('OC.OU.CC')                                     !039: Cocos Islands
+COUNTRY_VALUE_COD                 EQUATE('AF.AC.CD')                                     !040: Democratic Republic of the Congo
+COUNTRY_VALUE_CAF                 EQUATE('AF.AC.CF')                                     !041: Central African Republic
+COUNTRY_VALUE_COG                 EQUATE('AF.AC.CG')                                     !042: Republic of the Congo
+COUNTRY_VALUE_CHE                 EQUATE('EU.EW.CH')                                     !043: Switzerland
+COUNTRY_VALUE_CIV                 EQUATE('AF.AW.CI')                                     !044: Ivory Coast
+COUNTRY_VALUE_COK                 EQUATE('OC.OO.CK')                                     !045: Cook Islands
+COUNTRY_VALUE_CHL                 EQUATE('SA.MS.CL')                                     !046: Chile
+COUNTRY_VALUE_CMR                 EQUATE('AF.AC.CM')                                     !047: Cameroon
+COUNTRY_VALUE_CHN                 EQUATE('AS.SE.CN')                                     !048: China
+COUNTRY_VALUE_COL                 EQUATE('SA.MS.CO')                                     !049: Colombia
+COUNTRY_VALUE_CRI                 EQUATE('NA.MC.CR')                                     !050: Costa Rica
+COUNTRY_VALUE_CUB                 EQUATE('NA.MR.CU')                                     !051: Cuba
+COUNTRY_VALUE_CPV                 EQUATE('AF.AW.CV')                                     !052: Cabo Verde
+COUNTRY_VALUE_CUW                 EQUATE('NA.MR.CW')                                     !053: Curacao
+COUNTRY_VALUE_CXR                 EQUATE('OC.OU.CX')                                     !054: Christmas Island
+COUNTRY_VALUE_CYP                 EQUATE('EU.SW.CY')                                     !055: Cyprus
+COUNTRY_VALUE_CZE                 EQUATE('EU.EE.CZ')                                     !056: Czechia
+COUNTRY_VALUE_DEU                 EQUATE('EU.EW.DE')                                     !057: Germany
+COUNTRY_VALUE_DJI                 EQUATE('AF.AE.DJ')                                     !058: Djibouti
+COUNTRY_VALUE_DNK                 EQUATE('EU.EN.DK')                                     !059: Denmark
+COUNTRY_VALUE_DMA                 EQUATE('NA.MR.DM')                                     !060: Dominica
+COUNTRY_VALUE_DOM                 EQUATE('NA.MR.DO')                                     !061: Dominican Republic
+COUNTRY_VALUE_DZA                 EQUATE('AF.AN.DZ')                                     !062: Algeria
+COUNTRY_VALUE_ECU                 EQUATE('SA.MS.EC')                                     !063: Ecuador
+COUNTRY_VALUE_EST                 EQUATE('EU.EN.EE')                                     !064: Estonia
+COUNTRY_VALUE_EGY                 EQUATE('AF.AN.EG')                                     !065: Egypt
+COUNTRY_VALUE_ESH                 EQUATE('AF.AN.EH')                                     !066: Western Sahara
+COUNTRY_VALUE_ERI                 EQUATE('AF.AE.ER')                                     !067: Eritrea
+COUNTRY_VALUE_ESP                 EQUATE('EU.ES.ES')                                     !068: Spain
+COUNTRY_VALUE_ETH                 EQUATE('AF.AE.ET')                                     !069: Ethiopia
+COUNTRY_VALUE_FIN                 EQUATE('EU.EN.FI')                                     !070: Finland
+COUNTRY_VALUE_FJI                 EQUATE('OC.OE.FJ')                                     !071: Fiji
+COUNTRY_VALUE_FLK                 EQUATE('SA.MS.FK')                                     !072: Falkland Islands
+COUNTRY_VALUE_FSM                 EQUATE('OC.OI.FM')                                     !073: Micronesia
+COUNTRY_VALUE_FRO                 EQUATE('EU.EW.FO')                                     !074: Faroe Islands
+COUNTRY_VALUE_FRA                 EQUATE('EU.EW.FR')                                     !075: France
+COUNTRY_VALUE_GAB                 EQUATE('AF.AC.GA')                                     !076: Gabon
+COUNTRY_VALUE_GBR                 EQUATE('EU.EN.GB')                                     !077: United Kingdom
+COUNTRY_VALUE_GRD                 EQUATE('NA.MR.GD')                                     !078: Grenada
+COUNTRY_VALUE_GEO                 EQUATE('AS.AW.GE')                                     !079: Georgia
+COUNTRY_VALUE_GUF                 EQUATE('SA.MS.GF')                                     !080: French Guiana
+COUNTRY_VALUE_GGY                 EQUATE('EU.EN.GG')                                     !081: Guernsey
+COUNTRY_VALUE_GHA                 EQUATE('AF.AW.GH')                                     !082: Ghana
+COUNTRY_VALUE_GIB                 EQUATE('EU.ES.GI')                                     !083: Gibraltar
+COUNTRY_VALUE_GRL                 EQUATE('NA.MN.GL')                                     !084: Greenland
+COUNTRY_VALUE_GMB                 EQUATE('AF.AW.GM')                                     !085: Gambia
+COUNTRY_VALUE_GIN                 EQUATE('AF.AW.GN')                                     !086: Guinea
+COUNTRY_VALUE_GLP                 EQUATE('NA.MR.GP')                                     !087: Guadeloupe
+COUNTRY_VALUE_GNQ                 EQUATE('AF.AC.GQ')                                     !088: Equatorial Guinea
+COUNTRY_VALUE_GRC                 EQUATE('EU.ES.GR')                                     !089: Greece
+COUNTRY_VALUE_SGS                 EQUATE('AN.TR.GS')                                     !090: South Georgia and the South Sandwich Islands
+COUNTRY_VALUE_GTM                 EQUATE('NA.MC.GT')                                     !091: Guatemala
+COUNTRY_VALUE_GUM                 EQUATE('OC.OI.GU')                                     !092: Guam
+COUNTRY_VALUE_GNB                 EQUATE('AF.AW.GW')                                     !093: Guinea-Bissau
+COUNTRY_VALUE_GUY                 EQUATE('SA.MS.GY')                                     !094: Guyana
+COUNTRY_VALUE_HKG                 EQUATE('AS.AE.HK')                                     !095: Hong Kong
+COUNTRY_VALUE_HMD                 EQUATE('AN.TR.HM')                                     !096: Heard Island and McDonald Islands
+COUNTRY_VALUE_HND                 EQUATE('NA.MC.HN')                                     !097: Honduras
+COUNTRY_VALUE_HRV                 EQUATE('EU.ES.HR')                                     !098: Croatia
+COUNTRY_VALUE_HTI                 EQUATE('NA.MR.HT')                                     !099: Haiti
+COUNTRY_VALUE_HUN                 EQUATE('EU.EE.HU')                                     !100: Hungary
+COUNTRY_VALUE_IDN                 EQUATE('AS.SE.ID')                                     !101: Indonesia
+COUNTRY_VALUE_IRL                 EQUATE('EU.EN.IE')                                     !102: Ireland
+COUNTRY_VALUE_ISR                 EQUATE('AS.SW.IL')                                     !103: Israel
+COUNTRY_VALUE_IMN                 EQUATE('EU.EN.IM')                                     !104: Isle of Man
+COUNTRY_VALUE_IND                 EQUATE('AS.SC.IN')                                     !105: India
+COUNTRY_VALUE_IOT                 EQUATE('AN.TR.IO')                                     !106: British Indian Ocean Territory
+COUNTRY_VALUE_IRQ                 EQUATE('AS.SW.IQ')                                     !107: Iraq
+COUNTRY_VALUE_IRN                 EQUATE('AS.SC.IR')                                     !108: Iran
+COUNTRY_VALUE_ISL                 EQUATE('EU.EN.IS')                                     !109: Iceland
+COUNTRY_VALUE_ITA                 EQUATE('EU.ES.IT')                                     !110: Italy
+COUNTRY_VALUE_JEY                 EQUATE('EU.EN.JE')                                     !111: Jersey
+COUNTRY_VALUE_JAM                 EQUATE('NA.MR.JM')                                     !112: Jamaica
+COUNTRY_VALUE_JOR                 EQUATE('AS.SW.JO')                                     !113: Jordan
+COUNTRY_VALUE_JPN                 EQUATE('AS.SE.JP')                                     !114: Japan
+COUNTRY_VALUE_KEN                 EQUATE('AF.AE.KE')                                     !115: Kenya
+COUNTRY_VALUE_KGZ                 EQUATE('AS.SC.KG')                                     !116: Kyrgyzstan
+COUNTRY_VALUE_KHM                 EQUATE('AS.SE.KH')                                     !117: Cambodia
+COUNTRY_VALUE_KIR                 EQUATE('OC.OI.KI')                                     !118: Kiribati
+COUNTRY_VALUE_COM                 EQUATE('AF.AE.KM')                                     !119: Comoros
+COUNTRY_VALUE_KNA                 EQUATE('NA.MR.KN')                                     !120: Saint Kitts and Nevis
+COUNTRY_VALUE_PRK                 EQUATE('AS.SE.KP')                                     !121: North Korea
+COUNTRY_VALUE_KOR                 EQUATE('AS.SE.KR')                                     !122: South Korea
+COUNTRY_VALUE_XKX                 EQUATE('EU.ES.XK')                                     !123: Kosovo
+COUNTRY_VALUE_KWT                 EQUATE('AS.SW.KW')                                     !124: Kuwait
+COUNTRY_VALUE_CYM                 EQUATE('NA.MR.KY')                                     !125: Cayman Islands
+COUNTRY_VALUE_KAZ                 EQUATE('AS.SC.KZ')                                     !126: Kazakhstan
+COUNTRY_VALUE_LAO                 EQUATE('AS.SE.LA')                                     !127: Laos
+COUNTRY_VALUE_LBN                 EQUATE('AS.SW.LB')                                     !128: Lebanon
+COUNTRY_VALUE_LCA                 EQUATE('NA.MR.LC')                                     !129: Saint Lucia
+COUNTRY_VALUE_LIE                 EQUATE('EU.EW.LI')                                     !130: Liechtenstein
+COUNTRY_VALUE_LKA                 EQUATE('AS.??.LK')                                     !131: Sri Lanka
+COUNTRY_VALUE_LBR                 EQUATE('AF.AW.LR')                                     !132: Liberia
+COUNTRY_VALUE_LSO                 EQUATE('AF.AS.LS')                                     !133: Lesotho
+COUNTRY_VALUE_LTU                 EQUATE('EU.EN.LT')                                     !134: Lithuania
+COUNTRY_VALUE_LUX                 EQUATE('EU.EW.LU')                                     !135: Luxembourg
+COUNTRY_VALUE_LVA                 EQUATE('EU.EN.LV')                                     !136: Latvia
+COUNTRY_VALUE_LBY                 EQUATE('AF.AN.LY')                                     !137: Libya
+COUNTRY_VALUE_MAR                 EQUATE('AF.AN.MA')                                     !138: Morocco
+COUNTRY_VALUE_MCO                 EQUATE('EU.EW.MC')                                     !139: Monaco
+COUNTRY_VALUE_MDA                 EQUATE('EU.EE.MD')                                     !140: Moldova
+COUNTRY_VALUE_MNE                 EQUATE('EU.ES.ME')                                     !141: Montenegro
+COUNTRY_VALUE_MAF                 EQUATE('NA.MR.MF')                                     !142: Saint Martin
+COUNTRY_VALUE_MDG                 EQUATE('AF.AE.MG')                                     !143: Madagascar
+COUNTRY_VALUE_MHL                 EQUATE('OC.OI.MH')                                     !144: Marshall Islands
+COUNTRY_VALUE_MKD                 EQUATE('EU.ES.MK')                                     !145: North Macedonia
+COUNTRY_VALUE_MLI                 EQUATE('AF.AW.ML')                                     !146: Mali
+COUNTRY_VALUE_MMR                 EQUATE('AS.SE.MM')                                     !147: Myanmar
+COUNTRY_VALUE_MNG                 EQUATE('AS.SE.MN')                                     !148: Mongolia
+COUNTRY_VALUE_MAC                 EQUATE('AS.SE.MO')                                     !149: Macao
+COUNTRY_VALUE_MNP                 EQUATE('OC.OI.MP')                                     !150: Northern Mariana Islands
+COUNTRY_VALUE_MTQ                 EQUATE('NA.MR.MQ')                                     !151: Martinique
+COUNTRY_VALUE_MRT                 EQUATE('AF.AW.MR')                                     !152: Mauritania
+COUNTRY_VALUE_MSR                 EQUATE('NA.MR.MS')                                     !153: Montserrat
+COUNTRY_VALUE_MLT                 EQUATE('EU.ES.MT')                                     !154: Malta
+COUNTRY_VALUE_MUS                 EQUATE('AF.AE.MU')                                     !155: Mauritius
+COUNTRY_VALUE_MDV                 EQUATE('AS.SC.MV')                                     !156: Maldives
+COUNTRY_VALUE_MWI                 EQUATE('AF.AE.MW')                                     !157: Malawi
+COUNTRY_VALUE_MEX                 EQUATE('NA.MC.MX')                                     !158: Mexico
+COUNTRY_VALUE_MYS                 EQUATE('AS.SE.MY')                                     !159: Malaysia
+COUNTRY_VALUE_MOZ                 EQUATE('AF.AE.MZ')                                     !160: Mozambique
+COUNTRY_VALUE_NAM                 EQUATE('AF.AS.NA')                                     !161: Namibia
+COUNTRY_VALUE_NCL                 EQUATE('OC.OE.NC')                                     !162: New Caledonia
+COUNTRY_VALUE_NER                 EQUATE('AF.AW.NE')                                     !163: Niger
+COUNTRY_VALUE_NFK                 EQUATE('OC.OU.NF')                                     !164: Norfolk Island
+COUNTRY_VALUE_NGA                 EQUATE('AF.AW.NG')                                     !165: Nigeria
+COUNTRY_VALUE_NIC                 EQUATE('NA.MC.NI')                                     !166: Nicaragua
+COUNTRY_VALUE_NLD                 EQUATE('EU.EW.NL')                                     !167: The Netherlands
+COUNTRY_VALUE_NOR                 EQUATE('EU.EN.NO')                                     !168: Norway
+COUNTRY_VALUE_NPL                 EQUATE('AS.SC.NP')                                     !169: Nepal
+COUNTRY_VALUE_NRU                 EQUATE('OC.OI.NR')                                     !170: Nauru
+COUNTRY_VALUE_NIU                 EQUATE('OC.OO.NU')                                     !171: Niue
+COUNTRY_VALUE_NZL                 EQUATE('OC.OU.NZ')                                     !172: New Zealand
+COUNTRY_VALUE_OMN                 EQUATE('AS.SW.OM')                                     !173: Oman
+COUNTRY_VALUE_PAN                 EQUATE('NA.MC.PA')                                     !174: Panama
+COUNTRY_VALUE_PER                 EQUATE('SA.MS.PE')                                     !175: Peru
+COUNTRY_VALUE_PYF                 EQUATE('OC.OO.PF')                                     !176: French Polynesia
+COUNTRY_VALUE_PNG                 EQUATE('OC.OE.PG')                                     !177: Papua New Guinea
+COUNTRY_VALUE_PHL                 EQUATE('AS.SE.PH')                                     !178: Philippines
+COUNTRY_VALUE_PAK                 EQUATE('AS.SC.PK')                                     !179: Pakistan
+COUNTRY_VALUE_POL                 EQUATE('EU.EE.PL')                                     !180: Poland
+COUNTRY_VALUE_SPM                 EQUATE('NA.MN.PM')                                     !181: Saint Pierre and Miquelon
+COUNTRY_VALUE_PCN                 EQUATE('OC.OO.PN')                                     !182: Pitcairn
+COUNTRY_VALUE_PRI                 EQUATE('NA.MR.PR')                                     !183: Puerto Rico
+COUNTRY_VALUE_PSE                 EQUATE('AS.SW.PS')                                     !184: Palestinian Territory
+COUNTRY_VALUE_PRT                 EQUATE('EU.ES.PT')                                     !185: Portugal
+COUNTRY_VALUE_PLW                 EQUATE('OC.OI.PW')                                     !186: Palau
+COUNTRY_VALUE_PRY                 EQUATE('SA.MS.PY')                                     !187: Paraguay
+COUNTRY_VALUE_QAT                 EQUATE('AS.SW.QA')                                     !188: Qatar
+COUNTRY_VALUE_REU                 EQUATE('AF.AE.RE')                                     !189: Reunion
+COUNTRY_VALUE_ROU                 EQUATE('EU.EE.RO')                                     !190: Romania
+COUNTRY_VALUE_SRB                 EQUATE('EU.ES.RS')                                     !191: Serbia
+COUNTRY_VALUE_RUS                 EQUATE('EU.SN.RU')                                     !192: Russia
+COUNTRY_VALUE_RWA                 EQUATE('AF.AE.RW')                                     !193: Rwanda
+COUNTRY_VALUE_SAU                 EQUATE('AS.SW.SA')                                     !194: Saudi Arabia
+COUNTRY_VALUE_SLB                 EQUATE('OC.OE.SB')                                     !195: Solomon Islands
+COUNTRY_VALUE_SYC                 EQUATE('AF.AE.SC')                                     !196: Seychelles
+COUNTRY_VALUE_SDN                 EQUATE('AF.AN.SD')                                     !197: Sudan
+COUNTRY_VALUE_SSD                 EQUATE('AF.AN.SS')                                     !198: South Sudan
+COUNTRY_VALUE_SWE                 EQUATE('EU.EN.SE')                                     !199: Sweden
+COUNTRY_VALUE_SGP                 EQUATE('AS.SE.SG')                                     !200: Singapore
+COUNTRY_VALUE_SHN                 EQUATE('AF.AW.SH')                                     !201: Saint Helena
+COUNTRY_VALUE_SVN                 EQUATE('EU.ES.SI')                                     !202: Slovenia
+COUNTRY_VALUE_SJM                 EQUATE('EU.EN.SJ')                                     !203: Svalbard and Jan Mayen
+COUNTRY_VALUE_SVK                 EQUATE('EU.EE.SK')                                     !204: Slovakia
+COUNTRY_VALUE_SLE                 EQUATE('AF.AW.SL')                                     !205: Sierra Leone
+COUNTRY_VALUE_SMR                 EQUATE('EU.ES.SM')                                     !206: San Marino
+COUNTRY_VALUE_SEN                 EQUATE('AF.AW.SN')                                     !207: Senegal
+COUNTRY_VALUE_SOM                 EQUATE('AF.AE.SO')                                     !208: Somalia
+COUNTRY_VALUE_SUR                 EQUATE('SA.MS.SR')                                     !209: Suriname
+COUNTRY_VALUE_STP                 EQUATE('AF.AC.ST')                                     !210: Sao Tome and Principe
+COUNTRY_VALUE_SLV                 EQUATE('NA.MC.SV')                                     !211: El Salvador
+COUNTRY_VALUE_SXM                 EQUATE('NA.MR.SX')                                     !212: Sint Maarten
+COUNTRY_VALUE_SYR                 EQUATE('AS.SW.SY')                                     !213: Syria
+COUNTRY_VALUE_SWZ                 EQUATE('AF.AS.SZ')                                     !214: Eswatini
+COUNTRY_VALUE_TCA                 EQUATE('NA.MR.TC')                                     !215: Turks and Caicos Islands
+COUNTRY_VALUE_TCD                 EQUATE('AF.AC.TD')                                     !216: Chad
+COUNTRY_VALUE_ATF                 EQUATE('AN.TR.TF')                                     !217: French Southern Territories
+COUNTRY_VALUE_TGO                 EQUATE('AF.AW.TG')                                     !218: Togo
+COUNTRY_VALUE_THA                 EQUATE('AS.SE.TH')                                     !219: Thailand
+COUNTRY_VALUE_TJK                 EQUATE('AS.SC.TJ')                                     !220: Tajikistan
+COUNTRY_VALUE_TKL                 EQUATE('OC.OO.TK')                                     !221: Tokelau
+COUNTRY_VALUE_TLS                 EQUATE('OC.SE.TL')                                     !222: Timor Leste
+COUNTRY_VALUE_TKM                 EQUATE('AS.SC.TM')                                     !223: Turkmenistan
+COUNTRY_VALUE_TUN                 EQUATE('AF.AF.TN')                                     !224: Tunisia
+COUNTRY_VALUE_TON                 EQUATE('OC.OO.TO')                                     !225: Tonga
+COUNTRY_VALUE_TUR                 EQUATE('AS.SW.TR')                                     !226: Turkey
+COUNTRY_VALUE_TTO                 EQUATE('NA.MR.TT')                                     !227: Trinidad and Tobago
+COUNTRY_VALUE_TUV                 EQUATE('OC.OO.TV')                                     !228: Tuvalu
+COUNTRY_VALUE_TWN                 EQUATE('AS.SE.TW')                                     !229: Taiwan
+COUNTRY_VALUE_TZA                 EQUATE('AF.AE.TZ')                                     !230: Tanzania
+COUNTRY_VALUE_UKR                 EQUATE('EU.EE.UA')                                     !231: Ukraine
+COUNTRY_VALUE_UGA                 EQUATE('AF.AE.UG')                                     !232: Uganda
+COUNTRY_VALUE_UMI                 EQUATE('OC.OI.UM')                                     !233: United States Minor Outlying Islands
+COUNTRY_VALUE_USA                 EQUATE('NA.MN.US')                                     !234: United States
+COUNTRY_VALUE_URY                 EQUATE('SA.MS.UY')                                     !235: Uruguay
+COUNTRY_VALUE_UZB                 EQUATE('AS.SC.UZ')                                     !236: Uzbekistan
+COUNTRY_VALUE_VAT                 EQUATE('EU.ES.VA')                                     !237: Vatican
+COUNTRY_VALUE_VCT                 EQUATE('NA.MR.VC')                                     !238: Saint Vincent and the Grenadines
+COUNTRY_VALUE_VEN                 EQUATE('SA.MS.VE')                                     !239: Venezuela
+COUNTRY_VALUE_VGB                 EQUATE('NA.MR.VG')                                     !240: British Virgin Islands
+COUNTRY_VALUE_VIR                 EQUATE('NA.MR.VI')                                     !241: U.S. Virgin Islands
+COUNTRY_VALUE_VNM                 EQUATE('AS.SE.VN')                                     !242: Vietnam
+COUNTRY_VALUE_VUT                 EQUATE('OC.OE.VU')                                     !243: Vanuatu
+COUNTRY_VALUE_WLF                 EQUATE('OC.OO.WF')                                     !244: Wallis and Futuna
+COUNTRY_VALUE_WSM                 EQUATE('OC.OO.WS')                                     !245: Samoa
+COUNTRY_VALUE_YEM                 EQUATE('AS.SW.YE')                                     !246: Yemen
+COUNTRY_VALUE_MYT                 EQUATE('AF.AE.YT')                                     !247: Mayotte
+COUNTRY_VALUE_ZAF                 EQUATE('AF.AS.ZA')                                     !248: South Africa
+COUNTRY_VALUE_ZMB                 EQUATE('AF.AE.ZM')                                     !249: Zambia
+COUNTRY_VALUE_ZWE                 EQUATE('AF.AE.ZW')                                     !250: Zimbabwe
+COUNTRY_VALUE_SCG                 EQUATE('EU.ES.CS')                                     !251: Serbia and Montenegro
+COUNTRY_VALUE_ANT                 EQUATE('NA.MR.AN')                                     !252: Netherlands Antilles
+!                                         1234567890123456
+!EndRegion VALUE
+!Region NAME
+COUNTRY_NAME_AND                  EQUATE('Andorra')                                      !001: Andorra
+COUNTRY_NAME_ARE                  EQUATE('United Arab Emirates')                         !002: United Arab Emirates
+COUNTRY_NAME_AFG                  EQUATE('Afghanistan')                                  !003: Afghanistan
+COUNTRY_NAME_ATG                  EQUATE('Antigua and Barbuda')                          !004: Antigua and Barbuda
+COUNTRY_NAME_AIA                  EQUATE('Anguilla')                                     !005: Anguilla
+COUNTRY_NAME_ALB                  EQUATE('Albania')                                      !006: Albania
+COUNTRY_NAME_ARM                  EQUATE('Armenia')                                      !007: Armenia
+COUNTRY_NAME_AGO                  EQUATE('Angola')                                       !008: Angola
+COUNTRY_NAME_ATA                  EQUATE('Antarctica')                                   !009: Antarctica
+COUNTRY_NAME_ARG                  EQUATE('Argentina')                                    !010: Argentina
+COUNTRY_NAME_ASM                  EQUATE('American Samoa')                               !011: American Samoa
+COUNTRY_NAME_AUT                  EQUATE('Austria')                                      !012: Austria
+COUNTRY_NAME_AUS                  EQUATE('Australia')                                    !013: Australia
+COUNTRY_NAME_ABW                  EQUATE('Aruba')                                        !014: Aruba
+COUNTRY_NAME_ALA                  EQUATE('Aland Islands')                                !015: Aland Islands
+COUNTRY_NAME_AZE                  EQUATE('Azerbaijan')                                   !016: Azerbaijan
+COUNTRY_NAME_BIH                  EQUATE('Bosnia and Herzegovina')                       !017: Bosnia and Herzegovina
+COUNTRY_NAME_BRB                  EQUATE('Barbados')                                     !018: Barbados
+COUNTRY_NAME_BGD                  EQUATE('Bangladesh')                                   !019: Bangladesh
+COUNTRY_NAME_BEL                  EQUATE('Belgium')                                      !020: Belgium
+COUNTRY_NAME_BFA                  EQUATE('Burkina Faso')                                 !021: Burkina Faso
+COUNTRY_NAME_BGR                  EQUATE('Bulgaria')                                     !022: Bulgaria
+COUNTRY_NAME_BHR                  EQUATE('Bahrain')                                      !023: Bahrain
+COUNTRY_NAME_BDI                  EQUATE('Burundi')                                      !024: Burundi
+COUNTRY_NAME_BEN                  EQUATE('Benin')                                        !025: Benin
+COUNTRY_NAME_BLM                  EQUATE('Saint Barthelemy')                             !026: Saint Barthelemy
+COUNTRY_NAME_BMU                  EQUATE('Bermuda')                                      !027: Bermuda
+COUNTRY_NAME_BRN                  EQUATE('Brunei')                                       !028: Brunei
+COUNTRY_NAME_BOL                  EQUATE('Bolivia')                                      !029: Bolivia
+COUNTRY_NAME_BES                  EQUATE('Bonaire, Saint Eustatius and Saba')            !030: Bonaire, Saint Eustatius and Saba 
+COUNTRY_NAME_BRA                  EQUATE('Brazil')                                       !031: Brazil
+COUNTRY_NAME_BHS                  EQUATE('Bahamas')                                      !032: Bahamas
+COUNTRY_NAME_BTN                  EQUATE('Bhutan')                                       !033: Bhutan
+COUNTRY_NAME_BVT                  EQUATE('Bouvet Island')                                !034: Bouvet Island
+COUNTRY_NAME_BWA                  EQUATE('Botswana')                                     !035: Botswana
+COUNTRY_NAME_BLR                  EQUATE('Belarus')                                      !036: Belarus
+COUNTRY_NAME_BLZ                  EQUATE('Belize')                                       !037: Belize
+COUNTRY_NAME_CAN                  EQUATE('Canada')                                       !038: Canada
+COUNTRY_NAME_CCK                  EQUATE('Cocos Islands')                                !039: Cocos Islands
+COUNTRY_NAME_COD                  EQUATE('Democratic Republic of the Congo')             !040: Democratic Republic of the Congo
+COUNTRY_NAME_CAF                  EQUATE('Central African Republic')                     !041: Central African Republic
+COUNTRY_NAME_COG                  EQUATE('Republic of the Congo')                        !042: Republic of the Congo
+COUNTRY_NAME_CHE                  EQUATE('Switzerland')                                  !043: Switzerland
+COUNTRY_NAME_CIV                  EQUATE('Ivory Coast')                                  !044: Ivory Coast
+COUNTRY_NAME_COK                  EQUATE('Cook Islands')                                 !045: Cook Islands
+COUNTRY_NAME_CHL                  EQUATE('Chile')                                        !046: Chile
+COUNTRY_NAME_CMR                  EQUATE('Cameroon')                                     !047: Cameroon
+COUNTRY_NAME_CHN                  EQUATE('China')                                        !048: China
+COUNTRY_NAME_COL                  EQUATE('Colombia')                                     !049: Colombia
+COUNTRY_NAME_CRI                  EQUATE('Costa Rica')                                   !050: Costa Rica
+COUNTRY_NAME_CUB                  EQUATE('Cuba')                                         !051: Cuba
+COUNTRY_NAME_CPV                  EQUATE('Cabo Verde')                                   !052: Cabo Verde
+COUNTRY_NAME_CUW                  EQUATE('Curacao')                                      !053: Curacao
+COUNTRY_NAME_CXR                  EQUATE('Christmas Island')                             !054: Christmas Island
+COUNTRY_NAME_CYP                  EQUATE('Cyprus')                                       !055: Cyprus
+COUNTRY_NAME_CZE                  EQUATE('Czechia')                                      !056: Czechia
+COUNTRY_NAME_DEU                  EQUATE('Germany')                                      !057: Germany
+COUNTRY_NAME_DJI                  EQUATE('Djibouti')                                     !058: Djibouti
+COUNTRY_NAME_DNK                  EQUATE('Denmark')                                      !059: Denmark
+COUNTRY_NAME_DMA                  EQUATE('Dominica')                                     !060: Dominica
+COUNTRY_NAME_DOM                  EQUATE('Dominican Republic')                           !061: Dominican Republic
+COUNTRY_NAME_DZA                  EQUATE('Algeria')                                      !062: Algeria
+COUNTRY_NAME_ECU                  EQUATE('Ecuador')                                      !063: Ecuador
+COUNTRY_NAME_EST                  EQUATE('Estonia')                                      !064: Estonia
+COUNTRY_NAME_EGY                  EQUATE('Egypt')                                        !065: Egypt
+COUNTRY_NAME_ESH                  EQUATE('Western Sahara')                               !066: Western Sahara
+COUNTRY_NAME_ERI                  EQUATE('Eritrea')                                      !067: Eritrea
+COUNTRY_NAME_ESP                  EQUATE('Spain')                                        !068: Spain
+COUNTRY_NAME_ETH                  EQUATE('Ethiopia')                                     !069: Ethiopia
+COUNTRY_NAME_FIN                  EQUATE('Finland')                                      !070: Finland
+COUNTRY_NAME_FJI                  EQUATE('Fiji')                                         !071: Fiji
+COUNTRY_NAME_FLK                  EQUATE('Falkland Islands')                             !072: Falkland Islands
+COUNTRY_NAME_FSM                  EQUATE('Micronesia')                                   !073: Micronesia
+COUNTRY_NAME_FRO                  EQUATE('Faroe Islands')                                !074: Faroe Islands
+COUNTRY_NAME_FRA                  EQUATE('France')                                       !075: France
+COUNTRY_NAME_GAB                  EQUATE('Gabon')                                        !076: Gabon
+COUNTRY_NAME_GBR                  EQUATE('United Kingdom')                               !077: United Kingdom
+COUNTRY_NAME_GRD                  EQUATE('Grenada')                                      !078: Grenada
+COUNTRY_NAME_GEO                  EQUATE('Georgia')                                      !079: Georgia
+COUNTRY_NAME_GUF                  EQUATE('French Guiana')                                !080: French Guiana
+COUNTRY_NAME_GGY                  EQUATE('Guernsey')                                     !081: Guernsey
+COUNTRY_NAME_GHA                  EQUATE('Ghana')                                        !082: Ghana
+COUNTRY_NAME_GIB                  EQUATE('Gibraltar')                                    !083: Gibraltar
+COUNTRY_NAME_GRL                  EQUATE('Greenland')                                    !084: Greenland
+COUNTRY_NAME_GMB                  EQUATE('Gambia')                                       !085: Gambia
+COUNTRY_NAME_GIN                  EQUATE('Guinea')                                       !086: Guinea
+COUNTRY_NAME_GLP                  EQUATE('Guadeloupe')                                   !087: Guadeloupe
+COUNTRY_NAME_GNQ                  EQUATE('Equatorial Guinea')                            !088: Equatorial Guinea
+COUNTRY_NAME_GRC                  EQUATE('Greece')                                       !089: Greece
+COUNTRY_NAME_SGS                  EQUATE('South Georgia and the South Sandwich Islands') !090: South Georgia and the South Sandwich Islands
+COUNTRY_NAME_GTM                  EQUATE('Guatemala')                                    !091: Guatemala
+COUNTRY_NAME_GUM                  EQUATE('Guam')                                         !092: Guam
+COUNTRY_NAME_GNB                  EQUATE('Guinea-Bissau')                                !093: Guinea-Bissau
+COUNTRY_NAME_GUY                  EQUATE('Guyana')                                       !094: Guyana
+COUNTRY_NAME_HKG                  EQUATE('Hong Kong')                                    !095: Hong Kong
+COUNTRY_NAME_HMD                  EQUATE('Heard Island and McDonald Islands')            !096: Heard Island and McDonald Islands
+COUNTRY_NAME_HND                  EQUATE('Honduras')                                     !097: Honduras
+COUNTRY_NAME_HRV                  EQUATE('Croatia')                                      !098: Croatia
+COUNTRY_NAME_HTI                  EQUATE('Haiti')                                        !099: Haiti
+COUNTRY_NAME_HUN                  EQUATE('Hungary')                                      !100: Hungary
+COUNTRY_NAME_IDN                  EQUATE('Indonesia')                                    !101: Indonesia
+COUNTRY_NAME_IRL                  EQUATE('Ireland')                                      !102: Ireland
+COUNTRY_NAME_ISR                  EQUATE('Israel')                                       !103: Israel
+COUNTRY_NAME_IMN                  EQUATE('Isle of Man')                                  !104: Isle of Man
+COUNTRY_NAME_IND                  EQUATE('India')                                        !105: India
+COUNTRY_NAME_IOT                  EQUATE('British Indian Ocean Territory')               !106: British Indian Ocean Territory
+COUNTRY_NAME_IRQ                  EQUATE('Iraq')                                         !107: Iraq
+COUNTRY_NAME_IRN                  EQUATE('Iran')                                         !108: Iran
+COUNTRY_NAME_ISL                  EQUATE('Iceland')                                      !109: Iceland
+COUNTRY_NAME_ITA                  EQUATE('Italy')                                        !110: Italy
+COUNTRY_NAME_JEY                  EQUATE('Jersey')                                       !111: Jersey
+COUNTRY_NAME_JAM                  EQUATE('Jamaica')                                      !112: Jamaica
+COUNTRY_NAME_JOR                  EQUATE('Jordan')                                       !113: Jordan
+COUNTRY_NAME_JPN                  EQUATE('Japan')                                        !114: Japan
+COUNTRY_NAME_KEN                  EQUATE('Kenya')                                        !115: Kenya
+COUNTRY_NAME_KGZ                  EQUATE('Kyrgyzstan')                                   !116: Kyrgyzstan
+COUNTRY_NAME_KHM                  EQUATE('Cambodia')                                     !117: Cambodia
+COUNTRY_NAME_KIR                  EQUATE('Kiribati')                                     !118: Kiribati
+COUNTRY_NAME_COM                  EQUATE('Comoros')                                      !119: Comoros
+COUNTRY_NAME_KNA                  EQUATE('Saint Kitts and Nevis')                        !120: Saint Kitts and Nevis
+COUNTRY_NAME_PRK                  EQUATE('North Korea')                                  !121: North Korea
+COUNTRY_NAME_KOR                  EQUATE('South Korea')                                  !122: South Korea
+COUNTRY_NAME_XKX                  EQUATE('Kosovo')                                       !123: Kosovo
+COUNTRY_NAME_KWT                  EQUATE('Kuwait')                                       !124: Kuwait
+COUNTRY_NAME_CYM                  EQUATE('Cayman Islands')                               !125: Cayman Islands
+COUNTRY_NAME_KAZ                  EQUATE('Kazakhstan')                                   !126: Kazakhstan
+COUNTRY_NAME_LAO                  EQUATE('Laos')                                         !127: Laos
+COUNTRY_NAME_LBN                  EQUATE('Lebanon')                                      !128: Lebanon
+COUNTRY_NAME_LCA                  EQUATE('Saint Lucia')                                  !129: Saint Lucia
+COUNTRY_NAME_LIE                  EQUATE('Liechtenstein')                                !130: Liechtenstein
+COUNTRY_NAME_LKA                  EQUATE('Sri Lanka')                                    !131: Sri Lanka
+COUNTRY_NAME_LBR                  EQUATE('Liberia')                                      !132: Liberia
+COUNTRY_NAME_LSO                  EQUATE('Lesotho')                                      !133: Lesotho
+COUNTRY_NAME_LTU                  EQUATE('Lithuania')                                    !134: Lithuania
+COUNTRY_NAME_LUX                  EQUATE('Luxembourg')                                   !135: Luxembourg
+COUNTRY_NAME_LVA                  EQUATE('Latvia')                                       !136: Latvia
+COUNTRY_NAME_LBY                  EQUATE('Libya')                                        !137: Libya
+COUNTRY_NAME_MAR                  EQUATE('Morocco')                                      !138: Morocco
+COUNTRY_NAME_MCO                  EQUATE('Monaco')                                       !139: Monaco
+COUNTRY_NAME_MDA                  EQUATE('Moldova')                                      !140: Moldova
+COUNTRY_NAME_MNE                  EQUATE('Montenegro')                                   !141: Montenegro
+COUNTRY_NAME_MAF                  EQUATE('Saint Martin')                                 !142: Saint Martin
+COUNTRY_NAME_MDG                  EQUATE('Madagascar')                                   !143: Madagascar
+COUNTRY_NAME_MHL                  EQUATE('Marshall Islands')                             !144: Marshall Islands
+COUNTRY_NAME_MKD                  EQUATE('North Macedonia')                              !145: North Macedonia
+COUNTRY_NAME_MLI                  EQUATE('Mali')                                         !146: Mali
+COUNTRY_NAME_MMR                  EQUATE('Myanmar')                                      !147: Myanmar
+COUNTRY_NAME_MNG                  EQUATE('Mongolia')                                     !148: Mongolia
+COUNTRY_NAME_MAC                  EQUATE('Macao')                                        !149: Macao
+COUNTRY_NAME_MNP                  EQUATE('Northern Mariana Islands')                     !150: Northern Mariana Islands
+COUNTRY_NAME_MTQ                  EQUATE('Martinique')                                   !151: Martinique
+COUNTRY_NAME_MRT                  EQUATE('Mauritania')                                   !152: Mauritania
+COUNTRY_NAME_MSR                  EQUATE('Montserrat')                                   !153: Montserrat
+COUNTRY_NAME_MLT                  EQUATE('Malta')                                        !154: Malta
+COUNTRY_NAME_MUS                  EQUATE('Mauritius')                                    !155: Mauritius
+COUNTRY_NAME_MDV                  EQUATE('Maldives')                                     !156: Maldives
+COUNTRY_NAME_MWI                  EQUATE('Malawi')                                       !157: Malawi
+COUNTRY_NAME_MEX                  EQUATE('Mexico')                                       !158: Mexico
+COUNTRY_NAME_MYS                  EQUATE('Malaysia')                                     !159: Malaysia
+COUNTRY_NAME_MOZ                  EQUATE('Mozambique')                                   !160: Mozambique
+COUNTRY_NAME_NAM                  EQUATE('Namibia')                                      !161: Namibia
+COUNTRY_NAME_NCL                  EQUATE('New Caledonia')                                !162: New Caledonia
+COUNTRY_NAME_NER                  EQUATE('Niger')                                        !163: Niger
+COUNTRY_NAME_NFK                  EQUATE('Norfolk Island')                               !164: Norfolk Island
+COUNTRY_NAME_NGA                  EQUATE('Nigeria')                                      !165: Nigeria
+COUNTRY_NAME_NIC                  EQUATE('Nicaragua')                                    !166: Nicaragua
+COUNTRY_NAME_NLD                  EQUATE('The Netherlands')                              !167: The Netherlands
+COUNTRY_NAME_NOR                  EQUATE('Norway')                                       !168: Norway
+COUNTRY_NAME_NPL                  EQUATE('Nepal')                                        !169: Nepal
+COUNTRY_NAME_NRU                  EQUATE('Nauru')                                        !170: Nauru
+COUNTRY_NAME_NIU                  EQUATE('Niue')                                         !171: Niue
+COUNTRY_NAME_NZL                  EQUATE('New Zealand')                                  !172: New Zealand
+COUNTRY_NAME_OMN                  EQUATE('Oman')                                         !173: Oman
+COUNTRY_NAME_PAN                  EQUATE('Panama')                                       !174: Panama
+COUNTRY_NAME_PER                  EQUATE('Peru')                                         !175: Peru
+COUNTRY_NAME_PYF                  EQUATE('French Polynesia')                             !176: French Polynesia
+COUNTRY_NAME_PNG                  EQUATE('Papua New Guinea')                             !177: Papua New Guinea
+COUNTRY_NAME_PHL                  EQUATE('Philippines')                                  !178: Philippines
+COUNTRY_NAME_PAK                  EQUATE('Pakistan')                                     !179: Pakistan
+COUNTRY_NAME_POL                  EQUATE('Poland')                                       !180: Poland
+COUNTRY_NAME_SPM                  EQUATE('Saint Pierre and Miquelon')                    !181: Saint Pierre and Miquelon
+COUNTRY_NAME_PCN                  EQUATE('Pitcairn')                                     !182: Pitcairn
+COUNTRY_NAME_PRI                  EQUATE('Puerto Rico')                                  !183: Puerto Rico
+COUNTRY_NAME_PSE                  EQUATE('Palestinian Territory')                        !184: Palestinian Territory
+COUNTRY_NAME_PRT                  EQUATE('Portugal')                                     !185: Portugal
+COUNTRY_NAME_PLW                  EQUATE('Palau')                                        !186: Palau
+COUNTRY_NAME_PRY                  EQUATE('Paraguay')                                     !187: Paraguay
+COUNTRY_NAME_QAT                  EQUATE('Qatar')                                        !188: Qatar
+COUNTRY_NAME_REU                  EQUATE('Reunion')                                      !189: Reunion
+COUNTRY_NAME_ROU                  EQUATE('Romania')                                      !190: Romania
+COUNTRY_NAME_SRB                  EQUATE('Serbia')                                       !191: Serbia
+COUNTRY_NAME_RUS                  EQUATE('Russia')                                       !192: Russia
+COUNTRY_NAME_RWA                  EQUATE('Rwanda')                                       !193: Rwanda
+COUNTRY_NAME_SAU                  EQUATE('Saudi Arabia')                                 !194: Saudi Arabia
+COUNTRY_NAME_SLB                  EQUATE('Solomon Islands')                              !195: Solomon Islands
+COUNTRY_NAME_SYC                  EQUATE('Seychelles')                                   !196: Seychelles
+COUNTRY_NAME_SDN                  EQUATE('Sudan')                                        !197: Sudan
+COUNTRY_NAME_SSD                  EQUATE('South Sudan')                                  !198: South Sudan
+COUNTRY_NAME_SWE                  EQUATE('Sweden')                                       !199: Sweden
+COUNTRY_NAME_SGP                  EQUATE('Singapore')                                    !200: Singapore
+COUNTRY_NAME_SHN                  EQUATE('Saint Helena')                                 !201: Saint Helena
+COUNTRY_NAME_SVN                  EQUATE('Slovenia')                                     !202: Slovenia
+COUNTRY_NAME_SJM                  EQUATE('Svalbard and Jan Mayen')                       !203: Svalbard and Jan Mayen
+COUNTRY_NAME_SVK                  EQUATE('Slovakia')                                     !204: Slovakia
+COUNTRY_NAME_SLE                  EQUATE('Sierra Leone')                                 !205: Sierra Leone
+COUNTRY_NAME_SMR                  EQUATE('San Marino')                                   !206: San Marino
+COUNTRY_NAME_SEN                  EQUATE('Senegal')                                      !207: Senegal
+COUNTRY_NAME_SOM                  EQUATE('Somalia')                                      !208: Somalia
+COUNTRY_NAME_SUR                  EQUATE('Suriname')                                     !209: Suriname
+COUNTRY_NAME_STP                  EQUATE('Sao Tome and Principe')                        !210: Sao Tome and Principe
+COUNTRY_NAME_SLV                  EQUATE('El Salvador')                                  !211: El Salvador
+COUNTRY_NAME_SXM                  EQUATE('Sint Maarten')                                 !212: Sint Maarten
+COUNTRY_NAME_SYR                  EQUATE('Syria')                                        !213: Syria
+COUNTRY_NAME_SWZ                  EQUATE('Eswatini')                                     !214: Eswatini
+COUNTRY_NAME_TCA                  EQUATE('Turks and Caicos Islands')                     !215: Turks and Caicos Islands
+COUNTRY_NAME_TCD                  EQUATE('Chad')                                         !216: Chad
+COUNTRY_NAME_ATF                  EQUATE('French Southern Territories')                  !217: French Southern Territories
+COUNTRY_NAME_TGO                  EQUATE('Togo')                                         !218: Togo
+COUNTRY_NAME_THA                  EQUATE('Thailand')                                     !219: Thailand
+COUNTRY_NAME_TJK                  EQUATE('Tajikistan')                                   !220: Tajikistan
+COUNTRY_NAME_TKL                  EQUATE('Tokelau')                                      !221: Tokelau
+COUNTRY_NAME_TLS                  EQUATE('Timor Leste')                                  !222: Timor Leste
+COUNTRY_NAME_TKM                  EQUATE('Turkmenistan')                                 !223: Turkmenistan
+COUNTRY_NAME_TUN                  EQUATE('Tunisia')                                      !224: Tunisia
+COUNTRY_NAME_TON                  EQUATE('Tonga')                                        !225: Tonga
+COUNTRY_NAME_TUR                  EQUATE('Turkey')                                       !226: Turkey
+COUNTRY_NAME_TTO                  EQUATE('Trinidad and Tobago')                          !227: Trinidad and Tobago
+COUNTRY_NAME_TUV                  EQUATE('Tuvalu')                                       !228: Tuvalu
+COUNTRY_NAME_TWN                  EQUATE('Taiwan')                                       !229: Taiwan
+COUNTRY_NAME_TZA                  EQUATE('Tanzania')                                     !230: Tanzania
+COUNTRY_NAME_UKR                  EQUATE('Ukraine')                                      !231: Ukraine
+COUNTRY_NAME_UGA                  EQUATE('Uganda')                                       !232: Uganda
+COUNTRY_NAME_UMI                  EQUATE('United States Minor Outlying Islands')         !233: United States Minor Outlying Islands
+COUNTRY_NAME_USA                  EQUATE('United States')                                !234: United States
+COUNTRY_NAME_URY                  EQUATE('Uruguay')                                      !235: Uruguay
+COUNTRY_NAME_UZB                  EQUATE('Uzbekistan')                                   !236: Uzbekistan
+COUNTRY_NAME_VAT                  EQUATE('Vatican')                                      !237: Vatican
+COUNTRY_NAME_VCT                  EQUATE('Saint Vincent and the Grenadines')             !238: Saint Vincent and the Grenadines
+COUNTRY_NAME_VEN                  EQUATE('Venezuela')                                    !239: Venezuela
+COUNTRY_NAME_VGB                  EQUATE('British Virgin Islands')                       !240: British Virgin Islands
+COUNTRY_NAME_VIR                  EQUATE('U.S. Virgin Islands')                          !241: U.S. Virgin Islands
+COUNTRY_NAME_VNM                  EQUATE('Vietnam')                                      !242: Vietnam
+COUNTRY_NAME_VUT                  EQUATE('Vanuatu')                                      !243: Vanuatu
+COUNTRY_NAME_WLF                  EQUATE('Wallis and Futuna')                            !244: Wallis and Futuna
+COUNTRY_NAME_WSM                  EQUATE('Samoa')                                        !245: Samoa
+COUNTRY_NAME_YEM                  EQUATE('Yemen')                                        !246: Yemen
+COUNTRY_NAME_MYT                  EQUATE('Mayotte')                                      !247: Mayotte
+COUNTRY_NAME_ZAF                  EQUATE('South Africa')                                 !248: South Africa
+COUNTRY_NAME_ZMB                  EQUATE('Zambia')                                       !249: Zambia
+COUNTRY_NAME_ZWE                  EQUATE('Zimbabwe')                                     !250: Zimbabwe
+COUNTRY_NAME_SCG                  EQUATE('Serbia and Montenegro')                        !251: Serbia and Montenegro
+COUNTRY_NAME_ANT                  EQUATE('Netherlands Antilles')                         !252: Netherlands Antilles
+!EndRegion NAME
+!
+!EOF
+!  _EndOfInclude_

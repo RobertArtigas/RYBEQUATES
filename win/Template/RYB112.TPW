@@ -176,13 +176,23 @@
 #TAB('CSV/TXT')
   #BOXED('Data Sources'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
-    #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB112OptExpCSV, DEFAULT(1)  , AT(10)
-    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB112OptExpTXT, DEFAULT(0)  , AT(10)
+    #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB112OptExpCSV, DEFAULT(1)  , AT(1)
+    #DISPLAY('Carefull with EXPORT CSV option above and IMPORT CSV below.')
+    #DISPLAY('Cannot have both ON at the same time.')
+    #PREPARE
+        #IF(%RYB112OptExpCSV = 1)
+            #SET(%RYB112OptExpTXT, 0)
+        #ELSE
+            #SET(%RYB112OptExpTXT, 1)
+        #ENDIF
+    #ENDPREPARE
+    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB112OptExpTXT, DEFAULT(0)  , AT(0)
   #ENDBOXED
   #!
   #BOXED('Documents'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #DISPLAY(%RYB112Explain02),AT(,,436,10),PROP(PROP:FontStyle,700) 
+    #ENABLE(%RYB112OptExpCSV)
     #BOXED('CSV Data (Export)'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('CSV Directory: '     ,@S120)   , %RYB112CsvDirectory  , REQ   , DEFAULT('.\DataSources\Temp\')  , AT(100,,344)
@@ -193,6 +203,8 @@
       #PROMPT('CSV Location: '  ,@S120),%RYB112CsvLocation    ,REQ,DEFAULT(%RYB112CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
+    #ENDENABLE
+    #!ENABLE(%RYB112OptExpTXT)
     #BOXED('TXT Data (Import)'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB112TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
@@ -203,6 +215,7 @@
       #PROMPT('TXT Location: '  ,@S120),%RYB112TxtLocation    ,REQ,DEFAULT(%RYB112CsvLocation)    ,PROP(PROP:READONLY,1),PROP(PROP:FontStyle,700),PROP(PROP:FontColor,0C79A3H),AT(100,,344)
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
+    #!ENDENABLE
   #ENDBOXED
 #ENDTAB
 #!+++020
