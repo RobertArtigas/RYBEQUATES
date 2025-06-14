@@ -177,7 +177,7 @@
   #BOXED('Data Sources'),AT(,,456)
     #DISPLAY(''),AT(,,,1)
     #PROMPT ('Export CSV from existing entries?'            , CHECK), %RYB112OptExpCSV, DEFAULT(1)  , AT(10)
-    #DISPLAY('Carefull with EXPORT CSV option above and IMPORT CSV below.')                         , AT(10)
+    #DISPLAY('Carefull with EXPORT CSV option above and IMPORT CSV option below.')                  , AT(10)
     #DISPLAY('Cannot have both ON at the same time.')                                               , AT(10)
     #PREPARE
         #IF(%RYB112OptExpCSV = 1)
