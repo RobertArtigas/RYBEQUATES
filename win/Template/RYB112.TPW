@@ -181,12 +181,12 @@
     #DISPLAY('Cannot have both ON at the same time.')                                               , AT(10)
     #PREPARE
         #IF(%RYB112OptExpCSV = 1)
-            #SET(%RYB112OptExpTXT, 0)
+            #SET(%RYB112OptImpTXT, 0)
         #ELSE
-            #SET(%RYB112OptExpTXT, 1)
+            #SET(%RYB112OptImpTXT, 1)
         #ENDIF
     #ENDPREPARE
-    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB112OptExpTXT, DEFAULT(0)  , AT(10)
+    #PROMPT ('Create TXT entries from importing CSV file?'  , CHECK), %RYB112OptImpTXT, DEFAULT(0)  , AT(10)
   #ENDBOXED
   #!
   #BOXED('Documents'),AT(,,456)
@@ -204,7 +204,7 @@
       #DISPLAY(''),AT(,,,1)
     #ENDBOXED
     #ENDENABLE
-    #ENABLE(%RYB112OptExpTXT)
+    #ENABLE(%RYB112OptImpTXT)
     #BOXED('TXT Data (Import)'),AT(,,446)
       #DISPLAY(''),AT(,,,1)
       #PROMPT('TXT Directory: '     ,@S120)   , %RYB112TxtDirectory  , REQ   , DEFAULT('.\Generators\Temp\')  , AT(100,,344)
@@ -253,7 +253,7 @@
   #!RUN('NOTEPAD.EXE "' & %RYB112CsvLocation & '"')
 #ENDIF
 #!
-#IF(%RYB112OptExpTXT)
+#IF(%RYB112OptImpTXT)
   #SET(%RYB112TxtLocation     , %RYB112TxtDirectory & %RYB112TxtName)
   #CREATE(%RYB112TxtLocation)
 #INSERT(%RYB112LoadCsvEntries)
